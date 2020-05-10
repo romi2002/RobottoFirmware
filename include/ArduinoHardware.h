@@ -16,7 +16,7 @@ public:
     ArduinoHardware()
     {
         iostream = &Serial;
-        baud_ = 1000000;
+        baud_ = 57600;
     }
 
     void setBaud(long baud)

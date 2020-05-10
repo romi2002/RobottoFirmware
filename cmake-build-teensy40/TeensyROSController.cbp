@@ -1,0 +1,1538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="TeensyROSController"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Z_DUMMY_TARGET">
+				<Option output="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Z_DUMMY_TARGET" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/include"/>
+					<Add directory="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/src"/>
+					<Add directory="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src"/>
+					<Add directory="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/cores/teensy4"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Ethernet/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/SPI"/>
+					<Add directory="/home/abiel/.platformio/lib/Adafruit NeoPixel_ID28"/>
+					<Add directory="/home/abiel/.platformio/lib/FastLED_ID126"/>
+					<Add directory="/home/abiel/.platformio/include"/>
+					<Add directory="/home/abiel/.platformio/lib/FreeRTOS-Teensy4_ID6737/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ADC"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/AccelStepper/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_CC3000"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_CC3000/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_GFX"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_NeoPixel"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_RA8875"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_STMPE610"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_VS1053"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_nRF8001"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_nRF8001/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/AltSoftSerial"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Artnet"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Audio"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Audio/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Bounce"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Bounce2"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/CapacitiveSensor"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/CryptoAccel/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/DS1307RTC"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/DmxSimple"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/DogLcd"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/EEPROM"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/EasyTransfer"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/EasyTransferI2C"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Encoder"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Encoder/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Entropy"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FastCRC"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FastLED"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FlexCAN"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FlexCAN_T4"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FlexiTimer2"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FreqCount"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FreqMeasure"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FreqMeasureMulti"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FrequencyTimer2"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ILI9341_t3"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ILI9488_t3"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/IRremote"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Keypad/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/LedControl/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/LedDisplay"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/LiquidCrystal/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/LiquidCrystalFast"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/LowPower"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/MFRC522/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/MIDI/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Metro"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/MsTimer2"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/NXPMotionSense"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/NXPMotionSense/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/OSC"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/OctoWS2811"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/OneWire"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/PS2Keyboard"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/PS2Keyboard/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/PWMServo"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Ping"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/PulsePosition"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/QuadEncoder"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/RA8875"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/RadioHead"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ResponsiveAnalogRead/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/SD"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/SD/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/SPIFlash"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ST7565"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ST7735_t3"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/SerialFlash"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Servo"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ShiftPWM"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Snooze/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/SoftPWM"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/SoftwareSerial"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/TFT_ILI9163C"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Talkie"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/TeensyThreads"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Time"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/TimeAlarms"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/TimerOne"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/TimerThree"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/TinyGPS"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Tlc5940"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/TouchScreen"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/USBHost_t36"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/USBHost_t36/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/UTFT"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/VirtualWire"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/WS2812Serial"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Wire"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Wire/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/XBee"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/XPT2046_Touchscreen"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/i2c_t3"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ks0108"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/openGLCD"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ssd1351"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/x10"/>
+					<Add directory="/home/abiel/.platformio/packages/toolchain-gccarmnoneeabi/arm-none-eabi/include/c++/5.4.1"/>
+					<Add directory="/home/abiel/.platformio/packages/toolchain-gccarmnoneeabi/arm-none-eabi/include/c++/5.4.1/arm-none-eabi"/>
+					<Add directory="/home/abiel/.platformio/packages/toolchain-gccarmnoneeabi/lib/gcc/arm-none-eabi/5.4.1/include-fixed"/>
+					<Add directory="/home/abiel/.platformio/packages/toolchain-gccarmnoneeabi/lib/gcc/arm-none-eabi/5.4.1/include"/>
+					<Add directory="/home/abiel/.platformio/packages/toolchain-gccarmnoneeabi/arm-none-eabi/include"/>
+					<Add directory="/home/abiel/.platformio/packages/tool-unity"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 Z_DUMMY_TARGET"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Z_DUMMY_TARGET/fast">
+				<Option output="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Z_DUMMY_TARGET" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/include"/>
+					<Add directory="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/src"/>
+					<Add directory="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src"/>
+					<Add directory="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/cores/teensy4"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Ethernet/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/SPI"/>
+					<Add directory="/home/abiel/.platformio/lib/Adafruit NeoPixel_ID28"/>
+					<Add directory="/home/abiel/.platformio/lib/FastLED_ID126"/>
+					<Add directory="/home/abiel/.platformio/include"/>
+					<Add directory="/home/abiel/.platformio/lib/FreeRTOS-Teensy4_ID6737/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ADC"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/AccelStepper/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_CC3000"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_CC3000/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_GFX"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_NeoPixel"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_RA8875"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_STMPE610"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_VS1053"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_nRF8001"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Adafruit_nRF8001/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/AltSoftSerial"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Artnet"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Audio"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Audio/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Bounce"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Bounce2"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/CapacitiveSensor"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/CryptoAccel/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/DS1307RTC"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/DmxSimple"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/DogLcd"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/EEPROM"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/EasyTransfer"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/EasyTransferI2C"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Encoder"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Encoder/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Entropy"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FastCRC"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FastLED"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FlexCAN"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FlexCAN_T4"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FlexiTimer2"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FreqCount"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FreqMeasure"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FreqMeasureMulti"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/FrequencyTimer2"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ILI9341_t3"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ILI9488_t3"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/IRremote"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Keypad/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/LedControl/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/LedDisplay"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/LiquidCrystal/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/LiquidCrystalFast"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/LowPower"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/MFRC522/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/MIDI/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Metro"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/MsTimer2"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/NXPMotionSense"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/NXPMotionSense/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/OSC"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/OctoWS2811"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/OneWire"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/PS2Keyboard"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/PS2Keyboard/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/PWMServo"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Ping"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/PulsePosition"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/QuadEncoder"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/RA8875"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/RadioHead"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ResponsiveAnalogRead/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/SD"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/SD/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/SPIFlash"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ST7565"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ST7735_t3"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/SerialFlash"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Servo"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ShiftPWM"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Snooze/src"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/SoftPWM"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/SoftwareSerial"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/TFT_ILI9163C"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Talkie"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/TeensyThreads"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Time"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/TimeAlarms"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/TimerOne"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/TimerThree"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/TinyGPS"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Tlc5940"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/TouchScreen"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/USBHost_t36"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/USBHost_t36/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/UTFT"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/VirtualWire"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/WS2812Serial"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Wire"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/Wire/utility"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/XBee"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/XPT2046_Touchscreen"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/i2c_t3"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ks0108"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/openGLCD"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/ssd1351"/>
+					<Add directory="/home/abiel/.platformio/packages/framework-arduinoteensy/libraries/x10"/>
+					<Add directory="/home/abiel/.platformio/packages/toolchain-gccarmnoneeabi/arm-none-eabi/include/c++/5.4.1"/>
+					<Add directory="/home/abiel/.platformio/packages/toolchain-gccarmnoneeabi/arm-none-eabi/include/c++/5.4.1/arm-none-eabi"/>
+					<Add directory="/home/abiel/.platformio/packages/toolchain-gccarmnoneeabi/lib/gcc/arm-none-eabi/5.4.1/include-fixed"/>
+					<Add directory="/home/abiel/.platformio/packages/toolchain-gccarmnoneeabi/lib/gcc/arm-none-eabi/5.4.1/include"/>
+					<Add directory="/home/abiel/.platformio/packages/toolchain-gccarmnoneeabi/arm-none-eabi/include"/>
+					<Add directory="/home/abiel/.platformio/packages/tool-unity"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 Z_DUMMY_TARGET/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Production">
+				<Option working_dir="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 Production"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Debug">
+				<Option working_dir="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 Debug"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-teensy40/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/.git/hooks/applypatch-msg.sample">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/.git/hooks/commit-msg.sample">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/.git/hooks/fsmonitor-watchman.sample">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/.git/hooks/post-update.sample">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/.git/hooks/pre-applypatch.sample">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/.git/hooks/pre-commit.sample">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/.git/hooks/pre-merge-commit.sample">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/.git/hooks/pre-push.sample">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/.git/hooks/pre-rebase.sample">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/.git/hooks/pre-receive.sample">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/.git/hooks/prepare-commit-msg.sample">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/.git/hooks/update.sample">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/.git/objects/pack/pack-399d0e6af48b28d0e2b09ae607633af57f05ceed.idx">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/.git/objects/pack/pack-399d0e6af48b28d0e2b09ae607633af57f05ceed.pack">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/FreeRTOS.html">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/FreeRTOS_API.html">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/README.md">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/examples/blink_task.cpp">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/library.json">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/library.properties">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/FreeRTOS.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/FreeRTOSConfig.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/FreeRTOSConfig_default.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/FreeRTOS_TEENSY4.c">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/FreeRTOS_TEENSY4.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/StackMacros.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/croutine.c">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/croutine.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/deprecated_definitions.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/event_groups.c">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/event_groups.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/heap_3.c">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/list.c">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/list.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/memcpy-armv7m.S">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/memset.S">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/message_buffer.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/mpu_prototypes.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/mpu_wrappers.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/port.c">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/portable.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/portmacro.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/projdefs.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/queue.c">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/queue.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/semphr.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/stack_macros.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/stream_buffer.c">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/stream_buffer.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/task.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/tasks.c">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/threading_alt.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/timers.c">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/FreeRTOS-Teensy4/src/timers.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/ArduinoHardware.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/ArduinoTcpHardware.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TestAction.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TestActionFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TestActionGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TestActionResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TestFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TestGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TestRequestAction.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TestRequestActionFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TestRequestActionGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TestRequestActionResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TestRequestFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TestRequestGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TestRequestResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TestResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TwoIntsAction.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TwoIntsActionFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TwoIntsActionGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TwoIntsActionResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TwoIntsFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TwoIntsGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib/TwoIntsResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_msgs/GoalID.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_msgs/GoalStatus.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_msgs/GoalStatusArray.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_tutorials/AveragingAction.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_tutorials/AveragingActionFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_tutorials/AveragingActionGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_tutorials/AveragingActionResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_tutorials/AveragingFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_tutorials/AveragingGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_tutorials/AveragingResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_tutorials/FibonacciAction.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_tutorials/FibonacciActionFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_tutorials/FibonacciActionGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_tutorials/FibonacciActionResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_tutorials/FibonacciFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_tutorials/FibonacciGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/actionlib_tutorials/FibonacciResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/bond/Constants.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/bond/Status.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/FollowJointTrajectoryAction.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/FollowJointTrajectoryActionFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/FollowJointTrajectoryActionGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/FollowJointTrajectoryActionResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/FollowJointTrajectoryFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/FollowJointTrajectoryGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/FollowJointTrajectoryResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/GripperCommand.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/GripperCommandAction.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/GripperCommandActionFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/GripperCommandActionGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/GripperCommandActionResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/GripperCommandFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/GripperCommandGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/GripperCommandResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/JointControllerState.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/JointJog.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/JointTolerance.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/JointTrajectoryAction.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/JointTrajectoryActionFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/JointTrajectoryActionGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/JointTrajectoryActionResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/JointTrajectoryControllerState.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/JointTrajectoryFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/JointTrajectoryGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/JointTrajectoryResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/PidState.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/PointHeadAction.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/PointHeadActionFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/PointHeadActionGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/PointHeadActionResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/PointHeadFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/PointHeadGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/PointHeadResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/QueryCalibrationState.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/QueryTrajectoryState.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/SingleJointPositionAction.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/SingleJointPositionActionFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/SingleJointPositionActionGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/SingleJointPositionActionResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/SingleJointPositionFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/SingleJointPositionGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/control_msgs/SingleJointPositionResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/diagnostic_msgs/AddDiagnostics.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/diagnostic_msgs/DiagnosticArray.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/diagnostic_msgs/DiagnosticStatus.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/diagnostic_msgs/KeyValue.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/diagnostic_msgs/SelfTest.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/duration.cpp">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/dynamic_reconfigure/BoolParameter.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/dynamic_reconfigure/Config.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/dynamic_reconfigure/ConfigDescription.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/dynamic_reconfigure/DoubleParameter.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/dynamic_reconfigure/Group.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/dynamic_reconfigure/GroupState.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/dynamic_reconfigure/IntParameter.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/dynamic_reconfigure/ParamDescription.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/dynamic_reconfigure/Reconfigure.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/dynamic_reconfigure/SensorLevels.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/dynamic_reconfigure/StrParameter.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/ADC/ADC.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/Blink/Blink.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/BlinkM/BlinkM.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/BlinkM/BlinkM_funcs.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/BlinkerWithClass/BlinkerWithClass.ino">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/Clapper/Clapper.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/Esp8266HelloWorld/Esp8266HelloWorld.ino">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/HelloWorld/HelloWorld.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/IrRanger/IrRanger.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/Logging/Logging.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/Odom/Odom.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/ServiceClient/ServiceClient.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/ServiceClient/client.py">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/ServiceServer/ServiceServer.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/ServoControl/ServoControl.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/TcpBlink/TcpBlink.ino">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/TcpHelloWorld/TcpHelloWorld.ino">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/Temperature/Temperature.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/TimeTF/TimeTF.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/Ultrasound/Ultrasound.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/button_example/button_example.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/examples/pubsub/pubsub.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/Accel.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/AccelStamped.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/AccelWithCovariance.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/AccelWithCovarianceStamped.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/Inertia.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/InertiaStamped.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/Point.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/Point32.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/PointStamped.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/Polygon.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/PolygonStamped.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/Pose.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/Pose2D.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/PoseArray.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/PoseStamped.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/PoseWithCovariance.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/PoseWithCovarianceStamped.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/Quaternion.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/QuaternionStamped.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/Transform.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/TransformStamped.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/Twist.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/TwistStamped.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/TwistWithCovariance.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/TwistWithCovarianceStamped.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/Vector3.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/Vector3Stamped.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/Wrench.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/geometry_msgs/WrenchStamped.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/map_msgs/GetMapROI.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/map_msgs/GetPointMap.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/map_msgs/GetPointMapROI.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/map_msgs/OccupancyGridUpdate.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/map_msgs/PointCloud2Update.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/map_msgs/ProjectedMap.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/map_msgs/ProjectedMapInfo.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/map_msgs/ProjectedMapsInfo.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/map_msgs/SaveMap.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/map_msgs/SetMapProjections.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nav_msgs/GetMap.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nav_msgs/GetMapAction.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nav_msgs/GetMapActionFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nav_msgs/GetMapActionGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nav_msgs/GetMapActionResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nav_msgs/GetMapFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nav_msgs/GetMapGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nav_msgs/GetMapResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nav_msgs/GetPlan.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nav_msgs/GridCells.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nav_msgs/MapMetaData.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nav_msgs/OccupancyGrid.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nav_msgs/Odometry.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nav_msgs/Path.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nav_msgs/SetMap.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nodelet/NodeletList.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nodelet/NodeletLoad.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/nodelet/NodeletUnload.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/ros.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/ros/duration.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/ros/msg.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/ros/node_handle.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/ros/publisher.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/ros/service_client.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/ros/service_server.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/ros/subscriber.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/ros/time.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/roscpp/Empty.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/roscpp/GetLoggers.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/roscpp/Logger.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/roscpp/SetLoggerLevel.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/roscpp_tutorials/TwoInts.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/rosgraph_msgs/Clock.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/rosgraph_msgs/Log.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/rosgraph_msgs/TopicStatistics.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/rospy_tutorials/AddTwoInts.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/rospy_tutorials/BadTwoInts.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/rospy_tutorials/Floats.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/rospy_tutorials/HeaderString.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/rosserial_mbed/Adc.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/rosserial_mbed/Test.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/rosserial_msgs/Log.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/rosserial_msgs/RequestParam.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/rosserial_msgs/TopicInfo.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/BatteryState.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/CameraInfo.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/ChannelFloat32.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/CompressedImage.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/FluidPressure.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/Illuminance.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/Image.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/Imu.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/JointState.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/Joy.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/JoyFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/JoyFeedbackArray.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/LaserEcho.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/LaserScan.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/MagneticField.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/MultiDOFJointState.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/MultiEchoLaserScan.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/NavSatFix.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/NavSatStatus.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/PointCloud.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/PointCloud2.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/PointField.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/Range.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/RegionOfInterest.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/RelativeHumidity.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/SetCameraInfo.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/Temperature.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/sensor_msgs/TimeReference.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/shape_msgs/Mesh.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/shape_msgs/MeshTriangle.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/shape_msgs/Plane.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/shape_msgs/SolidPrimitive.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/smach_msgs/SmachContainerInitialStatusCmd.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/smach_msgs/SmachContainerStatus.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/smach_msgs/SmachContainerStructure.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Bool.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Byte.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/ByteMultiArray.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Char.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/ColorRGBA.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Duration.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Empty.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Float32.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Float32MultiArray.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Float64.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Float64MultiArray.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Header.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Int16.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Int16MultiArray.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Int32.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Int32MultiArray.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Int64.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Int64MultiArray.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Int8.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Int8MultiArray.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/MultiArrayDimension.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/MultiArrayLayout.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/String.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/Time.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/UInt16.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/UInt16MultiArray.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/UInt32.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/UInt32MultiArray.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/UInt64.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/UInt64MultiArray.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/UInt8.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_msgs/UInt8MultiArray.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_srvs/Empty.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_srvs/SetBool.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/std_srvs/Trigger.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/stereo_msgs/DisparityImage.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tests/array_test/array_test.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tests/float64_test/float64_test.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tests/time_test/time_test.pde">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tf/FrameGraph.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tf/tf.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tf/tfMessage.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tf/transform_broadcaster.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tf2_msgs/FrameGraph.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tf2_msgs/LookupTransformAction.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tf2_msgs/LookupTransformActionFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tf2_msgs/LookupTransformActionGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tf2_msgs/LookupTransformActionResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tf2_msgs/LookupTransformFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tf2_msgs/LookupTransformGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tf2_msgs/LookupTransformResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tf2_msgs/TF2Error.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/tf2_msgs/TFMessage.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/time.cpp">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/topic_tools/DemuxAdd.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/topic_tools/DemuxDelete.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/topic_tools/DemuxList.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/topic_tools/DemuxSelect.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/topic_tools/MuxAdd.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/topic_tools/MuxDelete.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/topic_tools/MuxList.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/topic_tools/MuxSelect.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/trajectory_msgs/JointTrajectory.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/trajectory_msgs/JointTrajectoryPoint.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/trajectory_msgs/MultiDOFJointTrajectory.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/trajectory_msgs/MultiDOFJointTrajectoryPoint.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/turtle_actionlib/ShapeAction.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/turtle_actionlib/ShapeActionFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/turtle_actionlib/ShapeActionGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/turtle_actionlib/ShapeActionResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/turtle_actionlib/ShapeFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/turtle_actionlib/ShapeGoal.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/turtle_actionlib/ShapeResult.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/turtle_actionlib/Velocity.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/turtlesim/Color.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/turtlesim/Kill.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/turtlesim/Pose.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/turtlesim/SetPen.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/turtlesim/Spawn.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/turtlesim/TeleportAbsolute.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/turtlesim/TeleportRelative.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/visualization_msgs/ImageMarker.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/visualization_msgs/InteractiveMarker.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/visualization_msgs/InteractiveMarkerControl.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/visualization_msgs/InteractiveMarkerFeedback.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/visualization_msgs/InteractiveMarkerInit.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/visualization_msgs/InteractiveMarkerPose.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/visualization_msgs/InteractiveMarkerUpdate.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/visualization_msgs/Marker.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/visualization_msgs/MarkerArray.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/lib/ros_lib/visualization_msgs/MenuEntry.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/src/HAL/BatteryMonitor.c">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/src/HAL/BatteryMonitor.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/src/PinAssignments.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/src/Tasks/BatteryPublisherTask.c">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/src/Tasks/BatteryPublisherTask.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/src/Tasks/RosSpinTask.c">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/src/Tasks/RosSpinTask.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/src/Tasks/RuntimeStatsPublisherTask.c">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/src/Tasks/RuntimeStatsPublisherTask.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/src/config.h">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/src/main.cpp">
+			<Option target="Z_DUMMY_TARGET"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/CMakeListsPrivate.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
