@@ -1,0 +1,1 @@
+#define configGENERATE_RUN_TIME_STATS 1
