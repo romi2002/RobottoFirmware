@@ -1,4 +1,4 @@
-#include "BatteryPublisherTask.hpp"
+#include "BatteryPublisherTask.h"
 
 [[noreturn]] void batteryPublisherTask(void *arg){
     ros::NodeHandle *nh = (ros::NodeHandle*) arg;

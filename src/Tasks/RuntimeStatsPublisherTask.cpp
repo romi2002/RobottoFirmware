@@ -1,4 +1,4 @@
-#include "RuntimeStatsPublisherTask.hpp"
+#include "RuntimeStatsPublisherTask.h"
 
 [[noreturn]] void runtimeStatsPublisherTask(void *arg) {
     ros::NodeHandle *nh = arg;

@@ -1,4 +1,4 @@
-#include "RosSpinTask.hpp"
+#include "RosSpinTask.h"
 
 [[noreturn]] void rosSpinTask(void *arg){
     ros::NodeHandle *nh = arg;
