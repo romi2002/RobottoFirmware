@@ -6,11 +6,17 @@
 #include <Arduino.h>
 #include <FreeRTOS_TEENSY4.h>
 
-[[noreturn]] void heartbeatTask(void *arg){
-    while(1){
-        vTaskDelay((100L * configTICK_RATE_HZ) / 1000L * 2);
+HeartbeatTask::HeartbeatTask(TickType_t tickDelay) : Thread("HeartbeatTask", 100, 1) {
+    this->tickDelay = tickDelay;
+
+    Start();
+}
+
+[[noreturn]] void HeartbeatTask::Run() {
+    while(true){
+        vTaskDelay((tickDelay * configTICK_RATE_HZ) / 1000L);
         digitalWrite(HEARTBEAT_PIN, HIGH);
-        vTaskDelay((100L * configTICK_RATE_HZ) / 1000L * 2);
+        vTaskDelay((tickDelay * configTICK_RATE_HZ) / 1000L);
         digitalWrite(HEARTBEAT_PIN, LOW);
     }
 }

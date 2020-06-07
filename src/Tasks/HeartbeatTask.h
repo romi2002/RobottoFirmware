@@ -6,7 +6,20 @@
 #define TEENSYROSCONTROLLER_HEARTBEATTASK_H
 
 #include "PinAssignments.h"
+#include <Arduino.h>
+#include <FreeRTOS_TEENSY4.h>
+#include "thread.hpp"
 
-void heartbeatTask(void *arg);
+using namespace cpp_freertos;
+
+class HeartbeatTask : public Thread {
+public:
+    HeartbeatTask(TickType_t tickDelay = 200);
+
+protected:
+    TickType_t tickDelay;
+
+    [[noreturn]] void Run() override;
+};
 
 #endif //TEENSYROSCONTROLLER_HEARTBEATTASK_H

@@ -1,3 +1,4 @@
+#include <LinkerFix.h>
 #include <Arduino.h>
 #include <FreeRTOS_TEENSY4.h>
 
@@ -17,6 +18,8 @@
 #include "HAL/VNH5019.h"
 
 #include <std_msgs/Float64.h>
+
+#include "thread.hpp"
 
 ros::NodeHandle nh;
 
@@ -55,7 +58,7 @@ void setup() {
     /**
      * RTOS SETUP
      */
-    portBASE_TYPE rosSpin = xTaskCreate(rosSpinTask, "RosSpin", 5120, &nh, 3, NULL);
+/*    portBASE_TYPE rosSpin = xTaskCreate(rosSpinTask, "RosSpin", 5120, &nh, 3, NULL);
     //portBASE_TYPE runtimeStat = xTaskCreate(runtimeStatsPublisherTask, "RunStatsPublisher", 2500, &nh, 2, NULL);
     portBASE_TYPE batteryTask = xTaskCreate(batteryPublisherTask, "BatPublisher", configMINIMAL_STACK_SIZE, &nh, 2,
                                             NULL);
@@ -102,7 +105,11 @@ void setup() {
 
     verifyTask(heartTask);
 
-    vTaskStartScheduler();
+    vTaskStartScheduler();*/
+
+    HeartbeatTask heartbeatThread;
+
+    Thread::StartScheduler();
 }
 
 void loop() {
