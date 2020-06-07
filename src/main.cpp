@@ -74,10 +74,14 @@ void setup() {
     data1.testMutex = testMutex;
     data1.motor = testMotor;
     data1.setpoint = &currentSetpoint;
+    data1.nh = &nh;
+    data1.encoderChannel = 1;
+    data1.phaseA_PIN = 2;
+    data1.phaseB_PIN = 3;
 
     definitions.PWM = PIN_A0;
-    definitions.IN_A = 12;
-    definitions.IN_B = 13;
+    definitions.IN_A = 13;
+    definitions.IN_B = 12;
     definitions.DIAG_A = 6;
     definitions.DIAG_B = 9;
     definitions.CS = PIN_A3;
@@ -88,6 +92,10 @@ void setup() {
     data2.testMutex = testMutex;
     data2.motor = testMotor2;
     data2.setpoint = &currentSetpoint;
+    data2.nh = &nh;
+    data2.encoderChannel = 2;
+    data2.phaseA_PIN = 4;
+    data2.phaseB_PIN = 5;
 
     portBASE_TYPE motorTask = xTaskCreate(motorTestTask, "MotorTestTask", 128, &data1, 7, NULL);
     portBASE_TYPE motorTask2 = xTaskCreate(motorTestTask, "MotorTestTask2", 128, &data2, 7, NULL);

@@ -12,8 +12,8 @@ set(CMAKE_CONFIGURATION_TYPES "teensy40" CACHE STRING "Build Types reflect Platf
 
 SET(CMAKE_C_COMPILER "$ENV{HOME}/.platformio/packages/toolchain-gccarmnoneeabi/bin/arm-none-eabi-gcc")
 SET(CMAKE_CXX_COMPILER "$ENV{HOME}/.platformio/packages/toolchain-gccarmnoneeabi/bin/arm-none-eabi-g++")
-SET(CMAKE_CXX_FLAGS "-fno-exceptions -felide-constructors -fno-rtti -std=gnu++14 -Wno-error=narrowing -fpermissive -Wall -ffunction-sections -fdata-sections -mthumb -mcpu=cortex-m7 -nostdlib -fsingle-precision-constant -mfloat-abi=hard -mfpu=fpv5-d16 -Os --specs=nano.specs")
-SET(CMAKE_C_FLAGS "-Wall -ffunction-sections -fdata-sections -mthumb -mcpu=cortex-m7 -nostdlib -fsingle-precision-constant -mfloat-abi=hard -mfpu=fpv5-d16 -Os --specs=nano.specs")
+SET(CMAKE_CXX_FLAGS "-fno-exceptions -felide-constructors -fno-rtti -std=gnu++14 -Wno-error=narrowing -fpermissive -Wall -ffunction-sections -fdata-sections -mthumb -mcpu=cortex-m7 -nostdlib -fsingle-precision-constant -mfloat-abi=hard -mfpu=fpv5-d16 -O2")
+SET(CMAKE_C_FLAGS "-Wall -ffunction-sections -fdata-sections -mthumb -mcpu=cortex-m7 -nostdlib -fsingle-precision-constant -mfloat-abi=hard -mfpu=fpv5-d16 -O2")
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -22,7 +22,6 @@ if (CMAKE_BUILD_TYPE MATCHES "teensy40")
     add_definitions(-D'__IMXRT1062__')
     add_definitions(-D'ARDUINO_TEENSY40')
     add_definitions(-D'USB_SERIAL')
-    add_definitions(-D'TEENSY_OPT_SMALLEST_CODE')
     add_definitions(-D'ARDUINO=10805')
     add_definitions(-D'TEENSYDUINO=151')
     add_definitions(-D'CORE_TEENSY')
@@ -31,6 +30,7 @@ if (CMAKE_BUILD_TYPE MATCHES "teensy40")
 
     include_directories("${CMAKE_CURRENT_LIST_DIR}/include")
     include_directories("${CMAKE_CURRENT_LIST_DIR}/src")
+    include_directories("${CMAKE_CURRENT_LIST_DIR}/lib/QuadEncoder_Teensy4")
     include_directories("${CMAKE_CURRENT_LIST_DIR}/lib/FreeRTOS-Teensy4/src")
     include_directories("${CMAKE_CURRENT_LIST_DIR}/lib/ros_lib")
     include_directories("$ENV{HOME}/.platformio/packages/framework-arduinoteensy/cores/teensy4")
