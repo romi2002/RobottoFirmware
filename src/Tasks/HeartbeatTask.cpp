@@ -3,10 +3,8 @@
 //
 
 #include "HeartbeatTask.h"
-#include <Arduino.h>
-#include <FreeRTOS_TEENSY4.h>
 
-HeartbeatTask::HeartbeatTask(TickType_t tickDelay) : Thread("HeartbeatTask", 100, 1) {
+HeartbeatTask::HeartbeatTask(TickType_t tickDelay) : Thread("HeartbeatTask", configMINIMAL_STACK_SIZE, HEARTBEAT_TASK_PRIORITY) {
     this->tickDelay = tickDelay;
 
     Start();

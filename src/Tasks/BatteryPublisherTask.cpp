@@ -1,14 +1,25 @@
 #include "BatteryPublisherTask.h"
 
-[[noreturn]] void batteryPublisherTask(void *arg){
-    ros::NodeHandle *nh = (ros::NodeHandle*) arg;
+BatteryPublisherTask::BatteryPublisherTask(ros::NodeHandle *nh, TickType_t waitTime) : Thread("BatteryPubTask", 256, BATTERY_TASK_PRIORITY),
+                                                                               currentSensorVoltagePub(
+                                                                                       "currentSensorVoltage",
+                                                                                       &currentSensorVoltageMsg),
+                                                                               currentSensorPub("currentSensor",
+                                                                                                &currentSensorMsg),
+                                                                               batteryVoltagePub("currentSensorVoltage",
+                                                                                                 &currentSensorVoltageMsg) {
+    this->nh = nh;
+    this->waitTime = waitTime;
+    Start();
+}
 
+[[noreturn]] void BatteryPublisherTask::Run() {
     nh->advertise(currentSensorVoltagePub);
     nh->advertise(currentSensorPub);
     nh->advertise(batteryVoltagePub);
 
-    while (1){
-        double inputVoltage = ((double)analogRead(CURRENT_SENSOR_PIN) / 4096) * 3.3;
+    while (true) {
+        double inputVoltage = ((double) analogRead(CURRENT_SENSOR_PIN) / 4096) * 3.3;
         double currentIn = (inputVoltage - 1.65) / 0.055;
 
         currentSensorVoltageMsg.data = inputVoltage;
@@ -23,6 +34,6 @@
 
         batteryVoltagePub.publish(&batteryVoltageMsg);
 
-        vTaskDelay(DEFAULT_WAIT_TIME);
+        vTaskDelay(waitTime);
     }
 }

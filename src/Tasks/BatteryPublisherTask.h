@@ -6,15 +6,28 @@
 
 #include <ros.h>
 #include <std_msgs/Float32.h>
+#include "thread.hpp"
 
-static std_msgs::Float32 currentSensorVoltageMsg;
-static std_msgs::Float32 currentSensorMsg;
-static std_msgs::Float32 batteryVoltageMsg;
+using namespace cpp_freertos;
 
-static ros::Publisher currentSensorVoltagePub("currentSensorVoltage", &currentSensorVoltageMsg);
-static ros::Publisher currentSensorPub("currentSensor", &currentSensorMsg);
-static ros::Publisher batteryVoltagePub("batteryVoltage", &batteryVoltageMsg);
+class BatteryPublisherTask : public Thread {
+public:
+    explicit BatteryPublisherTask(ros::NodeHandle *nh, TickType_t waitTime = DEFAULT_WAIT_TIME);
 
-void batteryPublisherTask(void *arg);
+protected:
+    void Run() override;
+
+private:
+    ros::NodeHandle *nh;
+    TickType_t waitTime;
+
+    ros::Publisher currentSensorVoltagePub;
+    ros::Publisher currentSensorPub;
+    ros::Publisher batteryVoltagePub;
+
+    std_msgs::Float32 currentSensorVoltageMsg;
+    std_msgs::Float32 currentSensorMsg;
+    std_msgs::Float32 batteryVoltageMsg;
+};
 
 #endif

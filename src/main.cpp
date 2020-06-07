@@ -107,7 +107,9 @@ void setup() {
 
     vTaskStartScheduler();*/
 
-    HeartbeatTask heartbeatThread;
+    HeartbeatTask heartbeatTask;
+    BatteryPublisherTask batteryPublisherTask(&nh);
+    RosSpinTask rosSpinTask(&nh);
 
     Thread::StartScheduler();
 }

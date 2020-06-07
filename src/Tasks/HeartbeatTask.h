@@ -5,6 +5,7 @@
 #ifndef TEENSYROSCONTROLLER_HEARTBEATTASK_H
 #define TEENSYROSCONTROLLER_HEARTBEATTASK_H
 
+#include "config.h"
 #include "PinAssignments.h"
 #include <Arduino.h>
 #include <FreeRTOS_TEENSY4.h>
@@ -14,7 +15,7 @@ using namespace cpp_freertos;
 
 class HeartbeatTask : public Thread {
 public:
-    HeartbeatTask(TickType_t tickDelay = 200);
+    explicit HeartbeatTask(TickType_t tickDelay = 200);
 
 protected:
     TickType_t tickDelay;
