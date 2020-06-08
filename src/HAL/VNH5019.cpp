@@ -24,13 +24,21 @@ void VNH5019::initializePins(const VNH5019_PinDefinitions &definitions) {
 }
 
 void VNH5019::set(double value) {
-    value = (value < -1.0) ? -1.0 : (1.0 < value) ? 1.0 : value; //Clamp value
+    double tempValue = (value < -1.0) ? -1.0 : (1.0 < value) ? 1.0 : value; //Clamp value
 
-    value *= (double) VNH5019_PWM_MAXVAL;
-    value = inverted ? -value : value;
+    tempValue = tempValue * (double) VNH5019_PWM_MAXVAL;
+    tempValue = inverted ? -tempValue : tempValue;
 
-    analogWrite(definitions.PWM, std::fabs(value));
+    analogWrite(definitions.PWM, (int) std::abs(tempValue));
 
-    digitalWrite(definitions.IN_A, value >= 0.0 ? HIGH : LOW);
-    digitalWrite(definitions.IN_B, value >= 0.0 ? LOW : HIGH);
+    if(value > 0.0){
+        digitalWriteFast(definitions.IN_A, HIGH);
+        digitalWriteFast(definitions.IN_B, LOW);
+    } else if(value < 0.0){
+        digitalWriteFast(definitions.IN_A, LOW);
+        digitalWriteFast(definitions.IN_B, HIGH);
+    } else {
+        digitalWriteFast(definitions.IN_A, LOW);
+        digitalWriteFast(definitions.IN_B, LOW);
+    }
 }

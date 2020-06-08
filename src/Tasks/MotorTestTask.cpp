@@ -2,11 +2,95 @@
 // Created by abiel on 5/12/20.
 //
 
+#include <functional>
 #include "MotorTestTask.h"
-#include "HAL/VNH5019.h"
-#include "config.h"
-#include "QuadEncoder_Teensy4.h"
 
+MotorTestTask::MotorTestTask(const std::string &name, ros::NodeHandle *nh, VNH5019 *motor, uint8_t encoderChannel, uint8_t phaseA, uint8_t phaseB, TickType_t waitTime) : Thread(name, 256, MOTOR_OUTPUT_TEST_TASK_PRIORITY) {
+    this->name = name;
+    this->nh = nh;
+    this->motor = motor;
+    this->quadEncoder = new QuadEncoder(encoderChannel, phaseA, phaseB);
+
+    setpointTopic = name + "_setpoint";
+    encoderPositionTopic = name + "_position";
+    encoderVelocityTopic = name + "_velocity";
+
+    quadEncoder->setInitConfig();
+    quadEncoder->EncConfig.filterCount = 5;
+    quadEncoder->EncConfig.filterSamplePeriod = 255;
+    //quadEncoder->EncConfig.INDEXTriggerMode = RISING_EDGE;
+
+    quadEncoder->init();
+
+    this->waitTime = waitTime;
+
+    this->setpointLock = new ReadWriteLockPreferReader();
+
+    this->setpointSubscriber = new ros::Subscriber<std_msgs::Float32, MotorTestTask>(setpointTopic.data(), &MotorTestTask::setpointSubscriberCb, this, 1);
+
+    nh->subscribe(*setpointSubscriber);
+
+    motorEncoderPositionPublisher = new ros::Publisher(encoderPositionTopic.data(), &motorEncoderPosition_msg);
+    motorEncoderVelocityPublisher = new ros::Publisher(encoderVelocityTopic.data(), &motorEncoderVelocity_msg);
+
+    nh->advertise(*motorEncoderPositionPublisher);
+    nh->advertise(*motorEncoderVelocityPublisher);
+
+    Start();
+}
+
+[[noreturn]] void MotorTestTask::Run() {
+    //auto lastTime = xTaskGetTickCount();
+    elapsedMicros deltaTime;
+    int32_t lastPosition = quadEncoder->read();
+    float currentVelocityAverage = 0;
+    const float currentVelocityAverageAlpha = 0.1;
+
+    while(true){
+        setpointLock->ReaderLock();
+        motor->set(targetSetpoint);
+        setpointLock->ReaderUnlock();
+
+        const int32_t encoderPosition = quadEncoder->read();
+        //const TickType_t deltaTimeTicks = xTaskGetTickCount() - lastTime;
+        //const float deltaTime = (float) deltaTimeTicks * (1.0f / (float) configTICK_RATE_HZ);
+
+        auto encoderPositionDelta = static_cast<float>(encoderPosition - lastPosition);
+        auto deltaTimeSeconds = static_cast<float>(deltaTime) / 1e+6f;
+        float encoderVelocity = encoderPositionDelta / deltaTimeSeconds;
+        currentVelocityAverage = currentVelocityAverage + currentVelocityAverageAlpha * (encoderVelocity - currentVelocityAverage);
+        //encoderVelocity
+
+        motorEncoderPosition_msg.data = encoderPosition;
+        motorEncoderPositionPublisher->publish(&motorEncoderPosition_msg);
+
+        motorEncoderVelocity_msg.data = currentVelocityAverage;
+        motorEncoderVelocityPublisher->publish(&motorEncoderVelocity_msg);
+
+
+        lastPosition = encoderPosition;
+        //lastTime = xTaskGetTickCount();
+        deltaTime = 0;
+
+        vTaskDelay(waitTime);
+    }
+}
+
+void MotorTestTask::setpointSubscriberCb(const std_msgs::Float32 &msg) {
+    setpointLock->WriterLock();
+    targetSetpoint = msg.data;
+    setpointLock->WriterUnlock();
+}
+
+MotorTestTask::~MotorTestTask() {
+    delete(quadEncoder);
+    delete(setpointLock);
+    //delete(setpointSubscriber);
+    delete(motorEncoderPositionPublisher);
+    delete(motorEncoderVelocityPublisher);
+}
+
+/*
 [[noreturn]] void motorTestTask(void *arg){
     MotorTestTaskData *data = static_cast<MotorTestTaskData *>(arg);
 
@@ -37,4 +121,4 @@
 
         vTaskDelay(DEFAULT_WAIT_TIME);
     }
-}
+}*/

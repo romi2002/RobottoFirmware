@@ -14,6 +14,7 @@
 #include "Tasks/HeartbeatTask.h"
 #include "Tasks/BatteryPublisherTask.h"
 #include "Tasks/MotorTestTask.h"
+#include "Tasks/MotorOutputTestTask.h"
 
 #include "HAL/VNH5019.h"
 
@@ -32,7 +33,7 @@ void messageCb(const std_msgs::Float64& msg){
     xSemaphoreGive(testMutex);
 }
 
-ros::Subscriber<std_msgs::Float64> testSubcriber("motorTest", &messageCb);
+//ros::Subscriber<std_msgs::Float64> testSubcriber("motorTest", &messageCb);
 
 void verifyTask(portBASE_TYPE ret) {
     if (ret != pdPASS) {
@@ -53,7 +54,7 @@ void setup() {
     testMutex = xSemaphoreCreateMutex();
 
     nh.initNode();
-    nh.subscribe(testSubcriber);
+    //nh.subscribe(testSubcriber);
 
     /**
      * RTOS SETUP
@@ -107,9 +108,28 @@ void setup() {
 
     vTaskStartScheduler();*/
 
+    VNH5019_PinDefinitions definitions{};
+    definitions.PWM = PIN_A0;
+    definitions.IN_A = 13;
+    definitions.IN_B = 12;
+    definitions.DIAG_A = 6;
+    definitions.DIAG_B = 9;
+    definitions.CS = PIN_A3;
+
+    VNH5019 testMotor(definitions);
+    MotorTestTaskData data1;
+    data1.testMutex = testMutex;
+    data1.motor = testMotor;
+    data1.setpoint = &currentSetpoint;
+    data1.nh = &nh;
+    data1.encoderChannel = 1;
+    data1.phaseA_PIN = 2;
+    data1.phaseB_PIN = 3;
+
     HeartbeatTask heartbeatTask;
     BatteryPublisherTask batteryPublisherTask(&nh);
     RosSpinTask rosSpinTask(&nh);
+    MotorTestTask motorOutputTestTask("TestMotor", &nh, &testMotor, 2, 4, 5, pdMS_TO_TICKS(10));
 
     Thread::StartScheduler();
 }

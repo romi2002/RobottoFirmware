@@ -8,9 +8,9 @@
 #include <Arduino.h>
 #include <cmath>
 
-const float VNH5019_PWM_FREQUENCY = 20.0 * 1000.0; //20kHz
-constexpr uint32_t VNH5019_PWM_BITS = 12;
-constexpr uint32_t VNH5019_PWM_MAXVAL = 4096;
+const float VNH5019_PWM_FREQUENCY = 4577.64; //16kHz
+constexpr uint32_t VNH5019_PWM_BITS = 15;
+constexpr uint32_t VNH5019_PWM_MAXVAL = 32757;
 
 struct VNH5019_PinDefinitions{
     uint8_t PWM;
