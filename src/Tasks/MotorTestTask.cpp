@@ -5,22 +5,14 @@
 #include <functional>
 #include "MotorTestTask.h"
 
-MotorTestTask::MotorTestTask(const std::string &name, ros::NodeHandle *nh, VNH5019 *motor, uint8_t encoderChannel, uint8_t phaseA, uint8_t phaseB, TickType_t waitTime) : Thread(name, 256, MOTOR_OUTPUT_TEST_TASK_PRIORITY) {
+MotorTestTask::MotorTestTask(const std::string &name, ros::NodeHandle *nh, MotorController *controller, TickType_t waitTime) : Thread(name, 256, MOTOR_OUTPUT_TEST_TASK_PRIORITY) {
     this->name = name;
     this->nh = nh;
-    this->motor = motor;
-    this->quadEncoder = new QuadEncoder(encoderChannel, phaseA, phaseB);
+    this->controller = controller;
 
     setpointTopic = name + "_setpoint";
     encoderPositionTopic = name + "_position";
     encoderVelocityTopic = name + "_velocity";
-
-    quadEncoder->setInitConfig();
-    quadEncoder->EncConfig.filterCount = 5;
-    quadEncoder->EncConfig.filterSamplePeriod = 255;
-    //quadEncoder->EncConfig.INDEXTriggerMode = RISING_EDGE;
-
-    quadEncoder->init();
 
     this->waitTime = waitTime;
 
@@ -40,37 +32,16 @@ MotorTestTask::MotorTestTask(const std::string &name, ros::NodeHandle *nh, VNH50
 }
 
 [[noreturn]] void MotorTestTask::Run() {
-    //auto lastTime = xTaskGetTickCount();
-    elapsedMicros deltaTime;
-    int32_t lastPosition = quadEncoder->read();
-    float currentVelocityAverage = 0;
-    float currentPositionAverage = 0;
-
     while(true){
         setpointLock->ReaderLock();
-        motor->set(targetSetpoint);
+        controller->set(targetSetpoint, MotorControlMode::PERCENTAGE);
         setpointLock->ReaderUnlock();
 
-        const int32_t encoderPosition = quadEncoder->read();
-
-        auto encoderPositionDelta = static_cast<float>(encoderPosition - lastPosition);
-        auto deltaTimeSeconds = static_cast<float>(deltaTime) / 1e+6f;
-        float encoderVelocity = encoderPositionDelta / deltaTimeSeconds;
-        encoderVelocity = encoderVelocity / 979.62 * 60.0;
-
-        currentPositionAverage = currentPositionAverage + positionAverageAlpha * (encoderPosition - currentPositionAverage);
-        currentVelocityAverage = currentVelocityAverage + velocityAverageAlpha * (encoderVelocity - currentVelocityAverage); //Exponential rolling average
-
-        motorEncoderPosition_msg.data = currentPositionAverage;
+        motorEncoderPosition_msg.data = controller->getPosition();
         motorEncoderPositionPublisher->publish(&motorEncoderPosition_msg);
 
-        motorEncoderVelocity_msg.data = currentVelocityAverage;
+        motorEncoderVelocity_msg.data = controller->getVelocity();
         motorEncoderVelocityPublisher->publish(&motorEncoderVelocity_msg);
-
-
-        lastPosition = encoderPosition;
-        //lastTime = xTaskGetTickCount();
-        deltaTime = 0;
 
         vTaskDelay(waitTime);
     }
@@ -83,7 +54,6 @@ void MotorTestTask::setpointSubscriberCb(const std_msgs::Float32 &msg) {
 }
 
 MotorTestTask::~MotorTestTask() {
-    delete(quadEncoder);
     delete(setpointLock);
     //delete(setpointSubscriber);
     delete(motorEncoderPositionPublisher);

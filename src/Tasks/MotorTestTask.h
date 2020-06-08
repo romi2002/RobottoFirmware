@@ -6,13 +6,11 @@
 #define TEENSYROSCONTROLLER_MOTORTESTTASK_H
 
 #include <FreeRTOS_TEENSY4.h>
-#include "HAL/VNH5019.h"
+#include "HAL/MotorController.h"
 
 #include <ros.h>
 #include <std_msgs/Int32.h>
 #include <std_msgs/Float32.h>
-
-#include "QuadEncoder_Teensy4.h"
 
 #include "config.h"
 
@@ -23,7 +21,7 @@ using namespace cpp_freertos;
 
 class MotorTestTask : public Thread{
 public:
-    MotorTestTask(const std::string &name, ros::NodeHandle *nh, VNH5019 *motor, uint8_t encoderChannel, uint8_t phaseA, uint8_t phaseB, TickType_t waitTime = DEFAULT_WAIT_TIME);
+    MotorTestTask(const std::string &name, ros::NodeHandle *nh, MotorController *controller, TickType_t waitTime = DEFAULT_WAIT_TIME);
 
     void setpointSubscriberCb(const std_msgs::Float32& msg);
 
@@ -36,8 +34,7 @@ protected:
 private:
     std::string name;
     ros::NodeHandle *nh;
-    VNH5019 *motor;
-    QuadEncoder *quadEncoder;
+    MotorController *controller;
 
     TickType_t waitTime;
 

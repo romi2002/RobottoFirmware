@@ -15,6 +15,7 @@
 #include "Tasks/BatteryPublisherTask.h"
 #include "Tasks/MotorTestTask.h"
 #include "Tasks/MotorOutputTestTask.h"
+#include "HAL/MotorController.h"
 
 #include "HAL/VNH5019.h"
 
@@ -116,12 +117,21 @@ void setup() {
     definitions.DIAG_B = 9;
     definitions.CS = PIN_A3;
 
-    VNH5019 testMotor(definitions);
+    EncoderPinDefinitions encoderPinDefinitions;
+    encoderPinDefinitions.channel = 2;
+    encoderPinDefinitions.phaseA = 4;
+    encoderPinDefinitions.phaseB = 5;
+
+    MotorControllerConfig controllerConfig;
+    controllerConfig.vnh5019PinDefinitions = definitions;
+    controllerConfig.encoderPinDefinitions = encoderPinDefinitions;
 
     HeartbeatTask heartbeatTask;
     BatteryPublisherTask batteryPublisherTask(&nh);
     RosSpinTask rosSpinTask(&nh);
-    MotorTestTask motorOutputTestTask("TestMotor", &nh, &testMotor, 2, 4, 5, pdMS_TO_TICKS(10));
+
+    MotorController controller("TestController", controllerConfig, pdMS_TO_TICKS(10));
+    MotorTestTask motorOutputTestTask("TestMotor", &nh, &controller);
 
     Thread::StartScheduler();
 }
