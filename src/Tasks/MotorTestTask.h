@@ -46,7 +46,7 @@ private:
 
     ros::Subscriber<std_msgs::Float32, MotorTestTask> *setpointSubscriber;
 
-    std_msgs::Int32 motorEncoderPosition_msg;
+    std_msgs::Float32 motorEncoderPosition_msg;
     std_msgs::Float32 motorEncoderVelocity_msg;
 
     ros::Publisher *motorEncoderPositionPublisher;
@@ -56,17 +56,9 @@ private:
      * Publisher / Subscriber topic names
      */
     std::string setpointTopic, encoderPositionTopic, encoderVelocityTopic;
+
+    const float positionAverageAlpha = 0.1;
+    const float velocityAverageAlpha = 0.1;
 };
-
-struct MotorTestTaskData {
-    SemaphoreHandle_t testMutex{};
-    double *setpoint{};
-    VNH5019 motor;
-    uint8_t encoderChannel, phaseA_PIN, phaseB_PIN;
-    ros::NodeHandle *nh;
-};
-
-//[[noreturn]] void motorTestTask(void *arg);
-
 
 #endif //TEENSYROSCONTROLLER_MOTORTESTTASK_H

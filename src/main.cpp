@@ -117,14 +117,6 @@ void setup() {
     definitions.CS = PIN_A3;
 
     VNH5019 testMotor(definitions);
-    MotorTestTaskData data1;
-    data1.testMutex = testMutex;
-    data1.motor = testMotor;
-    data1.setpoint = &currentSetpoint;
-    data1.nh = &nh;
-    data1.encoderChannel = 1;
-    data1.phaseA_PIN = 2;
-    data1.phaseB_PIN = 3;
 
     HeartbeatTask heartbeatTask;
     BatteryPublisherTask batteryPublisherTask(&nh);

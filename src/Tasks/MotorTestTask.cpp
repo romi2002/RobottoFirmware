@@ -44,7 +44,7 @@ MotorTestTask::MotorTestTask(const std::string &name, ros::NodeHandle *nh, VNH50
     elapsedMicros deltaTime;
     int32_t lastPosition = quadEncoder->read();
     float currentVelocityAverage = 0;
-    const float currentVelocityAverageAlpha = 0.1;
+    float currentPositionAverage = 0;
 
     while(true){
         setpointLock->ReaderLock();
@@ -52,16 +52,16 @@ MotorTestTask::MotorTestTask(const std::string &name, ros::NodeHandle *nh, VNH50
         setpointLock->ReaderUnlock();
 
         const int32_t encoderPosition = quadEncoder->read();
-        //const TickType_t deltaTimeTicks = xTaskGetTickCount() - lastTime;
-        //const float deltaTime = (float) deltaTimeTicks * (1.0f / (float) configTICK_RATE_HZ);
 
         auto encoderPositionDelta = static_cast<float>(encoderPosition - lastPosition);
         auto deltaTimeSeconds = static_cast<float>(deltaTime) / 1e+6f;
         float encoderVelocity = encoderPositionDelta / deltaTimeSeconds;
-        currentVelocityAverage = currentVelocityAverage + currentVelocityAverageAlpha * (encoderVelocity - currentVelocityAverage);
-        //encoderVelocity
+        encoderVelocity = encoderVelocity / 979.62 * 60.0;
 
-        motorEncoderPosition_msg.data = encoderPosition;
+        currentPositionAverage = currentPositionAverage + positionAverageAlpha * (encoderPosition - currentPositionAverage);
+        currentVelocityAverage = currentVelocityAverage + velocityAverageAlpha * (encoderVelocity - currentVelocityAverage); //Exponential rolling average
+
+        motorEncoderPosition_msg.data = currentPositionAverage;
         motorEncoderPositionPublisher->publish(&motorEncoderPosition_msg);
 
         motorEncoderVelocity_msg.data = currentVelocityAverage;
