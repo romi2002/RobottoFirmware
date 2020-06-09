@@ -11,12 +11,6 @@ MotorController::MotorController(const std::string &name, const MotorControllerC
 
     setpointLock = new ReadWriteLockPreferReader();
 
-    /**
-     * PIDConfig init
-     */
-    this->velocityPIDConfig = config.velocityPIDConfig;
-    this->positionPIDConfig = config.positionPIDConfig;
-
     velocityController = new PIDController(config.velocityPIDConfig);
     positionController = new PIDController(config.positionPIDConfig);
 
@@ -127,7 +121,7 @@ MotorController::~MotorController() {
     delete (motor);
 }
 
-control_msgs::PidState MotorController::getVelocityControllerStatus() const {
+control_msgs::PidState MotorController::getVelPIDStatus() const {
     control_msgs::PidState msg;
     velocityPIDLock->ReaderLock();
     msg = PIDControllerROS::getPIDState(velocityController);
@@ -136,7 +130,7 @@ control_msgs::PidState MotorController::getVelocityControllerStatus() const {
     return msg;
 }
 
-control_msgs::PidState MotorController::getPositionControllerStatus() const {
+control_msgs::PidState MotorController::getPosPIDStatus() const {
     control_msgs::PidState msg;
     positionPIDLock->ReaderLock();
     msg = PIDControllerROS::getPIDState(positionController);
@@ -145,7 +139,7 @@ control_msgs::PidState MotorController::getPositionControllerStatus() const {
     return msg;
 }
 
-PIDConfig MotorController::getVelocityControllerConfig() const {
+PIDConfig MotorController::getVelPIDConfig() const {
     PIDConfig configOut;
     positionPIDLock->ReaderLock();
     configOut = positionController->getCurrentConfig();
@@ -153,8 +147,22 @@ PIDConfig MotorController::getVelocityControllerConfig() const {
     return configOut;
 }
 
-void MotorController::setVelocityControllerConfig(const PIDConfig &configIn) {
+void MotorController::setVelPIDConfig(const PIDConfig &configIn) {
     velocityPIDLock->WriterLock();
     velocityController->setConfig(configIn);
     velocityPIDLock->WriterUnlock();
+}
+
+PIDConfig MotorController::getPosPIDConfig() const {
+    PIDConfig configOut;
+    velocityPIDLock->ReaderLock();
+    configOut = velocityController->getCurrentConfig();
+    velocityPIDLock->ReaderUnlock();
+    return configOut;
+}
+
+void MotorController::setPosPIDConfig(const PIDConfig &configIn) {
+    positionPIDLock->WriterLock();
+    positionController->setConfig(configIn);
+    positionPIDLock->WriterUnlock();
 }

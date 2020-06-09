@@ -56,13 +56,17 @@ public:
 
     double getPosition() const;
 
-    control_msgs::PidState getVelocityControllerStatus() const;
+    control_msgs::PidState getVelPIDStatus() const;
 
-    control_msgs::PidState getPositionControllerStatus() const;
+    control_msgs::PidState getPosPIDStatus() const;
 
-    PIDConfig getVelocityControllerConfig() const;
+    PIDConfig getVelPIDConfig() const;
 
-    void setVelocityControllerConfig(const PIDConfig &configIn);
+    void setVelPIDConfig(const PIDConfig &configIn);
+
+    PIDConfig getPosPIDConfig() const;
+
+    void setPosPIDConfig(const PIDConfig &configIn);
 
     ~MotorController() override;
 
@@ -85,7 +89,6 @@ private:
     /**
      * PID
      */
-    PIDConfig velocityPIDConfig, positionPIDConfig;
     PIDController *velocityController, *positionController;
     ReadWriteLock *velocityPIDLock, *positionPIDLock;
 

@@ -13,7 +13,7 @@
 #include "Tasks/RosSpinTask.h"
 #include "Tasks/HeartbeatTask.h"
 #include "Tasks/BatteryPublisherTask.h"
-#include "Tasks/MotorTestTask.h"
+#include "Tasks/MotorControllerTestTask.h"
 #include "Tasks/MotorOutputTestTask.h"
 #include "HAL/MotorController.h"
 
@@ -139,7 +139,7 @@ void setup() {
     RosSpinTask rosSpinTask(&nh);
 
     MotorController controller("TestController", controllerConfig, pdMS_TO_TICKS(10));
-    MotorTestTask motorOutputTestTask("TestMotor", &nh, &controller);
+    MotorControllerTestTask motorOutputTestTask("TestMotor", &nh, &controller);
 
     Thread::StartScheduler();
 }
