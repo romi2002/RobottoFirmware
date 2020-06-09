@@ -37,10 +37,8 @@ struct MotorControllerConfig {
 
     double countsPerRev = 979.62;
 
-    double positionFilterAlpha = 0.035;
+    double positionFilterAlpha = 0.8;
     double velocityFilterAlpha = 0.035;
-
-    double motorDeadband = 0.1;
 
     PIDConfig velocityPIDConfig, positionPIDConfig;
 };

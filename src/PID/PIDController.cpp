@@ -51,9 +51,7 @@ double PIDController::calculate(double sensorVal) {
 
     double output = lastPError + lastIError + lastDError;
 
-    if (fabs(output) < config.deadband) {
-        output = 0;
-    }
+    output = fabs(output) < config.deadband ? 0 : output;
 
 
     //if(fabs(output) < config.deadband){

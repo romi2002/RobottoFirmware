@@ -58,7 +58,7 @@ MotorControllerTestTask::MotorControllerTestTask(const std::string &name, ros::N
 
     while (true) {
         setpointLock->ReaderLock();
-        controller->set(setpoint, MotorControlMode::VELOCITY);
+        controller->set(setpoint, MotorControlMode::POSITION);
         setpointLock->ReaderUnlock();
 
         positionMsg.data = controller->getPosition();
@@ -93,15 +93,23 @@ void MotorControllerTestTask::setpointSubscriberCb(const std_msgs::Float32 &msg)
 
 void MotorControllerTestTask::velPIDConfigSubCb(const control_msgs::PidState &msg) {
     PIDConfig newConfig = PIDControllerROS::getPIDConfig(msg);
-    if(newConfig != controller->getVelPIDConfig()){
-        controller->setVelPIDConfig(newConfig);
+    PIDConfig oldConfig = controller->getVelPIDConfig();
+    if(newConfig != oldConfig){
+        oldConfig.p = newConfig.p;
+        oldConfig.i = newConfig.i;
+        oldConfig.d = newConfig.d;
+        controller->setVelPIDConfig(oldConfig);
     }
 }
 
 void MotorControllerTestTask::posPIDConfigSubCb(const control_msgs::PidState &msg) {
     PIDConfig newConfig = PIDControllerROS::getPIDConfig(msg);
-    if(newConfig != controller->getPosPIDConfig()){
-        controller->setPosPIDConfig(newConfig);
+    PIDConfig oldConfig = controller->getPosPIDConfig();
+    if(newConfig != oldConfig){
+        oldConfig.p = newConfig.p;
+        oldConfig.i = newConfig.i;
+        oldConfig.d = newConfig.d;
+        controller->setPosPIDConfig(oldConfig);
     }
 }
 

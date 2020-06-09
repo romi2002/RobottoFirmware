@@ -39,7 +39,7 @@ void VNH5019::set(double value) {
     } else if (value < 0.0) {
         digitalWriteFast(definitions.IN_A, LOW);
         digitalWriteFast(definitions.IN_B, HIGH);
-    } else {
+    } else if (value == 0.0) {
         digitalWriteFast(definitions.IN_A, LOW);
         digitalWriteFast(definitions.IN_B, LOW);
     }

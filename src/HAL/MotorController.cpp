@@ -90,14 +90,24 @@ double MotorController::getVelocity() const {
                 motor->set(setpoint);
                 break;
             case MotorControlMode::VELOCITY:
-                if (modeChanged) velocityController->reset();
                 velocityPIDLock->WriterLock();
+                if (modeChanged) velocityController->reset();
                 velocityController->setSetpoint(setpoint);
 
                 averageVelocityLock->ReaderLock();
                 motor->set(velocityController->calculate(averageVelocity));
                 averageVelocityLock->ReaderUnlock();
                 velocityPIDLock->WriterUnlock();
+                break;
+            case MotorControlMode::POSITION:
+                positionPIDLock->WriterLock();
+                if (modeChanged) positionController->reset();
+                positionController->setSetpoint(setpoint);
+
+                averagePositionLock->ReaderLock();
+                motor->set(positionController->calculate(averagePosition));
+                averagePositionLock->ReaderUnlock();
+                positionPIDLock->WriterUnlock();
                 break;
             default:
                 break;
