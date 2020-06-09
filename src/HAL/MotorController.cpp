@@ -17,7 +17,11 @@ MotorController::MotorController(const std::string &name, const MotorControllerC
     this->velocityPIDConfig = config.velocityPIDConfig;
     this->positionPIDConfig = config.positionPIDConfig;
 
-    pidConfigLock = new ReadWriteLockPreferReader();
+    velocityController = new PIDController(config.velocityPIDConfig);
+    positionController = new PIDController(config.positionPIDConfig);
+
+    //velocityPIDLock = new ReadWriteLockPreferReader();
+    //positionPIDLock = new ReadWriteLockPreferReader();
 
     encoder = new QuadEncoder(config.encoderPinDefinitions.channel, config.encoderPinDefinitions.phaseA,
                               config.encoderPinDefinitions.phaseB);
@@ -38,7 +42,10 @@ MotorController::MotorController(const std::string &name, const MotorControllerC
 void MotorController::set(double setpoint, MotorControlMode mode) {
     setpointLock->WriterLock();
     this->setpoint = setpoint;
-    currentMode = mode;
+    if(currentMode != mode){
+        modeChanged = true;
+        currentMode = mode;
+    }
     setpointLock->WriterUnlock();
 }
 
@@ -63,17 +70,6 @@ double MotorController::getVelocity() const {
     int32_t lastPosition = encoder->read();
 
     while (true) {
-        setpointLock->ReaderLock();
-        //TODO Add position and velocity control
-        switch (currentMode) {
-            case MotorControlMode::PERCENTAGE:
-                motor->set(setpoint);
-                break;
-            default:
-                break;
-        }
-        setpointLock->ReaderUnlock();
-
         const int32_t encoderPosition = encoder->read();
 
         auto encoderPositionDelta = static_cast<float>(encoderPosition - lastPosition);
@@ -93,6 +89,36 @@ double MotorController::getVelocity() const {
         lastPosition = encoder->read();
         deltaTime = 0;
 
+        setpointLock->ReaderLock();
+        //TODO Add position and velocity control
+        switch (currentMode) {
+            case MotorControlMode::PERCENTAGE:
+                motor->set(setpoint);
+                break;
+            case MotorControlMode::VELOCITY:
+                if(modeChanged) velocityController->reset();
+                velocityController->setSetpoint(setpoint);
+
+                averageVelocityLock->ReaderLock();
+                motor->set(velocityController->calculate(averageVelocity));
+                averageVelocityLock->ReaderUnlock();
+
+                break;
+            default:
+                break;
+        }
+        modeChanged = false;
+        setpointLock->ReaderUnlock();
+
         vTaskDelay(updateTime);
     }
+}
+
+MotorController::~MotorController() {
+    delete(setpointLock);
+    delete(velocityController); delete(positionController);
+    //delete(velocityPIDLock); delete(positionPIDLock);
+    delete(encoder);
+    delete(averageVelocityLock); delete(averagePositionLock);
+    delete(motor);
 }

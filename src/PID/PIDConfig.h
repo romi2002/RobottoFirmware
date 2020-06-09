@@ -10,6 +10,11 @@ struct PIDConfig {
     double p = 0;
     double i = 0;
     double d = 0;
+
+    bool enableRampRate = false;
+    double rampRate = 0;
+
+    double deadband = 0;
 };
 
 

@@ -34,7 +34,7 @@ MotorTestTask::MotorTestTask(const std::string &name, ros::NodeHandle *nh, Motor
 [[noreturn]] void MotorTestTask::Run() {
     while(true){
         setpointLock->ReaderLock();
-        controller->set(targetSetpoint, MotorControlMode::PERCENTAGE);
+        controller->set(targetSetpoint, MotorControlMode::VELOCITY);
         setpointLock->ReaderUnlock();
 
         motorEncoderPosition_msg.data = controller->getPosition();

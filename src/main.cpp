@@ -125,6 +125,14 @@ void setup() {
     MotorControllerConfig controllerConfig;
     controllerConfig.vnh5019PinDefinitions = definitions;
     controllerConfig.encoderPinDefinitions = encoderPinDefinitions;
+    PIDConfig velocityConfig;
+    velocityConfig.p = 0.1;
+    velocityConfig.d = 0.002;
+    //velocityConfig.i = 0.0001;
+    velocityConfig.deadband = 0.2;
+    velocityConfig.enableRampRate = true;
+    velocityConfig.rampRate = 600;
+    controllerConfig.velocityPIDConfig = velocityConfig;
 
     HeartbeatTask heartbeatTask;
     BatteryPublisherTask batteryPublisherTask(&nh);

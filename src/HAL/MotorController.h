@@ -9,12 +9,14 @@
 
 #include "thread.hpp"
 #include "read_write_lock.hpp"
+
 using namespace cpp_freertos;
 
 #include "VNH5019.h"
 #include "QuadEncoder_Teensy4.h"
 
 #include "PID/PIDConfig.h"
+#include "PID/PIDController.h"
 
 enum class MotorControlMode {
     PERCENTAGE,
@@ -34,8 +36,8 @@ struct MotorControllerConfig {
 
     double countsPerRev = 979.62;
 
-    double positionFilterAlpha = 0.05;
-    double velocityFilterAlpha = 0.05;
+    double positionFilterAlpha = 0.035;
+    double velocityFilterAlpha = 0.035;
 
     double motorDeadband = 0.1;
 
@@ -44,12 +46,16 @@ struct MotorControllerConfig {
 
 class MotorController : public Thread {
 public:
-    MotorController(const std::string &name, const MotorControllerConfig &config, TickType_t updateTime = DEFAULT_WAIT_TIME);
+    MotorController(const std::string &name, const MotorControllerConfig &config,
+                    TickType_t updateTime = DEFAULT_WAIT_TIME);
 
     void set(double setpoint, MotorControlMode mode);
 
     double getVelocity() const;
+
     double getPosition() const;
+
+    ~MotorController() override;
 
 protected:
     void Run() override;
@@ -62,27 +68,29 @@ private:
     /**
      * Setpoint
      */
-     double setpoint{0};
-     MotorControlMode currentMode{MotorControlMode::PERCENTAGE};
-     ReadWriteLock *setpointLock;
+    double setpoint{0};
+    MotorControlMode currentMode{MotorControlMode::PERCENTAGE};
+    bool modeChanged = false;
+    ReadWriteLock *setpointLock;
 
     /**
      * PID
      */
-     PIDConfig velocityPIDConfig, positionPIDConfig;
-    ReadWriteLock *pidConfigLock;
+    PIDConfig velocityPIDConfig, positionPIDConfig;
+    PIDController *velocityController, *positionController;
+    //ReadWriteLock *velocityPIDLock, *positionPIDLock;
 
     /**
      * Encoder
      */
-     QuadEncoder *encoder;
-     double averageVelocity{0}, averagePosition{0};
-     ReadWriteLock *averageVelocityLock, *averagePositionLock;
+    QuadEncoder *encoder;
+    double averageVelocity{0}, averagePosition{0};
+    ReadWriteLock *averageVelocityLock, *averagePositionLock;
 
-     /**
-      * Motor driver
-      */
-      VNH5019 *motor;
+    /**
+     * Motor driver
+     */
+    VNH5019 *motor;
 };
 
 
