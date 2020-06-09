@@ -4,6 +4,7 @@
 
 #include <functional>
 #include "MotorTestTask.h"
+#include <sstream>
 
 MotorTestTask::MotorTestTask(const std::string &name, ros::NodeHandle *nh, MotorController *controller, TickType_t waitTime) : Thread(name, 256, MOTOR_OUTPUT_TEST_TASK_PRIORITY) {
     this->name = name;
@@ -13,25 +14,33 @@ MotorTestTask::MotorTestTask(const std::string &name, ros::NodeHandle *nh, Motor
     setpointTopic = name + "_setpoint";
     encoderPositionTopic = name + "_position";
     encoderVelocityTopic = name + "_velocity";
+    velocityControllerStatusTopic = name + "_velocityPIDStatus";
+    velocityControllerConfigTopic = name + "_velocityPIDConfig";
 
     this->waitTime = waitTime;
 
     this->setpointLock = new ReadWriteLockPreferReader();
 
-    this->setpointSubscriber = new ros::Subscriber<std_msgs::Float32, MotorTestTask>(setpointTopic.data(), &MotorTestTask::setpointSubscriberCb, this, 1);
+    this->setpointSubscriber = new ros::Subscriber<std_msgs::Float32, MotorTestTask>(setpointTopic.data(), &MotorTestTask::setpointSubscriberCb, this);
+    this->pidVelocityStateSubscriber = new ros::Subscriber<control_msgs::PidState, MotorTestTask>(velocityControllerConfigTopic.data(), &MotorTestTask::pidVelocityStateSubscriberCb, this);
 
     nh->subscribe(*setpointSubscriber);
+    nh->subscribe(*pidVelocityStateSubscriber);
 
     motorEncoderPositionPublisher = new ros::Publisher(encoderPositionTopic.data(), &motorEncoderPosition_msg);
     motorEncoderVelocityPublisher = new ros::Publisher(encoderVelocityTopic.data(), &motorEncoderVelocity_msg);
+    motorVelocityControllerStatusPublisher = new ros::Publisher(velocityControllerStatusTopic.data(), &motorVelocityControllerStatus_msg);
 
     nh->advertise(*motorEncoderPositionPublisher);
     nh->advertise(*motorEncoderVelocityPublisher);
+    nh->advertise(*motorVelocityControllerStatusPublisher);
 
     Start();
 }
 
 [[noreturn]] void MotorTestTask::Run() {
+    int32_t timesUpdated = 0;
+
     while(true){
         setpointLock->ReaderLock();
         controller->set(targetSetpoint, MotorControlMode::VELOCITY);
@@ -43,6 +52,16 @@ MotorTestTask::MotorTestTask(const std::string &name, ros::NodeHandle *nh, Motor
         motorEncoderVelocity_msg.data = controller->getVelocity();
         motorEncoderVelocityPublisher->publish(&motorEncoderVelocity_msg);
 
+        /**
+         * Reduce update frequency for non essential topics
+         */
+        if(timesUpdated >= 10){
+            motorVelocityControllerStatus_msg = controller->getVelocityControllerStatus();
+            motorVelocityControllerStatusPublisher->publish(&motorVelocityControllerStatus_msg);
+            timesUpdated = 0;
+        }
+
+        timesUpdated++;
         vTaskDelay(waitTime);
     }
 }
@@ -51,6 +70,13 @@ void MotorTestTask::setpointSubscriberCb(const std_msgs::Float32 &msg) {
     setpointLock->WriterLock();
     targetSetpoint = msg.data;
     setpointLock->WriterUnlock();
+}
+
+void MotorTestTask::pidVelocityStateSubscriberCb(const control_msgs::PidState &msg) {
+    PIDConfig newConfig = PIDControllerROS::getPIDConfig(msg);
+    //if(newConfig != controller->getVelocityControllerConfig()){
+        controller->setVelocityControllerConfig(newConfig);
+    //}
 }
 
 MotorTestTask::~MotorTestTask() {

@@ -24,7 +24,7 @@ void PIDController::reset() {
     deltaTime = 0;
 }
 
-void PIDController::setConfig(PIDConfig &newConfig) {
+void PIDController::setConfig(const PIDConfig &newConfig) {
     this->config = newConfig;
 }
 
@@ -45,7 +45,11 @@ double PIDController::calculate(double sensorVal) {
     integral += error * deltaTimeSeconds;
     const double derivative = (error - lastError) / deltaTimeSeconds;
 
-    double output = config.p * error + config.i * integral + config.d * derivative;
+    lastPError = config.p * error;
+    lastIError = config.i * integral;
+    lastDError = config.d * derivative;
+
+    double output = lastPError + lastIError + lastDError;
 
     if(fabs(output) < config.deadband){
             output = 0;
@@ -57,8 +61,42 @@ double PIDController::calculate(double sensorVal) {
     //}
 
     lastOutput = output;
+    errorDot = (error - lastError) / deltaTimeSeconds;
+    lastDeltaTime = deltaTimeSeconds;
     lastError = error;
     deltaTime = 0;
 
     return output;
+}
+
+double PIDController::getError() const {
+    return lastError;
+}
+
+double PIDController::getErrorDot() const {
+    return errorDot;
+}
+
+double PIDController::getP_Error() const {
+    return lastPError;
+}
+
+double PIDController::getI_Error() const {
+    return lastIError;
+}
+
+double PIDController::getD_Error() const {
+    return lastDError;
+}
+
+double PIDController::getLastOutput() const {
+    return lastOutput;
+}
+
+double PIDController::getLastTimestep() const {
+    return lastDeltaTime;
+}
+
+PIDConfig PIDController::getCurrentConfig() const {
+    return config;
 }

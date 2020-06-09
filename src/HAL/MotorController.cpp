@@ -20,8 +20,8 @@ MotorController::MotorController(const std::string &name, const MotorControllerC
     velocityController = new PIDController(config.velocityPIDConfig);
     positionController = new PIDController(config.positionPIDConfig);
 
-    //velocityPIDLock = new ReadWriteLockPreferReader();
-    //positionPIDLock = new ReadWriteLockPreferReader();
+    velocityPIDLock = new ReadWriteLockPreferReader();
+    positionPIDLock = new ReadWriteLockPreferReader();
 
     encoder = new QuadEncoder(config.encoderPinDefinitions.channel, config.encoderPinDefinitions.phaseA,
                               config.encoderPinDefinitions.phaseB);
@@ -97,12 +97,13 @@ double MotorController::getVelocity() const {
                 break;
             case MotorControlMode::VELOCITY:
                 if(modeChanged) velocityController->reset();
+                velocityPIDLock->WriterLock();
                 velocityController->setSetpoint(setpoint);
 
                 averageVelocityLock->ReaderLock();
                 motor->set(velocityController->calculate(averageVelocity));
                 averageVelocityLock->ReaderUnlock();
-
+                velocityPIDLock->WriterUnlock();
                 break;
             default:
                 break;
@@ -117,8 +118,40 @@ double MotorController::getVelocity() const {
 MotorController::~MotorController() {
     delete(setpointLock);
     delete(velocityController); delete(positionController);
-    //delete(velocityPIDLock); delete(positionPIDLock);
+    delete(velocityPIDLock); delete(positionPIDLock);
     delete(encoder);
     delete(averageVelocityLock); delete(averagePositionLock);
     delete(motor);
+}
+
+control_msgs::PidState MotorController::getVelocityControllerStatus() const {
+    control_msgs::PidState msg;
+    velocityPIDLock->ReaderLock();
+    msg = PIDControllerROS::getPIDState(velocityController);
+    velocityPIDLock->ReaderUnlock();
+
+    return msg;
+}
+
+control_msgs::PidState MotorController::getPositionControllerStatus() const {
+    control_msgs::PidState msg;
+    positionPIDLock->ReaderLock();
+    msg = PIDControllerROS::getPIDState(positionController);
+    positionPIDLock->ReaderUnlock();
+
+    return msg;
+}
+
+PIDConfig MotorController::getVelocityControllerConfig() const {
+    PIDConfig configOut;
+    positionPIDLock->ReaderLock();
+    configOut = positionController->getCurrentConfig();
+    positionPIDLock->ReaderUnlock();
+    return configOut;
+}
+
+void MotorController::setVelocityControllerConfig(const PIDConfig &configIn) {
+    velocityPIDLock->WriterLock();
+    velocityController->setConfig(configIn);
+    velocityPIDLock->WriterUnlock();
 }

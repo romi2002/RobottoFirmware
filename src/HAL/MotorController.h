@@ -9,6 +9,7 @@
 
 #include "thread.hpp"
 #include "read_write_lock.hpp"
+#include "PID/PIDControllerRos.h"
 
 using namespace cpp_freertos;
 
@@ -55,6 +56,12 @@ public:
 
     double getPosition() const;
 
+    control_msgs::PidState getVelocityControllerStatus() const;
+    control_msgs::PidState getPositionControllerStatus() const;
+
+    PIDConfig getVelocityControllerConfig() const;
+    void setVelocityControllerConfig(const PIDConfig &configIn);
+
     ~MotorController() override;
 
 protected:
@@ -78,7 +85,7 @@ private:
      */
     PIDConfig velocityPIDConfig, positionPIDConfig;
     PIDController *velocityController, *positionController;
-    //ReadWriteLock *velocityPIDLock, *positionPIDLock;
+    ReadWriteLock *velocityPIDLock, *positionPIDLock;
 
     /**
      * Encoder

@@ -10,7 +10,7 @@
 
 class PIDController {
 public:
-    PIDController(const PIDConfig &config);
+    explicit PIDController(const PIDConfig &config);
 
     void setSetpoint(double newSetpoint);
     double getSetpoint() const;
@@ -19,7 +19,20 @@ public:
 
     void reset(); //Keeps setpoint
 
-    void setConfig(PIDConfig &newConfig);
+    void setConfig(const PIDConfig &newConfig);
+
+    double getError() const;
+    double getErrorDot() const;
+
+    double getP_Error() const;
+    double getI_Error() const;
+    double getD_Error() const;
+
+    double getLastOutput() const;
+
+    double getLastTimestep() const;
+
+    PIDConfig getCurrentConfig() const;
 private:
     PIDConfig config;
     elapsedMicros deltaTime;
@@ -29,7 +42,14 @@ private:
 
     double lastOutput{0};
     double lastError{0};
+    double errorDot{0};
+    double lastDeltaTime{0};
+
     double integral{0};
+
+    double lastPError{0};
+    double lastIError{0};
+    double lastDError{0};
 };
 
 

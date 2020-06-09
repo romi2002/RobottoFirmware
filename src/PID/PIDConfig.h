@@ -6,7 +6,8 @@
 #define TEENSYROSCONTROLLER_PIDCONFIG_H
 
 
-struct PIDConfig {
+class PIDConfig {
+public:
     double p = 0;
     double i = 0;
     double d = 0;
@@ -15,6 +16,9 @@ struct PIDConfig {
     double rampRate = 0;
 
     double deadband = 0;
+
+    bool operator==(const PIDConfig &rhs) const;
+    bool operator!=(const PIDConfig &rhs) const;
 };
 
 
