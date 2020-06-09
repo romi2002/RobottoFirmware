@@ -31,10 +31,10 @@ void PIDController::setConfig(const PIDConfig &newConfig) {
 double PIDController::calculate(double sensorVal) {
     const double deltaTimeSeconds = deltaTime / 1e+6;
 
-    if(config.enableRampRate and setpoint != targetSetpoint){
+    if (config.enableRampRate and setpoint != targetSetpoint) {
         const double targetDelta = targetSetpoint - setpoint;
         double setpointDelta = std::copysign(config.rampRate * deltaTimeSeconds, targetDelta);
-        if(std::fabs(setpointDelta ) > std::fabs(targetDelta)) setpointDelta = targetDelta;
+        if (std::fabs(setpointDelta) > std::fabs(targetDelta)) setpointDelta = targetDelta;
         setpoint += setpointDelta;
     } else {
         setpoint = targetSetpoint;
@@ -51,9 +51,9 @@ double PIDController::calculate(double sensorVal) {
 
     double output = lastPError + lastIError + lastDError;
 
-    if(fabs(output) < config.deadband){
-            output = 0;
-        }
+    if (fabs(output) < config.deadband) {
+        output = 0;
+    }
 
 
     //if(fabs(output) < config.deadband){

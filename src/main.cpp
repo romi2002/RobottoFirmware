@@ -25,10 +25,10 @@
 
 ros::NodeHandle nh;
 
-SemaphoreHandle_t  testMutex;
+SemaphoreHandle_t testMutex;
 double currentSetpoint = 0;
 
-void messageCb(const std_msgs::Float64& msg){
+void messageCb(const std_msgs::Float64 &msg) {
     xSemaphoreTake(testMutex, portMAX_DELAY);
     currentSetpoint = msg.data;
     xSemaphoreGive(testMutex);

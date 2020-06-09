@@ -19,8 +19,10 @@ void VNH5019::initializePins(const VNH5019_PinDefinitions &definitions) {
     analogWriteFrequency(definitions.PWM, VNH5019_PWM_FREQUENCY);
 
     pinMode(definitions.PWM, OUTPUT);
-    pinMode(definitions.IN_A, OUTPUT); pinMode(definitions.IN_B, OUTPUT);
-    pinMode(definitions.DIAG_A, INPUT); pinMode(definitions.DIAG_B, INPUT);
+    pinMode(definitions.IN_A, OUTPUT);
+    pinMode(definitions.IN_B, OUTPUT);
+    pinMode(definitions.DIAG_A, INPUT);
+    pinMode(definitions.DIAG_B, INPUT);
 }
 
 void VNH5019::set(double value) {
@@ -31,10 +33,10 @@ void VNH5019::set(double value) {
 
     analogWrite(definitions.PWM, (int) std::abs(tempValue));
 
-    if(value > 0.0){
+    if (value > 0.0) {
         digitalWriteFast(definitions.IN_A, HIGH);
         digitalWriteFast(definitions.IN_B, LOW);
-    } else if(value < 0.0){
+    } else if (value < 0.0) {
         digitalWriteFast(definitions.IN_A, LOW);
         digitalWriteFast(definitions.IN_B, HIGH);
     } else {

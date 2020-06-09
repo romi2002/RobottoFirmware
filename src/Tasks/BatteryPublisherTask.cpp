@@ -1,13 +1,15 @@
 #include "BatteryPublisherTask.h"
 
-BatteryPublisherTask::BatteryPublisherTask(ros::NodeHandle *nh, TickType_t waitTime) : Thread("BatteryPubTask", 256, BATTERY_TASK_PRIORITY),
-                                                                               currentSensorVoltagePub(
-                                                                                       "currentSensorVoltage",
-                                                                                       &currentSensorVoltageMsg),
-                                                                               currentSensorPub("currentSensor",
-                                                                                                &currentSensorMsg),
-                                                                               batteryVoltagePub("currentSensorVoltage",
-                                                                                                 &currentSensorVoltageMsg) {
+BatteryPublisherTask::BatteryPublisherTask(ros::NodeHandle *nh, TickType_t waitTime) : Thread("BatteryPubTask", 256,
+                                                                                              BATTERY_TASK_PRIORITY),
+                                                                                       currentSensorVoltagePub(
+                                                                                               "currentSensorVoltage",
+                                                                                               &currentSensorVoltageMsg),
+                                                                                       currentSensorPub("currentSensor",
+                                                                                                        &currentSensorMsg),
+                                                                                       batteryVoltagePub(
+                                                                                               "currentSensorVoltage",
+                                                                                               &currentSensorVoltageMsg) {
     this->nh = nh;
     this->waitTime = waitTime;
     Start();

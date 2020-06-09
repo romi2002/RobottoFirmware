@@ -24,7 +24,7 @@ control_msgs::PidState PIDControllerROS::getPIDState(const PIDController *contro
     return msg;
 }
 
-PIDConfig PIDControllerROS::getPIDConfig(const control_msgs::PidState &state){
+PIDConfig PIDControllerROS::getPIDConfig(const control_msgs::PidState &state) {
     PIDConfig config;
 
     config.p = state.p_term;

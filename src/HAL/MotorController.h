@@ -57,9 +57,11 @@ public:
     double getPosition() const;
 
     control_msgs::PidState getVelocityControllerStatus() const;
+
     control_msgs::PidState getPositionControllerStatus() const;
 
     PIDConfig getVelocityControllerConfig() const;
+
     void setVelocityControllerConfig(const PIDConfig &configIn);
 
     ~MotorController() override;

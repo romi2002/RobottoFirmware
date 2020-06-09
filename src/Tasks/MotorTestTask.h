@@ -20,16 +20,18 @@
 
 using namespace cpp_freertos;
 
-class MotorTestTask : public Thread{
+class MotorTestTask : public Thread {
 public:
-    MotorTestTask(const std::string &name, ros::NodeHandle *nh, MotorController *controller, TickType_t waitTime = DEFAULT_WAIT_TIME);
+    MotorTestTask(const std::string &name, ros::NodeHandle *nh, MotorController *controller,
+                  TickType_t waitTime = DEFAULT_WAIT_TIME);
 
     ~MotorTestTask() override;
 
 protected:
     void Run() override;
 
-    void setpointSubscriberCb(const std_msgs::Float32& msg);
+    void setpointSubscriberCb(const std_msgs::Float32 &msg);
+
     void pidVelocityStateSubscriberCb(const control_msgs::PidState &msg);
 
 private:

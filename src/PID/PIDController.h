@@ -13,6 +13,7 @@ public:
     explicit PIDController(const PIDConfig &config);
 
     void setSetpoint(double newSetpoint);
+
     double getSetpoint() const;
 
     double calculate(double sensorVal);
@@ -22,10 +23,13 @@ public:
     void setConfig(const PIDConfig &newConfig);
 
     double getError() const;
+
     double getErrorDot() const;
 
     double getP_Error() const;
+
     double getI_Error() const;
+
     double getD_Error() const;
 
     double getLastOutput() const;
@@ -33,6 +37,7 @@ public:
     double getLastTimestep() const;
 
     PIDConfig getCurrentConfig() const;
+
 private:
     PIDConfig config;
     elapsedMicros deltaTime;

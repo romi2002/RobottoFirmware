@@ -42,7 +42,7 @@ MotorController::MotorController(const std::string &name, const MotorControllerC
 void MotorController::set(double setpoint, MotorControlMode mode) {
     setpointLock->WriterLock();
     this->setpoint = setpoint;
-    if(currentMode != mode){
+    if (currentMode != mode) {
         modeChanged = true;
         currentMode = mode;
     }
@@ -96,7 +96,7 @@ double MotorController::getVelocity() const {
                 motor->set(setpoint);
                 break;
             case MotorControlMode::VELOCITY:
-                if(modeChanged) velocityController->reset();
+                if (modeChanged) velocityController->reset();
                 velocityPIDLock->WriterLock();
                 velocityController->setSetpoint(setpoint);
 
@@ -116,12 +116,15 @@ double MotorController::getVelocity() const {
 }
 
 MotorController::~MotorController() {
-    delete(setpointLock);
-    delete(velocityController); delete(positionController);
-    delete(velocityPIDLock); delete(positionPIDLock);
-    delete(encoder);
-    delete(averageVelocityLock); delete(averagePositionLock);
-    delete(motor);
+    delete (setpointLock);
+    delete (velocityController);
+    delete (positionController);
+    delete (velocityPIDLock);
+    delete (positionPIDLock);
+    delete (encoder);
+    delete (averageVelocityLock);
+    delete (averagePositionLock);
+    delete (motor);
 }
 
 control_msgs::PidState MotorController::getVelocityControllerStatus() const {

@@ -8,8 +8,9 @@
 #include "PIDController.h"
 #include "control_msgs/PidState.h"
 
-namespace PIDControllerROS{
-    control_msgs::PidState getPIDState(PIDController const * controller);
+namespace PIDControllerROS {
+    control_msgs::PidState getPIDState(PIDController const *controller);
+
     PIDConfig getPIDConfig(const control_msgs::PidState &state);
 }
 

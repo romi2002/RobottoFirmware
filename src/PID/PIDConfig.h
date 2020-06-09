@@ -18,6 +18,7 @@ public:
     double deadband = 0;
 
     bool operator==(const PIDConfig &rhs) const;
+
     bool operator!=(const PIDConfig &rhs) const;
 };
 
