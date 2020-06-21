@@ -4,7 +4,7 @@
 
 #include "VNH5019.h"
 
-VNH5019::VNH5019(const VNH5019_PinDefinitions &pinDefinitions) {
+VNH5019::VNH5019(const VNH5019_PinAssignments &pinDefinitions) {
     this->definitions = pinDefinitions;
 
     initializePins(pinDefinitions);
@@ -14,7 +14,7 @@ VNH5019::VNH5019() {
     ;
 }
 
-void VNH5019::initializePins(const VNH5019_PinDefinitions &definitions) {
+void VNH5019::initializePins(const VNH5019_PinAssignments &definitions) {
     analogWriteResolution(VNH5019_PWM_BITS);
     analogWriteFrequency(definitions.PWM, VNH5019_PWM_FREQUENCY);
 

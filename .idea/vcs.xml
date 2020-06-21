@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/lib/FreeRTOS-Teensy4" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/arduino-mcp23017" vcs="Git" />
   </component>
 </project>

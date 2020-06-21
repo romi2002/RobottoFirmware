@@ -1,0 +1,16 @@
+//
+// Created by abiel on 6/21/20.
+//
+
+#ifndef TEENSYROSCONTROLLER_VNH5019_PINASSIGNMENTS_H
+#define TEENSYROSCONTROLLER_VNH5019_PINASSIGNMENTS_H
+
+struct VNH5019_PinAssignments {
+    uint8_t PWM;
+    uint8_t IN_A, IN_B;
+    uint8_t CS;
+
+    uint8_t DIAG_A, DIAG_B;
+};
+
+#endif //TEENSYROSCONTROLLER_VNH5019_PINASSIGNMENTS_H

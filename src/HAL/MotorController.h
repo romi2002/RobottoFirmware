@@ -18,6 +18,7 @@ using namespace cpp_freertos;
 
 #include "PID/PIDConfig.h"
 #include "PID/PIDController.h"
+#include "EncoderPinAssignments.h"
 
 enum class MotorControlMode {
     PERCENTAGE,
@@ -25,15 +26,9 @@ enum class MotorControlMode {
     POSITION
 };
 
-struct EncoderPinDefinitions {
-    uint8_t channel;
-    uint8_t phaseA;
-    uint8_t phaseB;
-};
-
 struct MotorControllerConfig {
-    VNH5019_PinDefinitions vnh5019PinDefinitions;
-    EncoderPinDefinitions encoderPinDefinitions;
+    VNH5019_PinAssignments vnh5019PinDefinitions;
+    EncoderPinAssignments encoderPinDefinitions;
 
     double countsPerRev = 979.62;
 
