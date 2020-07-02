@@ -22,13 +22,42 @@
 #include <std_msgs/Float64.h>
 
 #include "thread.hpp"
+#include "read_write_lock.hpp"
+
+#include "Adafruit_MCP23017.h"
+#include <ArduinoLog.h>
 
 ros::NodeHandle nh;
 
+Adafruit_MCP23017 mcp;
+cpp_freertos::ReadWriteLockPreferWriter *mcpLock;
+
+void printTimestamp(Print* _logOutput) {
+    char c[12];
+    int m = sprintf(c, "%10lu ", millis());
+    _logOutput->print(c);
+}
+
+void printNewline(Print* _logOutput) {
+    _logOutput->print('\n');
+}
+
+
 void setup() {
+    SerialUSB1.begin(115200);
+    Log.begin(LOG_LEVEL_VERBOSE, &SerialUSB1);
+    Log.setSuffix(printNewline);
+
     analogReadResolution(12);
+    pinMode(PinAssignments::DEBUG_PIN, OUTPUT);
 
     nh.initNode();
+
+    /**
+     * MCP Init
+     */
+    mcpLock = new cpp_freertos::ReadWriteLockPreferWriter();
+    mcp.begin(0x27);
 
     MotorControllerConfig controllerConfig;
     controllerConfig.vnh5019PinDefinitions = PinAssignments::getMotor1Driver();
@@ -41,17 +70,24 @@ void setup() {
     positionConfig.enableRampRate = true;
     positionConfig.rampRate = 1000;
     controllerConfig.positionPIDConfig = positionConfig;
+    controllerConfig.mcp = &mcp;
+    controllerConfig.mcpLock = mcpLock;
 
     HeartbeatTask heartbeatTask;
-    BatteryPublisherTask batteryPublisherTask(&nh);
-    RosSpinTask rosSpinTask(&nh);
+    //BatteryPublisherTask batteryPublisherTask(&nh);
+    //RosSpinTask rosSpinTask(&nh);
 
     MotorController controller("TestController", controllerConfig, pdMS_TO_TICKS(10));
-    MotorControllerTestTask motorOutputTestTask("TestMotor", &nh, &controller);
+    controller.set(0.0, MotorControlMode::PERCENTAGE);
+    //MotorControllerTestTask motorOutputTestTask("TestMotor", &nh, &controller);
+
+    Log.notice(F(CR "******************************************" CR));                     // Info string with Newline
+    Log.notice(  "***          Logging example                " CR);                       // Info string in flash memory
+    Log.notice(F("******************* ")); Log.notice("*********************** " CR);
 
     Thread::StartScheduler();
 }
 
 void loop() {
-    ;
+    //
 }

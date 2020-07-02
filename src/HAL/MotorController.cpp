@@ -3,6 +3,7 @@
 //
 
 #include "MotorController.h"
+#include <ArduinoLog.h>
 
 MotorController::MotorController(const std::string &name, const MotorControllerConfig &config, TickType_t updateTime)
         : Thread(name, 256, MOTOR_DRIVER_TASK_PRIORITY) {
@@ -28,7 +29,7 @@ MotorController::MotorController(const std::string &name, const MotorControllerC
     averageVelocityLock = new ReadWriteLockPreferWriter();
     averagePositionLock = new ReadWriteLockPreferWriter();
 
-    motor = new VNH5019(config.vnh5019PinDefinitions);
+    motor = new VNH5019(config.vnh5019PinDefinitions, config.mcp, config.mcpLock);
 
     Start();
 }
@@ -64,6 +65,8 @@ double MotorController::getVelocity() const {
     int32_t lastPosition = encoder->read();
 
     while (true) {
+        Log.verbose("Hello");
+
         const int32_t encoderPosition = encoder->read();
 
         auto encoderPositionDelta = static_cast<float>(encoderPosition - lastPosition);

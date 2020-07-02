@@ -26,9 +26,14 @@ enum class MotorControlMode {
     POSITION
 };
 
+class Adafruit_MCP23017;
+
 struct MotorControllerConfig {
     VNH5019_PinAssignments vnh5019PinDefinitions;
     EncoderPinAssignments encoderPinDefinitions;
+
+    Adafruit_MCP23017 *mcp;
+    ReadWriteLockPreferWriter *mcpLock;
 
     double countsPerRev = 979.62;
 

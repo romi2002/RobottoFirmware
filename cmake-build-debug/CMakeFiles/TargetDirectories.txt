@@ -1,5 +1,0 @@
-/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-debug/CMakeFiles/Production.dir
-/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-debug/CMakeFiles/Debug.dir
-/home/abiel/Documents/PlatformIO/Projects/TeensyROSController/cmake-build-debug/CMakeFiles/Z_DUMMY_TARGET.dir
