@@ -58,7 +58,7 @@ MotorControllerTestTask::MotorControllerTestTask(const std::string &name, ros::N
 
     while (true) {
         setpointLock->ReaderLock();
-        controller->set(setpoint, MotorControlMode::POSITION);
+        controller->set(setpoint, MotorControlMode::PERCENTAGE);
         setpointLock->ReaderUnlock();
 
         positionMsg.data = controller->getPosition();

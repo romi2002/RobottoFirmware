@@ -3,7 +3,7 @@
 //
 
 #include "MotorController.h"
-#include <ArduinoLog.h>
+#include "log.h"
 
 MotorController::MotorController(const std::string &name, const MotorControllerConfig &config, TickType_t updateTime)
         : Thread(name, 256, MOTOR_DRIVER_TASK_PRIORITY) {
@@ -28,6 +28,9 @@ MotorController::MotorController(const std::string &name, const MotorControllerC
 
     averageVelocityLock = new ReadWriteLockPreferWriter();
     averagePositionLock = new ReadWriteLockPreferWriter();
+
+    averageVelocity = 0;
+    averagePosition = 0;
 
     motor = new VNH5019(config.vnh5019PinDefinitions, config.mcp, config.mcpLock);
 
@@ -65,21 +68,22 @@ double MotorController::getVelocity() const {
     int32_t lastPosition = encoder->read();
 
     while (true) {
-        Log.verbose("Hello");
-
         const int32_t encoderPosition = encoder->read();
 
         auto encoderPositionDelta = static_cast<float>(encoderPosition - lastPosition);
         auto deltaTimeSeconds = static_cast<float>(deltaTime) / 1e+6f;
-        float encoderVelocity = encoderPositionDelta / deltaTimeSeconds;
+        deltaTimeSeconds = max(deltaTimeSeconds, 0.0f);
+        double encoderVelocity = encoderPositionDelta / deltaTimeSeconds;
         encoderVelocity = encoderVelocity / 979.62 * 60.0;
 
         averagePositionLock->WriterLock();
+        if(isnanf(averagePosition)) averagePosition = 0;
         averagePosition = averagePosition + config.positionFilterAlpha * (encoderPosition - averagePosition);
         averagePositionLock->WriterUnlock();
 
         averageVelocityLock->WriterLock();
-        averageVelocity = averageVelocity + config.velocityFilterAlpha *
+        if(isnanf(averageVelocity)) averageVelocity = 0;
+        averageVelocity += config.velocityFilterAlpha *
                                             (encoderVelocity - averageVelocity); //Exponential rolling average
         averageVelocityLock->WriterUnlock();
 

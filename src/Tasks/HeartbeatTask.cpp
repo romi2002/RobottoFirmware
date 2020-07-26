@@ -3,7 +3,6 @@
 //
 
 #include "HeartbeatTask.h"
-#include <ArduinoLog.h>
 
 HeartbeatTask::HeartbeatTask(TickType_t tickDelay) : Thread("HeartbeatTask", configMINIMAL_STACK_SIZE,
                                                             HEARTBEAT_TASK_PRIORITY) {
@@ -15,8 +14,6 @@ HeartbeatTask::HeartbeatTask(TickType_t tickDelay) : Thread("HeartbeatTask", con
 
 [[noreturn]] void HeartbeatTask::Run() {
     while (true) {
-        Log.verbose("Beat");
-
         vTaskDelay((tickDelay * configTICK_RATE_HZ) / 1000L);
         digitalWrite(PinAssignments::HEARTBEAT_PIN, HIGH);
         vTaskDelay((tickDelay * configTICK_RATE_HZ) / 1000L);

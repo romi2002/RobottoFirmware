@@ -46,7 +46,6 @@ void VNH5019::set(double value) {
 
     mcpLock->WriterLock();
     if (value > 0.0) {
-        digitalWrite(12, HIGH);
         mcp->digitalWrite(definitions.IN_A, HIGH);
         mcp->digitalWrite(definitions.IN_B, LOW);
     } else if (value < 0.0) {
