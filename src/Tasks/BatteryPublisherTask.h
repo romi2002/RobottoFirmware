@@ -6,6 +6,7 @@
 
 #include <ros.h>
 #include <std_msgs/Float32.h>
+#include <sensor_msgs/BatteryState.h>
 #include "thread.hpp"
 
 using namespace cpp_freertos;
@@ -22,12 +23,15 @@ private:
     TickType_t waitTime;
 
     ros::Publisher currentSensorVoltagePub;
-    ros::Publisher currentSensorPub;
-    ros::Publisher batteryVoltagePub;
+    ros::Publisher energyUsedPub;
+    ros::Publisher batteryStatePub;
 
+    sensor_msgs::BatteryState batteryStateMsg;
     std_msgs::Float32 currentSensorVoltageMsg;
-    std_msgs::Float32 currentSensorMsg;
-    std_msgs::Float32 batteryVoltageMsg;
+    std_msgs::Float32 energyUsedMsg;
+
+    double energyUsed;
+    elapsedMillis dt;
 };
 
 #endif

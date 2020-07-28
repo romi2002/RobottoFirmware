@@ -36,6 +36,7 @@ void setup() {
     SerialUSB1.begin(115200);
 
     analogReadResolution(12);
+    analogReadAveraging(4);
     pinMode(PinAssignments::DEBUG_PIN, OUTPUT);
 
     //Wire.begin();

@@ -5,11 +5,11 @@ BatteryPublisherTask::BatteryPublisherTask(ros::NodeHandle *nh, TickType_t waitT
                                                                                        currentSensorVoltagePub(
                                                                                                "currentSensorVoltage",
                                                                                                &currentSensorVoltageMsg),
-                                                                                       currentSensorPub("currentSensor",
-                                                                                                        &currentSensorMsg),
-                                                                                       batteryVoltagePub(
-                                                                                               "currentSensorVoltage",
-                                                                                               &currentSensorVoltageMsg) {
+                                                                                       energyUsedPub("energyUsed",
+                                                                                                        &energyUsedMsg),
+                                                                                       batteryStatePub(
+                                                                                               "batteryState",
+                                                                                               &batteryStateMsg) {
     this->nh = nh;
     this->waitTime = waitTime;
     Start();
@@ -17,25 +17,36 @@ BatteryPublisherTask::BatteryPublisherTask(ros::NodeHandle *nh, TickType_t waitT
 
 [[noreturn]] void BatteryPublisherTask::Run() {
     nh->advertise(currentSensorVoltagePub);
-    nh->advertise(currentSensorPub);
-    nh->advertise(batteryVoltagePub);
+    nh->advertise(energyUsedPub);
+    nh->advertise(batteryStatePub);
 
     while (true) {
-        double inputVoltage = ((double) analogRead(PinAssignments::CURRENT_SENSOR_PIN) / 4096) * 3.3;
-        double currentIn = (inputVoltage - 1.65) / 0.055;
+        double currentSensorVoltage = ((double) analogRead(PinAssignments::CURRENT_SENSOR_PIN) / 4096) * 3.3;
+        double current = (currentSensorVoltage - 1.65) / 0.055;
 
-        currentSensorVoltageMsg.data = inputVoltage;
+        currentSensorVoltageMsg.data = analogRead(PinAssignments::CURRENT_SENSOR_PIN);
         currentSensorVoltagePub.publish(&currentSensorVoltageMsg);
 
-        currentSensorMsg.data = currentIn;
-        currentSensorPub.publish(&currentSensorMsg);
+        double batteryVoltage = (((double) analogRead(PinAssignments::BATTERY_VOLTAGE_PIN) / 4096) * 3.3);
+        batteryVoltage *= ((270.0 + 70.0) / 70.0);
+        //batteryVoltage *= 0.95;
 
-        batteryVoltageMsg.data = (((double) analogRead(PinAssignments::BATTERY_VOLTAGE_PIN) / 4096) * 3.3);
-        batteryVoltageMsg.data *= ((270.0 + 70.0) / 70.0);
-        batteryVoltageMsg.data *= 0.95; //(Calib)
+        batteryStateMsg.voltage = batteryVoltage;
+        batteryStateMsg.current = current;
+        batteryStateMsg.present = true;
+        batteryStateMsg.power_supply_status = 2; //Discharging
+        batteryStateMsg.power_supply_health = 0;
+        batteryStateMsg.power_supply_technology = 3;
 
-        batteryVoltagePub.publish(&batteryVoltageMsg);
+        batteryStatePub.publish(&batteryStateMsg);
+
+        double energy = ((current * (dt / 1000.0)) / 60.0) / 60.0; //mAh
+        energyUsed += energy;
+
+        energyUsedMsg.data = energyUsed;
+        energyUsedPub.publish(&energyUsedMsg);
 
         vTaskDelay(waitTime);
+        dt = 0;
     }
 }
