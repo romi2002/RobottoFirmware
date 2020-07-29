@@ -84,6 +84,7 @@ private:
     bool modeChanged = false;
     ReadWriteLock *setpointLock;
 
+
     /**
      * PID
      */

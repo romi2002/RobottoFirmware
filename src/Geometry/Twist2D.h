@@ -24,6 +24,16 @@ public:
     double dy{0};
     double dtheta{0};
 
+    Twist2D operator+(const Twist2D &other) const;
+
+    Twist2D operator+=(const Twist2D &other);
+
+    Twist2D operator-(const Twist2D &other) const;
+
+    Twist2D operator-() const;
+
+    Twist2D& operator-=(const Twist2D &other);
+
     bool operator==(const Twist2D &rhs) const {
         return dx == rhs.dx &&
                dy == rhs.dy &&

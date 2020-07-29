@@ -5,10 +5,12 @@
 #include "MecanumTask.h"
 #include "PinAssignments.h"
 
-MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *nh, TickType_t waitTime) : cpp_freertos::Thread("MecanumTask", 256, MECANUM_TASK_PRIORITY) {
+MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *nh, double wheelDiameter, TickType_t waitTime) : cpp_freertos::Thread("MecanumTask", 256, MECANUM_TASK_PRIORITY) {
     m_config = config;
     this->waitTime = waitTime;
     this->nh = nh;
+    this->wheelDiameter = wheelDiameter;
+    wheelCircumference = M_PI * wheelDiameter;
 
     twistLock = new cpp_freertos::ReadWriteLockPreferWriter();
 
@@ -40,9 +42,14 @@ MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *n
 
     kinematics = new MecanumKinematics(wheelPositions);
 
+    odometry = new ExponentialOdometry();
+
     this->twistSetpointSubscriber = new ros::Subscriber<geometry_msgs::Twist, MecanumTask>(
             "cmd_vel", &MecanumTask::twistSubsriberCb, this
             );
+
+    posePublisher = new ros::Publisher("pose" ,&posePublisherMsg);
+    nh->advertise(*posePublisher);
 
     nh->subscribe(*twistSetpointSubscriber);
 
@@ -56,11 +63,50 @@ void MecanumTask::writeToMotors(const MecanumWheelVelocities &vel, MotorControlM
     controllers.backRight->set(vel.backRight, controlMode);
 }
 
+MecanumWheelVelocities MecanumTask::getWheelPositions() const {
+    MecanumWheelVelocities out;
+    out.frontLeft = controllers.frontLeft->getPosition() / encoderCodes * (2.0 * M_PI);
+    out.frontRight = controllers.frontRight->getPosition() / encoderCodes * (2.0 * M_PI);
+    out.backLeft = controllers.backLeft->getPosition() / encoderCodes * (2.0 * M_PI);
+    out.backRight = controllers.backRight->getPosition() / encoderCodes * (2.0 * M_PI);
+
+    return out;
+}
+
+MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
+    MecanumWheelVelocities  out;
+
+    out.frontLeft = controllers.frontLeft->getVelocity() / encoderCodes * (2.0 * M_PI);
+    out.frontRight = controllers.frontRight->getVelocity() / encoderCodes * (2.0 * M_PI);
+    out.backLeft = controllers.backLeft->getVelocity() / encoderCodes * (2.0 * M_PI);
+    out.backRight = controllers.backRight->getVelocity() / encoderCodes * (2.0 * M_PI);
+
+    return out;
+}
+
 [[noreturn]] void MecanumTask::Run() {
     while (true){
         twistLock->ReaderLock();
         auto vel = kinematics->toWheelSpeeds(currentTarget);
         twistLock->ReaderUnlock();
+
+        auto currentWheelPositions = getWheelPositions();
+
+        currentWheelPositions.frontLeft *= (wheelDiameter / 2.0);
+        currentWheelPositions.frontRight *= (wheelDiameter / 2.0);
+        currentWheelPositions.backLeft *= (wheelDiameter / 2.0);
+        currentWheelPositions.backRight *= (wheelDiameter / 2.0);
+
+        auto pose = kinematics->toChassisSpeeds(currentWheelPositions);
+
+        odometry->update(pose);
+
+        const auto currentPose = odometry->getPose();
+        posePublisherMsg.linear.x = currentPose.x;
+        posePublisherMsg.linear.y = currentPose.y;
+        posePublisherMsg.angular.z = currentPose.theta;
+
+        posePublisher->publish(&posePublisherMsg);
 
         writeToMotors(vel, MotorControlMode::PERCENTAGE);
 

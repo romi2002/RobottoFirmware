@@ -78,7 +78,7 @@ void setup() {
     BatteryPublisherTask batteryPublisherTask(&nh);
     RosSpinTask rosSpinTask(&nh);
 
-    MecanumTask mecanumTask(controllerConfig, &nh);
+    MecanumTask mecanumTask(controllerConfig, &nh, 1);
 
     //MotorController controller("TestController", controllerConfig, pdMS_TO_TICKS(10));
     //controller.set(0.0, MotorControlMode::PERCENTAGE);
