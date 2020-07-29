@@ -8,6 +8,18 @@
 
 class Twist2D {
 public:
+    constexpr Twist2D() = default;
+
+    Twist2D(double dx, double dy, double dtheta){
+        this->dx = dx;
+        this->dy = dy;
+        this->dtheta = dtheta;
+    }
+
+    Twist2D(const Twist2D &rhs){
+        Twist2D(rhs.dx, rhs.dy, rhs.dtheta);
+    }
+
     double dx{0};
     double dy{0};
     double dtheta{0};

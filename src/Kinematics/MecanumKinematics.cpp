@@ -50,5 +50,5 @@ void MecanumKinematics::setInverseKinematics(const MecanumWheelValues<Translatio
             1,  1, (wheelPositions.frontRight.X() - wheelPositions.frontRight.Y()),
             1,  1, (wheelPositions.backLeft.X() - wheelPositions.backLeft.Y()),
             1, -1, (-(wheelPositions.backRight.X() + wheelPositions.backRight.Y()));
-    inverseKinematics /= std::sqrt(2.0);
+    inverseKinematics /= std::sqrt(2);
 }

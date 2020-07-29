@@ -15,6 +15,7 @@
 #include "Tasks/BatteryPublisherTask.h"
 #include "Tasks/MotorControllerTestTask.h"
 #include "Tasks/MotorOutputTestTask.h"
+#include "Tasks/MecanumTask.h"
 #include "HAL/MotorController.h"
 
 #include "HAL/VNH5019.h"
@@ -77,9 +78,11 @@ void setup() {
     BatteryPublisherTask batteryPublisherTask(&nh);
     RosSpinTask rosSpinTask(&nh);
 
-    MotorController controller("TestController", controllerConfig, pdMS_TO_TICKS(10));
+    MecanumTask mecanumTask(controllerConfig, &nh);
+
+    //MotorController controller("TestController", controllerConfig, pdMS_TO_TICKS(10));
     //controller.set(0.0, MotorControlMode::PERCENTAGE);
-    MotorControllerTestTask motorOutputTestTask("TestMotor", &nh, &controller);
+   // MotorControllerTestTask motorOutputTestTask("TestMotor", &nh, &controller);
 
     Thread::StartScheduler();
 }
