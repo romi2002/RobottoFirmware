@@ -13,14 +13,14 @@
 template <typename T>
 void serialLog(const T &out){
 #ifdef LOG_DEBUG
-    SerialUSB1.print(out);
+    //SerialUSB1.print(out);
 #endif
 }
 
 template <typename T>
 void serialLogLn(const T &out){
 #ifdef LOG_DEBUG
-    SerialUSB1.println(out);
+    //SerialUSB1.println(out);
 #endif
 }
 

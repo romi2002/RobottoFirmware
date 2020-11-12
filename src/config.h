@@ -1,7 +1,7 @@
 #pragma once
 
 #include "FreeRTOS_TEENSY4.h"
-const TickType_t DEFAULT_WAIT_TIME = pdMS_TO_TICKS(5);
+const TickType_t DEFAULT_WAIT_TIME = pdMS_TO_TICKS(10);
 
 /**
  * Task priorities

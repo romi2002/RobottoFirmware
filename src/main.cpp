@@ -2,7 +2,7 @@
 #include <Arduino.h>
 #include <FreeRTOS_TEENSY4.h>
 
-#define USE_USBCON
+#define USE_TEENSY_HW_SERIAL
 #include "log.h"
 #include "PinAssignments.h"
 
@@ -34,7 +34,7 @@ Adafruit_MCP23017 mcp;
 cpp_freertos::ReadWriteLockPreferWriter *mcpLock;
 
 void setup() {
-    SerialUSB1.begin(115200);
+    //SerialUSB1.begin(115200);
 
     analogReadResolution(12);
     analogReadAveraging(4);
@@ -56,6 +56,7 @@ void setup() {
     /**
      * MCP Init
      */
+    return;
     mcpLock = new cpp_freertos::ReadWriteLockPreferWriter();
     mcp.begin(0x27);
 
@@ -88,5 +89,5 @@ void setup() {
 }
 
 void loop() {
-    //
+    nh.spinOnce();
 }

@@ -8,8 +8,8 @@ VNH5019_PinAssignments PinAssignments::getMotor1Driver() {
     VNH5019_PinAssignments def{};
 
     def.PWM = 6;
-    def.IN_A = 8;
-    def.IN_B = 9;
+    def.IN_A = 9;
+    def.IN_B = 8;
     def.DIAG_A = 0;
     def.DIAG_B = 1;
 
@@ -44,8 +44,8 @@ VNH5019_PinAssignments PinAssignments::getMotor4Driver() {
     VNH5019_PinAssignments def{};
 
     def.PWM = 10;
-    def.IN_A = 14;
-    def.IN_B = 15;
+    def.IN_A = 15;
+    def.IN_B = 14;
     def.DIAG_A = 6;
     def.DIAG_B = 7;
 

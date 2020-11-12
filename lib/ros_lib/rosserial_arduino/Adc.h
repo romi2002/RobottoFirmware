@@ -1,12 +1,12 @@
-#ifndef _ROS_rosserial_mbed_Adc_h
-#define _ROS_rosserial_mbed_Adc_h
+#ifndef _ROS_rosserial_arduino_Adc_h
+#define _ROS_rosserial_arduino_Adc_h
 
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
 #include "ros/msg.h"
 
-namespace rosserial_mbed
+namespace rosserial_arduino
 {
 
   class Adc : public ros::Msg
@@ -83,7 +83,7 @@ namespace rosserial_mbed
      return offset;
     }
 
-    const char * getType(){ return "rosserial_mbed/Adc"; };
+    const char * getType(){ return "rosserial_arduino/Adc"; };
     const char * getMD5(){ return "6d7853a614e2e821319068311f2af25b"; };
 
   };

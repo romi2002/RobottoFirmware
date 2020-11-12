@@ -101,10 +101,10 @@ uint16_t ADC128D818::read(uint8_t channel, bool useRTOSDelay) {
     uint8_t high_byte = Wire.read();
     uint8_t low_byte = Wire.read();
 
-    SerialUSB1.print("h: ");
-    SerialUSB1.print((((((uint16_t) high_byte) << 8) | ((uint16_t) low_byte)) & 0xFFF0) >> 4);
-    SerialUSB1.print(" l: ");
-    SerialUSB1.print((((((uint16_t) low_byte) << 8) | ((uint16_t) high_byte)) & 0xFFF0) >> 4);
+    //SerialUSB1.print("h: ");
+    //SerialUSB1.print((((((uint16_t) high_byte) << 8) | ((uint16_t) low_byte)) & 0xFFF0) >> 4);
+    //SerialUSB1.print(" l: ");
+    //SerialUSB1.print((((((uint16_t) low_byte) << 8) | ((uint16_t) high_byte)) & 0xFFF0) >> 4);
 
 
     uint16_t result = (((((uint16_t) high_byte) << 8) | ((uint16_t) low_byte)) & 0xFFF0) >> 4;

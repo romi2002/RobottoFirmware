@@ -5,10 +5,10 @@
 #include <stdlib.h>
 #include "ros/msg.h"
 
-namespace rosserial_mbed
+namespace rosserial_arduino
 {
 
-static const char TEST[] = "rosserial_mbed/Test";
+static const char TEST[] = "rosserial_arduino/Test";
 
   class TestRequest : public ros::Msg
   {

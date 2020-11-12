@@ -7,7 +7,7 @@
 namespace PinAssignments{
     const uint8_t HEARTBEAT_PIN = 13;
     const uint8_t  DEBUG_PIN = 12;
-    const uint8_t CURRENT_SENSOR_PIN = PIN_A8;
+    const uint8_t CURRENT_SENSOR_PIN = PIN_A0;
     const uint8_t BATTERY_VOLTAGE_PIN = PIN_A9;
 
     VNH5019_PinAssignments getMotor1Driver();

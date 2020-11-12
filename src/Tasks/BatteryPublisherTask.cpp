@@ -28,11 +28,11 @@ BatteryPublisherTask::BatteryPublisherTask(ros::NodeHandle *nh, TickType_t waitT
         currentSensorVoltagePub.publish(&currentSensorVoltageMsg);
 
         double batteryVoltage = (((double) analogRead(PinAssignments::BATTERY_VOLTAGE_PIN) / 4096) * 3.3);
-        batteryVoltage *= ((270.0 + 70.0) / 70.0);
+        batteryVoltage *= ((1000.0 + 300.0) / 300.0);
         //batteryVoltage *= 0.95;
 
         batteryStateMsg.voltage = batteryVoltage;
-        batteryStateMsg.current = current;
+        batteryStateMsg.current = currentSensorVoltage;
         batteryStateMsg.present = true;
         batteryStateMsg.power_supply_status = 2; //Discharging
         batteryStateMsg.power_supply_health = 0;

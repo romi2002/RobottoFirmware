@@ -109,7 +109,6 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
         posePublisher->publish(&posePublisherMsg);
 
         writeToMotors(vel, MotorControlMode::PERCENTAGE);
-
         vTaskDelay(waitTime);
     }
 }
