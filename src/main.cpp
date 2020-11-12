@@ -56,7 +56,6 @@ void setup() {
     /**
      * MCP Init
      */
-    return;
     mcpLock = new cpp_freertos::ReadWriteLockPreferWriter();
     mcp.begin(0x27);
 
@@ -89,5 +88,5 @@ void setup() {
 }
 
 void loop() {
-    nh.spinOnce();
+    ;
 }

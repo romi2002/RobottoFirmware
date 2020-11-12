@@ -44,6 +44,7 @@
 #define USE_TEENSY_HW_SERIAL
 #if defined(USE_TEENSY_HW_SERIAL) || defined(__MK20DX256__) || defined(__MK64FX512__) || defined(__MK66FX1M0__) || defined(__MKL26Z64__)
   #if defined(USE_TEENSY_HW_SERIAL)
+    #include <HardwareSerial.h>
     #define SERIAL_CLASS HardwareSerial // Teensy HW Serial
   #else
     #include <usb_serial.h>  // Teensy 3.0 and 3.1
@@ -77,9 +78,9 @@ class ArduinoHardware {
 #elif defined(USE_TEENSY_HW_SERIAL) or defined(USE_STM32_HW_SERIAL)
       iostream = &Serial8;
 #else
-      iostream = &Serial;
+      iostream = &SerialUSB;
 #endif
-      baud_ = 115200;
+      baud_ = 9600;
     }
     ArduinoHardware(ArduinoHardware& h){
       this->iostream = h.iostream;
@@ -97,13 +98,13 @@ class ArduinoHardware {
       // Startup delay as a fail-safe to upload a new sketch
       delay(3000); 
 #endif
-      iostream->begin(baud_);
+      Serial8.begin(baud_);
     }
 
-    int read(){return iostream->read();};
+    int read(){return Serial8.read();};
     void write(uint8_t* data, int length){
       for(int i=0; i<length; i++)
-        iostream->write(data[i]);
+        Serial8.write(data[i]);
     }
 
     unsigned long time(){return millis();}
