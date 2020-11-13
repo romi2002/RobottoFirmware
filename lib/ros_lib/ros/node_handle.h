@@ -35,6 +35,7 @@
 #ifndef ROS_NODE_HANDLE_H_
 #define ROS_NODE_HANDLE_H_
 
+#include <Arduino.h>
 #include <stdint.h>
 
 #include "std_msgs/Time.h"
@@ -243,7 +244,7 @@ public:
           return SPIN_TIMEOUT;
         }
       }
-      int data = hardware_.read();
+      int data = Serial5.read();
       if (data < 0)
         break;
       checksum_ += data;
@@ -534,7 +535,7 @@ public:
 
     if (l <= OUTPUT_SIZE)
     {
-      hardware_.write(message_out, l);
+      Serial5.write(message_out, l);
       return l;
     }
     else

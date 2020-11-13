@@ -7,6 +7,7 @@
 
 #include "Kinematics/MecanumKinematics.h"
 #include "geometry_msgs/Twist.h"
+#include "nav_msgs/Odometry.h"
 
 #include "Odometry/ExponentialOdometry.h"
 
@@ -59,8 +60,8 @@ private:
 
     ExponentialOdometry *odometry;
 
-    geometry_msgs::Twist posePublisherMsg;
-    ros::Publisher *posePublisher;
+    nav_msgs::Odometry odomPublisherMsg;
+    ros::Publisher *odomPublisher;
 
     ros::NodeHandle *nh;
 };

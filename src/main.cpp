@@ -28,6 +28,9 @@
 #include "Adafruit_MCP23017.h"
 #include "ADC128D818.h"
 
+#include <TeensyDebug.h>
+#pragma GCC optimize ("O0")
+
 ros::NodeHandle nh;
 
 Adafruit_MCP23017 mcp;
@@ -35,6 +38,11 @@ cpp_freertos::ReadWriteLockPreferWriter *mcpLock;
 
 void setup() {
     //SerialUSB1.begin(115200);
+    debug.begin(SerialUSB1);
+    SerialUSB.begin(115200);
+    Serial5.begin(2500000);
+    SerialUSB.println("Hi there");
+    
 
     analogReadResolution(12);
     analogReadAveraging(4);
@@ -66,7 +74,7 @@ void setup() {
     positionConfig.p = 0.1;
     positionConfig.d = 0.002;
     //velocityConfig.i = 0.0001;
-    positionConfig.deadband = 0.1;
+    positionConfig.deadband = 0.15;
     positionConfig.enableRampRate = true;
     positionConfig.rampRate = 1000;
     controllerConfig.positionPIDConfig = positionConfig;

@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch",
+      "type": "cppdbg",
+      "request": "launch",
+      "miDebuggerPath": "/Applications/Arduino.app//Contents/Java/hardware/tools/arm/bin/arm-none-eabi-gdb",
+      "miDebuggerArgs": "--baud=115200",
+      "MIMode": "gdb",
+      "targetArchitecture": "arm",
+      "program": "firmware.elf",
+      "launchCompleteCommand": "None",
+      "filterStderr": false,
+      "filterStdout": false,
+      "externalConsole": false,
+      "cwd": "${workspaceRoot}",
+      "setupCommands": [
+        {"text": "set target-async off"},
+        {"text": "target extended-remote /dev/cu.usbserial"},   
+        ]
+    }
+  ]
+}

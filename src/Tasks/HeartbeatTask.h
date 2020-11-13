@@ -10,6 +10,7 @@
 #include <Arduino.h>
 #include <FreeRTOS_TEENSY4.h>
 #include "thread.hpp"
+#include "Watchdog_t4.h"
 
 using namespace cpp_freertos;
 
@@ -19,6 +20,7 @@ public:
 
 protected:
     TickType_t tickDelay;
+    WDT_T4<WDT1> wdt;
 
     [[noreturn]] void Run() override;
 };
