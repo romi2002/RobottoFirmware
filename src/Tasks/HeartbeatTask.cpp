@@ -10,7 +10,7 @@ HeartbeatTask::HeartbeatTask(TickType_t tickDelay) : Thread("HeartbeatTask", con
     pinMode(PinAssignments::HEARTBEAT_PIN, OUTPUT);
 
     WDT_timings_t config;
-    config.timeout = 1;
+    config.timeout = 10;
 
     wdt.begin(config);
 

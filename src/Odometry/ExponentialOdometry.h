@@ -20,11 +20,12 @@ private:
     Eigen::Matrix<double, 3, 3> rotMatrix;
     void updateRotMatrix(double angle);
 
-    double lastStartAngle;
+    double lastStartAngle{0};
 
-    Twist2D lastPositionUpdate;
+    Twist2D lastPositionUpdate{0,0,0};
 
-    Pose2D currentPose;
+    Pose2D currentPose{0, 0, 0};
+    Twist2D currentVel{0, 0, 0};
 };
 
 

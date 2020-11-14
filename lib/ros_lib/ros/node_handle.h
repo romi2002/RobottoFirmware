@@ -44,6 +44,9 @@
 #include "rosserial_msgs/RequestParam.h"
 
 #include "ros/msg.h"
+#include "config.h"
+#include "thread.hpp"
+#include "task.h"
 
 namespace ros
 {
@@ -535,7 +538,10 @@ public:
 
     if (l <= OUTPUT_SIZE)
     {
+      Serial5.flush();
       Serial5.write(message_out, l);
+      SerialUSB.print("Size: "); SerialUSB.print(l);
+      SerialUSB.print(" Chk: "); SerialUSB.println(message_out[4]);
       return l;
     }
     else

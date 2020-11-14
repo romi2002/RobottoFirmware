@@ -28,9 +28,6 @@
 #include "Adafruit_MCP23017.h"
 #include "ADC128D818.h"
 
-#include <TeensyDebug.h>
-#pragma GCC optimize ("O0")
-
 ros::NodeHandle nh;
 
 Adafruit_MCP23017 mcp;
@@ -38,15 +35,15 @@ cpp_freertos::ReadWriteLockPreferWriter *mcpLock;
 
 void setup() {
     //SerialUSB1.begin(115200);
-    debug.begin(SerialUSB1);
     SerialUSB.begin(115200);
-    Serial5.begin(2500000);
+    Serial5.begin(921600);
     SerialUSB.println("Hi there");
     
 
     analogReadResolution(12);
     analogReadAveraging(4);
     pinMode(PinAssignments::DEBUG_PIN, OUTPUT);
+    digitalWrite(PinAssignments::DEBUG_PIN, LOW);
 
     //Wire.begin();
 
@@ -76,7 +73,7 @@ void setup() {
     //velocityConfig.i = 0.0001;
     positionConfig.deadband = 0.15;
     positionConfig.enableRampRate = true;
-    positionConfig.rampRate = 1000;
+    positionConfig.rampRate = 50;
     controllerConfig.positionPIDConfig = positionConfig;
     controllerConfig.mcp = &mcp;
     controllerConfig.mcpLock = mcpLock;
@@ -86,7 +83,7 @@ void setup() {
     BatteryPublisherTask batteryPublisherTask(&nh);
     RosSpinTask rosSpinTask(&nh);
 
-    MecanumTask mecanumTask(controllerConfig, &nh, 1);
+    MecanumTask mecanumTask(controllerConfig, &nh, 0.075);
 
     //MotorController controller("TestController", controllerConfig, pdMS_TO_TICKS(10));
     //controller.set(0.0, MotorControlMode::PERCENTAGE);

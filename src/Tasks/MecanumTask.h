@@ -42,7 +42,7 @@ private:
     void writeToMotors(const MecanumWheelVelocities &vel, MotorControlMode controlMode);
 
 private:
-    const double encoderCodes = 92.0;
+    const double encoderCodes = 1200.0;
 
     double wheelDiameter, wheelCircumference;
 

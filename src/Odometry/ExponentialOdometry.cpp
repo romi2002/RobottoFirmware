@@ -33,15 +33,19 @@ void ExponentialOdometry::update(const Twist2D &position, double startAngle) {
     const double deltaSin = std::sin(deltaPos.dtheta);
     const double deltaCos = std::cos(deltaPos.dtheta);
 
-    Eigen::Matrix<double, 3, 3> velMatrix;
-    velMatrix << deltaSin / deltaPos.dtheta, (deltaCos - 1.0) / deltaPos.dtheta, 0,
-            (1.0 - deltaCos) / deltaPos.dtheta, deltaSin / deltaPos.dtheta, 0,
-            0, 0, 1;
-
     Eigen::Matrix<double, 3, 1> deltaMatrix;
     deltaMatrix << deltaPos.dx, deltaPos.dy, deltaPos.dtheta;
 
-    Eigen::Matrix<double, 3, 1> finalMatrix = rotMatrix * velMatrix * deltaMatrix;
+    Eigen::Matrix<double, 3, 1> finalMatrix;
+    if(deltaPos.dtheta != 0){
+        Eigen::Matrix<double, 3, 3> velMatrix;
+        velMatrix << deltaSin / deltaPos.dtheta, (deltaCos - 1.0) / deltaPos.dtheta, 0,
+            (1.0 - deltaCos) / deltaPos.dtheta, deltaSin / deltaPos.dtheta, 0,
+            0, 0, 1;
+        finalMatrix = rotMatrix * velMatrix * deltaMatrix;
+    } else {
+        finalMatrix = rotMatrix * deltaMatrix;
+    }
 
     Pose2D posUpdate(
             finalMatrix(0, 0),

@@ -24,21 +24,21 @@ MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *n
 
     controllers.frontRight = new MotorController("FrontRight", m_config);
 
-    m_config.encoderPinDefinitions = PinAssignments::getMotor3Encoder();
-    m_config.vnh5019PinDefinitions = PinAssignments::getMotor3Driver();
+    m_config.encoderPinDefinitions = PinAssignments::getMotor4Encoder();
+    m_config.vnh5019PinDefinitions = PinAssignments::getMotor4Driver();
 
     controllers.backLeft = new MotorController("BackLeft", m_config);
 
-    m_config.encoderPinDefinitions = PinAssignments::getMotor4Encoder();
-    m_config.vnh5019PinDefinitions = PinAssignments::getMotor4Driver();
+    m_config.encoderPinDefinitions = PinAssignments::getMotor3Encoder();
+    m_config.vnh5019PinDefinitions = PinAssignments::getMotor3Driver();
 
     controllers.backRight = new MotorController("BackRight", m_config);
 
     MecanumWheelValues<Translation2D> wheelPositions;
-    wheelPositions.frontLeft = Translation2D(0.5, 0.5);
-    wheelPositions.frontRight = Translation2D(0.5, -0.5);
-    wheelPositions.backLeft = Translation2D(-0.5, 0.5);
-    wheelPositions.backRight = Translation2D(-0.5, -0.5);
+    wheelPositions.frontLeft = Translation2D(0.08, 0.08);
+    wheelPositions.frontRight = Translation2D(0.08, -0.08);
+    wheelPositions.backLeft = Translation2D(-0.08, 0.08);
+    wheelPositions.backRight = Translation2D(-0.08, -0.08);
 
     kinematics = new MecanumKinematics(wheelPositions);
 
@@ -91,15 +91,24 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
         twistLock->ReaderUnlock();
 
         auto currentWheelPositions = getWheelPositions();
+        auto currentWheelVelocities = getWheelVelocities();
 
         currentWheelPositions.frontLeft *= (wheelDiameter / 2.0);
         currentWheelPositions.frontRight *= (wheelDiameter / 2.0);
         currentWheelPositions.backLeft *= (wheelDiameter / 2.0);
         currentWheelPositions.backRight *= (wheelDiameter / 2.0);
 
-        auto velocities = kinematics->toChassisSpeeds(currentWheelPositions);
+        currentWheelVelocities.frontLeft *= (wheelDiameter / 2.0);
+        currentWheelVelocities.frontRight *= (wheelDiameter / 2.0);
+        currentWheelVelocities.backLeft *= (wheelDiameter / 2.0);
+        currentWheelVelocities.backRight *= (wheelDiameter / 2.0);
 
-        odometry->update(velocities);
+        auto positions = kinematics->toChassisSpeeds(currentWheelPositions);
+        auto velocities = kinematics->toChassisSpeeds(currentWheelVelocities);
+
+        positions.dtheta = 0; //TODO get yaw from IMU
+
+        odometry->update(positions);
 
         const auto currentPose = odometry->getPose();
         odomPublisherMsg.child_frame_id = "base_link";

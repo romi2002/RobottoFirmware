@@ -37,6 +37,7 @@ void VNH5019::initializePins(const VNH5019_PinAssignments &definitions) {
 }
 
 void VNH5019::set(double value) {
+    if(std::fabs(value) < 0.05) value = 0;
     double tempValue = (value < -1.0) ? -1.0 : (1.0 < value) ? 1.0 : value; //Clamp value
 
     tempValue = tempValue * (double) VNH5019_PWM_MAXVAL;
