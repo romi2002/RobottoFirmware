@@ -50,11 +50,18 @@ void setup() {
     analogReadAveraging(4);
     pinMode(PinAssignments::DEBUG_PIN, OUTPUT);
     digitalWrite(PinAssignments::DEBUG_PIN, LOW);
+
     pinMode(PinAssignments::IMU_INT_PIN, INPUT_PULLDOWN);
+    pinMode(PinAssignments::IMU_RST_PIN, OUTPUT);
+
+    i2cLock = new cpp_freertos::ReadWriteLockPreferWriter();
 
     Wire.begin();
     Wire.setClock(100);
+    delay(2000);
+
     IMUTask imuTask(i2cLock);
+    Serial.println("Passed IMU");
 
     /**
      * ADC128D818 Init
@@ -70,8 +77,8 @@ void setup() {
     /**
      * MCP Init
      */
-    i2cLock = new cpp_freertos::ReadWriteLockPreferWriter();
-    mcp.begin(0x27);
+    //mcp.begin(0x27);
+    Serial.println("Passed MCP");
 
     MotorControllerConfig controllerConfig{};
     controllerConfig.vnh5019PinDefinitions = PinAssignments::getMotor4Driver();
@@ -92,7 +99,9 @@ void setup() {
     BatteryPublisherTask batteryPublisherTask(&nh);
     RosSpinTask rosSpinTask(&nh);
 
-    MecanumTask mecanumTask(controllerConfig, &nh, 0.075);
+    //MecanumTask mecanumTask(controllerConfig, &nh, 0.075);
+
+    Serial.println("Passed Tasks");
 
     //MotorController controller("TestController", controllerConfig, pdMS_TO_TICKS(10));
     //controller.set(0.0, MotorControlMode::PERCENTAGE);

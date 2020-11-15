@@ -10,6 +10,7 @@ namespace PinAssignments {
     const uint8_t CURRENT_SENSOR_PIN = PIN_A0;
     const uint8_t BATTERY_VOLTAGE_PIN = PIN_A9;
     const uint8_t IMU_INT_PIN = 11;
+    const uint8_t IMU_RST_PIN = 32;
 
     VNH5019_PinAssignments getMotor1Driver();
 

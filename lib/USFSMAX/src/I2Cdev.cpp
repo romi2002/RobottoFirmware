@@ -66,14 +66,24 @@ uint8_t I2Cdev::readByte(uint8_t address, uint8_t subAddress)
 void I2Cdev::readBytes(uint8_t address, uint8_t subAddress, uint8_t count, uint8_t * dest)
 {  
   uint8_t i = 0;
+  Serial.println("Begin");
 
+  Serial.println((int) _I2C_Bus);
   _I2C_Bus->beginTransmission(address);                                                                                                     // Initialize the Tx buffer
+  Serial.println("beginTransmission");
   _I2C_Bus->write(subAddress);                                                                                                              // Put slave register address in Tx buffer
-  _I2C_Bus->endTransmission(false);                                                                                                    // Send the Tx buffer, but send a restart to keep connection alive
-  _I2C_Bus->requestFrom(address, (size_t) count);                                                                                           // Read bytes from slave register address 
+    Serial.println("writeSub");
+    _I2C_Bus->endTransmission(false);                                                                                                    // Send the Tx buffer, but send a restart to keep connection alive
+    Serial.println("endTrans");
+    Serial.println(address);
+    Serial.println(count);
+    _I2C_Bus->requestFrom(address, (size_t) count);                                                                                           // Read bytes from slave register address
+  Serial.println("BefWhile");
   while (_I2C_Bus->available())
   {
+      Serial.println(i);
     dest[i++] = _I2C_Bus->read();
+    if(i == count) return;
   }                                                                                                                                         // Put read results in the Rx buffer
 }
 

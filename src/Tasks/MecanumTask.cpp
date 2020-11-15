@@ -119,9 +119,9 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
 
         const auto currentPose = odometry->getPose();
 
-        posePublisherMsg.position.x = currentPose.x;
+        posePublisherMsg.position.x = currentPose.x + 1;
         posePublisherMsg.position.y = currentPose.y;
-        posePublisherMsg.position.z = 0;
+        posePublisherMsg.position.z = imuYaw;
 
         twistPublisherMsg.linear.x = velocities.dx;
         twistPublisherMsg.linear.y = velocities.dy;

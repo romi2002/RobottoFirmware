@@ -355,8 +355,13 @@ void USFSMAX::getQUAT_Lin()
 {
   uint8_t bytes[28];
 
-  _i2c->readBytes(MAX32660_SLV_ADDR, Q0_BYTE0, 28, bytes);
-  qt[_sensornum][0] = uint32_reg_to_float (&bytes[0]);
+    Serial.println("readBytes");
+
+    _i2c->readBytes(MAX32660_SLV_ADDR, Q0_BYTE0, 28, bytes);
+
+    Serial.println("parseBytes");
+
+    qt[_sensornum][0] = uint32_reg_to_float (&bytes[0]);
   qt[_sensornum][1] = uint32_reg_to_float (&bytes[4]);
   qt[_sensornum][2] = uint32_reg_to_float (&bytes[8]);
   qt[_sensornum][3] = uint32_reg_to_float (&bytes[12]);
