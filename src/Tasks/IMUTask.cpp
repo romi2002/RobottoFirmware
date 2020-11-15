@@ -52,14 +52,12 @@ IMUTask::IMUTask(ReadWriteLockPreferWriter *i2cLock, TickType_t tickDelay)
         ret = UFSMAX_0->init_USFSMAX();
         delay(200);
     }
-    Serial.println("Passed gyro init");
-    delay(1000);
-    Wire.setClock(1 * 1000);
+    //delay(1000);
+    Wire.setClock(4 * 1000);
     digitalWrite(PinAssignments::IMU_RST_PIN, HIGH);
-    delay(2000);
+    delay(100);
 
     attachInterrupt(PinAssignments::IMU_INT_PIN, DRDY_handler_0, RISING);
-    Serial.println("Passed interrupt");
 
     Mv_Cal = M_V;  // Vertical geomagnetic field component
     Mh_Cal = M_H;  // Horizontal geomagnetic field component
@@ -92,7 +90,6 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
 
         Acq_time = 0;
         Begin = micros();
-        Serial.println("SwitchCase");
 
     // Optimize the I2C read function with respect to whatever sensor data is
         // ready
@@ -129,10 +126,7 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
         };
         Acq_time += micros() - Begin;
 
-        Serial.println("PassedSwitch");
-
         if (Mag_flag[sensorNUM]) {
-            Serial.println("magFlag");
 
             if (ScaledSensorDataFlag)  // Calibration data is applied in the
                 // coprocessor; just scale
@@ -154,7 +148,6 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
             Mag_flag[sensorNUM] = 0;
         }
         if (Acc_flag[sensorNUM]) {
-            Serial.println("accFlag");
 
             if (ScaledSensorDataFlag)  // Calibration data is applied in the
                 // coprocessor; just scale
@@ -173,7 +166,6 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
             Acc_flag[sensorNUM] = 0;
         }
         if (Gyro_flag[sensorNUM] == 1) {
-            Serial.println("gyroFlag");
 
             if (ScaledSensorDataFlag)  // Calibration data is applied in the
                 // coprocessor; just scale
@@ -194,12 +186,9 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
             IMu->compute_Alternate_IMU();
             Gyro_flag[sensorNUM] = 0;
         }
-        Serial.println("passedFlags");
 
         if (Quat_flag[sensorNUM] == 1) {
-            Serial.println("computeIMU");
             IMu->computeIMU();
-            Serial.println("afterIMU");
             Quat_flag[sensorNUM] = 0;
         }
 
@@ -209,15 +198,14 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
 
     while (true) {
         if (dataReady) {
-            Serial.println("DataReady");
+            noInterrupts();
             dataReady = 0;
+            Serial.println("IMULOCK");
             i2cLock->WriterLock();
-            Serial.println("LOCK");
             ProcEventStatus(i2c_0, 0);
-            Serial.println("EventStatus");
             FetchUSFSMAX_Data(UFSMAX_0, imu_0, 0);
-            Serial.println("Fetch");
             i2cLock->WriterUnlock();
+            Serial.println("UNLOCK");
 
             imuQuat.x = qt[0][0];
             imuQuat.y = qt[0][1];
@@ -225,8 +213,10 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
             imuQuat.w = qt[0][3];
 
             imuYaw = heading[0];
+            Serial.println(imuYaw);
+            interrupts();
         }
 
-        vTaskDelay(this->tickDelay * 5);
+        vTaskDelay(1);
     }
 }

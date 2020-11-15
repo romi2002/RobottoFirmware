@@ -113,7 +113,8 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
         auto positions = kinematics->toChassisSpeeds(currentWheelPositions);
         auto velocities = kinematics->toChassisSpeeds(currentWheelVelocities);
 
-        positions.dtheta = imuYaw;
+        //positions.dtheta = imuYaw;
+        //Serial.println(imuYaw);
 
         odometry->update(positions);
 
@@ -127,13 +128,12 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
         twistPublisherMsg.linear.y = velocities.dy;
         twistPublisherMsg.angular.z = velocities.dtheta;
 
-        //TODO Publish orientation from IMU
-        posePublisherMsg.orientation = imuQuat;
+        //posePublisherMsg.orientation = imuQuat;
 
         posePublisher->publish(&posePublisherMsg);
         twistPublisher->publish(&twistPublisherMsg);
 
-        writeToMotors(vel, MotorControlMode::PERCENTAGE);
+        //writeToMotors(vel, MotorControlMode::PERCENTAGE);
         vTaskDelay(waitTime);
     }
 }

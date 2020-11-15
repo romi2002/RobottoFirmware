@@ -27,7 +27,6 @@ void VNH5019::initializePins(const VNH5019_PinAssignments &definitions) {
     analogWriteFrequency(definitions.PWM, VNH5019_PWM_FREQUENCY);
 
     pinMode(definitions.PWM, OUTPUT);
-
     mcpLock->WriterLock();
     mcp->pinMode(definitions.IN_A, OUTPUT);
     mcp->pinMode(definitions.IN_B, OUTPUT);
@@ -44,8 +43,17 @@ void VNH5019::set(double value) {
     tempValue = inverted ? -tempValue : tempValue;
 
     analogWrite(definitions.PWM, (int) std::abs(tempValue));
+    Serial.println("VH50: Por entrar al lock");
+    Serial.println((int)mcpLock);
 
     mcpLock->WriterLock();
+    Serial.println("Nunca entra");
+    Serial.println(__LINE__);
+    Serial.println((int)mcpLock);
+
+    Serial.println((int) mcp);
+    Serial.println(value);
+
     if (value > 0.0) {
         mcp->digitalWrite(definitions.IN_A, HIGH);
         mcp->digitalWrite(definitions.IN_B, LOW);
@@ -53,8 +61,13 @@ void VNH5019::set(double value) {
         mcp->digitalWrite(definitions.IN_A, LOW);
         mcp->digitalWrite(definitions.IN_B, HIGH);
     } else if (value == 0.0) {
+        Serial.println("This if");
         mcp->digitalWrite(definitions.IN_A, LOW);
+        Serial.println("This line");
         mcp->digitalWrite(definitions.IN_B, LOW);
     }
+
+    Serial.println("Despues del if");
     mcpLock->WriterUnlock();
+    Serial.println("VH50: Fuera de set");
 }

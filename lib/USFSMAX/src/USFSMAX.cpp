@@ -29,6 +29,8 @@
 #include "Arduino.h"
 #include "USFSMAX.h"
 
+#include "thread.hpp"
+
 USFSMAX::USFSMAX(I2Cdev* i2c, uint8_t sensornum)
 {
   _i2c = i2c;
@@ -53,7 +55,7 @@ ssize_t USFSMAX::init_USFSMAX()
 
   STAT = _i2c->readByte(MAX32660_SLV_ADDR, FUSION_STATUS);                                                                         // Read the coprocessor's current fusion status
   delay(100);
-  
+
   #ifdef SERIAL_DEBUG
     Serial.println("");
     Serial.print("Fusion status: "); Serial.println(STAT);
@@ -118,7 +120,7 @@ ssize_t USFSMAX::init_USFSMAX()
     Serial.print("Coprocessor configured! Reading sensor calibrations...");
     Serial.println("");
   #endif
-  
+
   USFSMAX::Retreive_full_gyrocal();
   delay(100);
   Alarms::blink_blueLED(2,10,1);
@@ -136,7 +138,7 @@ ssize_t USFSMAX::init_USFSMAX()
     Serial.println("Gyroscope Sensor Offsets (g)");
     Serial.println(gyrocal[_sensornum].V[0], 4);
     Serial.println(gyrocal[_sensornum].V[1], 4);
-    Serial.println(gyrocal[_sensornum].V[2], 4); 
+    Serial.println(gyrocal[_sensornum].V[2], 4);
     Serial.println("");
     Serial.println("Gyroscope Calibration Tensor");
     Serial.print(gyrocal[_sensornum].invW[0][0], 4); Serial.print(",");
@@ -152,7 +154,7 @@ ssize_t USFSMAX::init_USFSMAX()
     Serial.println("Accelerometer Sensor Offsets (g)");
     Serial.println(accelcal[_sensornum].V[0], 4);
     Serial.println(accelcal[_sensornum].V[1], 4);
-    Serial.println(accelcal[_sensornum].V[2], 4); 
+    Serial.println(accelcal[_sensornum].V[2], 4);
     Serial.println("");
     Serial.println("Accelerometer Calibration Tensor");
     Serial.print(accelcal[_sensornum].invW[0][0], 4); Serial.print(",");
@@ -168,7 +170,7 @@ ssize_t USFSMAX::init_USFSMAX()
     Serial.println("Magnetometer Sensor Offsets (uT)");
     Serial.println(ellipsoid_magcal[_sensornum].V[0], 4);
     Serial.println(ellipsoid_magcal[_sensornum].V[1], 4);
-    Serial.println(ellipsoid_magcal[_sensornum].V[2], 4); 
+    Serial.println(ellipsoid_magcal[_sensornum].V[2], 4);
     Serial.println("");
     Serial.println("Magnetometer Soft Iron Correction Tensor");
     Serial.print(ellipsoid_magcal[_sensornum].invW[0][0], 4); Serial.print(",");
@@ -184,16 +186,16 @@ ssize_t USFSMAX::init_USFSMAX()
     Serial.println("Magnetometer Residual Hard Iron Offsets (uT)");
     Serial.println(final_magcal[_sensornum].V[0], 4);
     Serial.println(final_magcal[_sensornum].V[1], 4);
-    Serial.println(final_magcal[_sensornum].V[2], 4); 
+    Serial.println(final_magcal[_sensornum].V[2], 4);
     Serial.println("");
     Serial.println("Magnetometer Fine Calibration/Alignment Tensor");
     Serial.print(final_magcal[_sensornum].invW[0][0], 4); Serial.print(",");
     Serial.print(final_magcal[_sensornum].invW[0][1], 4); Serial.print(",");
     Serial.println(final_magcal[_sensornum].invW[0][2], 4);
     Serial.print(final_magcal[_sensornum].invW[1][0], 4); Serial.print(",");
-    Serial.print(final_magcal[_sensornum].invW[1][1], 4); Serial.print(","); 
+    Serial.print(final_magcal[_sensornum].invW[1][1], 4); Serial.print(",");
     Serial.println(final_magcal[_sensornum].invW[1][2], 4);
-    Serial.print(final_magcal[_sensornum].invW[2][0], 4); Serial.print(","); 
+    Serial.print(final_magcal[_sensornum].invW[2][0], 4); Serial.print(",");
     Serial.print(final_magcal[_sensornum].invW[2][1], 4); Serial.print(",");
     Serial.println(final_magcal[_sensornum].invW[2][2], 4);
     Serial.println(""); Serial.println("");
@@ -209,7 +211,7 @@ void USFSMAX::Upload_cfg(CoProcessorConfig_t Config)
   CmdByte = 0x08;                                                                                                                  // Clears bit0 to stop fusion an sets bit3 to specify configuration uplaod
   _i2c->writeByte(MAX32660_SLV_ADDR, FUSION_START_STOP, CmdByte);
   delay(1000);
-  
+
   // Assign configuration values
   Config.cal_points        = CAL_POINTS;
   Config.Ascale            = ACC_SCALE;
@@ -299,7 +301,7 @@ void USFSMAX::MagBaro_getADC()
 void USFSMAX::Gyro_getADC()
 {
   uint8_t bytes[6];
-  
+
   _i2c->readBytes(MAX32660_SLV_ADDR, G_X_L, 6, bytes);
   gyroADC[_sensornum][0] = ((int16_t)bytes[1] << 8) | bytes[0];
   gyroADC[_sensornum][1] = ((int16_t)bytes[3] << 8) | bytes[2];
@@ -309,7 +311,7 @@ void USFSMAX::Gyro_getADC()
 void USFSMAX::ACC_getADC()
 {
   uint8_t bytes[6];
-  
+
   _i2c->readBytes(MAX32660_SLV_ADDR, A_X_L, 6, bytes);
   accADC[_sensornum][0] = ((int16_t)bytes[1] << 8) | bytes[0];
   accADC[_sensornum][1] = ((int16_t)bytes[3] << 8) | bytes[2];
@@ -319,7 +321,7 @@ void USFSMAX::ACC_getADC()
 void USFSMAX::MAG_getADC()
 {
   uint8_t bytes[6];
-  
+
   _i2c->readBytes(MAX32660_SLV_ADDR, M_X_L, 6, bytes);
   magADC[_sensornum][0] = ((int16_t)bytes[1] << 8) | bytes[0];
   magADC[_sensornum][1] = ((int16_t)bytes[3] << 8) | bytes[2];
@@ -343,7 +345,7 @@ void USFSMAX::GetMxMy()
 void USFSMAX::getQUAT()
 {
   uint8_t bytes[16];
-  
+
   _i2c->readBytes(MAX32660_SLV_ADDR, Q0_BYTE0, 16, bytes);
   qt[_sensornum][0] = uint32_reg_to_float (&bytes[0]);
   qt[_sensornum][1] = uint32_reg_to_float (&bytes[4]);
@@ -355,11 +357,7 @@ void USFSMAX::getQUAT_Lin()
 {
   uint8_t bytes[28];
 
-    Serial.println("readBytes");
-
     _i2c->readBytes(MAX32660_SLV_ADDR, Q0_BYTE0, 28, bytes);
-
-    Serial.println("parseBytes");
 
     qt[_sensornum][0] = uint32_reg_to_float (&bytes[0]);
   qt[_sensornum][1] = uint32_reg_to_float (&bytes[4]);
@@ -376,7 +374,7 @@ void USFSMAX::getQUAT_Lin()
 void USFSMAX::LIN_ACC_getADC()
 {
   uint8_t bytes[12];
-  
+
   _i2c->readBytes(MAX32660_SLV_ADDR, LIN_X_L, 12, bytes);
   accLIN[_sensornum][0] = ((int16_t)bytes[1] << 8) | bytes[0];
   accLIN[_sensornum][1] = ((int16_t)bytes[3] << 8) | bytes[2];
@@ -389,7 +387,7 @@ void USFSMAX::LIN_ACC_getADC()
 void USFSMAX::BARO_getADC()
 {
   uint8_t bytes[3];
-  
+
   _i2c->readBytes(MAX32660_SLV_ADDR, BARO_XL, 3, bytes);
   baroADC[_sensornum] = (int32_t)bytes[2] << 16 | (int32_t)bytes[1] << 8 | bytes[0];
 }

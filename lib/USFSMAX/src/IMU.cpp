@@ -45,16 +45,13 @@ IMU::IMU(USFSMAX* usfsmax, uint8_t sensornum)
 */
 void IMU::computeIMU()
 {
-    Serial.println("init");
     float yaw[2];
   static float buff_roll[2] = {0.0f, 0.0f}, buff_pitch[2] = {0.0f, 0.0f}, buff_heading[2] = {0.0f, 0.0f};
 
-    Serial.println("getQuat");
     Begin = micros();
   _usfsmax->getQUAT_Lin();
   Acq_time += micros() - Begin;
 
-    Serial.println("calcQuat");
 
     // MAXUSFS Quaternion is ENU
   buff_heading[_sensornum] = atan2f(2.0f*(qt[_sensornum][1]*qt[_sensornum][2] - qt[_sensornum][0]*qt[_sensornum][3]), qt[_sensornum][0]*qt[_sensornum][0] -

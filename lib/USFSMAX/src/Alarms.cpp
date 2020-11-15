@@ -49,10 +49,10 @@ void Alarms::blink_blueLED(uint8_t num, uint8_t ontime,uint8_t repeat)
     for(i=0; i<num; i++)
     {
       Alarms::toggle_blueLED();
-      delay(ontime);
+      //delay(ontime);
     }
     //wait 60 ms
-    delay(60);
+    //delay(60);
   }
 }
 

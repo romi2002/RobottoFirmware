@@ -61,7 +61,6 @@ void setup() {
     delay(2000);
 
     IMUTask imuTask(i2cLock);
-    Serial.println("Passed IMU");
 
     /**
      * ADC128D818 Init
@@ -77,8 +76,7 @@ void setup() {
     /**
      * MCP Init
      */
-    //mcp.begin(0x27);
-    Serial.println("Passed MCP");
+    mcp.begin(0x27);
 
     MotorControllerConfig controllerConfig{};
     controllerConfig.vnh5019PinDefinitions = PinAssignments::getMotor4Driver();
@@ -99,7 +97,7 @@ void setup() {
     BatteryPublisherTask batteryPublisherTask(&nh);
     RosSpinTask rosSpinTask(&nh);
 
-    //MecanumTask mecanumTask(controllerConfig, &nh, 0.075);
+    MecanumTask mecanumTask(controllerConfig, &nh, 0.075);
 
     Serial.println("Passed Tasks");
 
