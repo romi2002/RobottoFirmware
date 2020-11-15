@@ -37,6 +37,7 @@
 
 #include <stdint.h>
 #include <Arduino.h>
+#include <queue>
 
 #include "std_msgs/Time.h"
 #include "rosserial_msgs/TopicInfo.h"
@@ -94,6 +95,8 @@ const uint8_t MODE_MSG_CHECKSUM   = 8;    // checksum for msg and topic id
 
 const uint8_t SERIAL_MSG_TIMEOUT  = 20;   // 20 milliseconds to recieve all of message data
 
+const uint8_t MAX_MSG_QUEUE_LEN = 5;
+
 using rosserial_msgs::TopicInfo;
 
 /* Node Handle */
@@ -117,7 +120,9 @@ protected:
   uint32_t spin_timeout_;
 
   uint8_t message_in[INPUT_SIZE];
-  uint8_t message_out[OUTPUT_SIZE];
+  uint8_t message_outBuffer[OUTPUT_SIZE];
+
+  std::queue<std::pair<uint8_t *, size_t>> msgQueue; //Byte buffer queue
 
   Publisher * publishers[MAX_PUBLISHERS];
   Subscriber_ * subscribers[MAX_SUBSCRIBERS];
@@ -139,7 +144,7 @@ public:
       message_in[i] = 0;
 
     for (unsigned int i = 0; i < OUTPUT_SIZE; i++)
-      message_out[i] = 0;
+      message_outBuffer[i] = 0;
 
     req_param_resp.ints_length = 0;
     req_param_resp.ints = NULL;
@@ -204,6 +209,15 @@ protected:
   uint32_t last_sync_receive_time;
   uint32_t last_msg_timeout_time;
 
+  void handleMSGQueue(){
+    const auto msg = msgQueue.front();
+
+    Serial5.write(msg.first, msg.second);
+    free(msg.first);
+
+    msgQueue.pop();
+  }
+
 public:
   /* This function goes in your loop() function, it handles
    *  serial input and callbacks for subscribers.
@@ -226,6 +240,11 @@ public:
       {
         mode_ = MODE_FIRST_FF;
       }
+    }
+
+    /* Send data while queue available */
+    while(!msgQueue.empty()){
+      handleMSGQueue();
     }
 
     /* while available buffer, read data */
@@ -515,34 +534,41 @@ public:
       return 0;
 
     /* serialize message */
-    int l = msg->serialize(message_out + 7);
+    int l = msg->serialize(message_outBuffer + 7);
 
     /* setup the header */
-    message_out[0] = 0xff;
-    message_out[1] = PROTOCOL_VER;
-    message_out[2] = (uint8_t)((uint16_t)l & 255);
-    message_out[3] = (uint8_t)((uint16_t)l >> 8);
-    message_out[4] = 255 - ((message_out[2] + message_out[3]) % 256);
-    message_out[5] = (uint8_t)((int16_t)id & 255);
-    message_out[6] = (uint8_t)((int16_t)id >> 8);
+    message_outBuffer[0] = 0xff;
+    message_outBuffer[1] = PROTOCOL_VER;
+    message_outBuffer[2] = (uint8_t)((uint16_t)l & 255);
+    message_outBuffer[3] = (uint8_t)((uint16_t)l >> 8);
+    message_outBuffer[4] = 255 - ((message_outBuffer[2] + message_outBuffer[3]) % 256);
+    message_outBuffer[5] = (uint8_t)((int16_t)id & 255);
+    message_outBuffer[6] = (uint8_t)((int16_t)id >> 8);
 
     /* calculate checksum */
     int chk = 0;
     for (int i = 5; i < l + 7; i++)
-      chk += message_out[i];
+      chk += message_outBuffer[i];
     l += 7;
-    message_out[l++] = 255 - (chk % 256);
+    message_outBuffer[l++] = 255 - (chk % 256);
 
-    if (l <= OUTPUT_SIZE)
-    {
-      Serial5.write(message_out, l);
-      return l;
-    }
-    else
-    {
-      logerror("Message from device dropped: message larger than buffer.");
+    if(msgQueue.size() > MAX_MSG_QUEUE_LEN){
+      //TODO Handle this correctly
+      SerialUSB.println("Dropping msg!");
       return -1;
     }
+
+    uint8_t *newLocation = (uint8_t*) malloc(l);
+
+    if(newLocation == nullptr){
+      SerialUSB.println("Failed to malloc");
+      return -1;
+    }
+
+    memcpy(newLocation, message_outBuffer, l);
+
+    //Add to queue
+    msgQueue.emplace(std::make_pair(newLocation, l));
   }
 
   /********************************************************************

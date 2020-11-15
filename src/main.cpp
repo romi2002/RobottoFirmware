@@ -1,5 +1,6 @@
 #include <LinkerFix.h>
 #include <Arduino.h>
+#include <Wire.h>
 #include <FreeRTOS_TEENSY4.h>
 
 #define USE_TEENSY_HW_SERIAL
