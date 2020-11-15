@@ -58,6 +58,12 @@ void setup() {
 
     Wire.begin();
     Wire.setClock(100);
+
+    /**
+    * MCP Init
+    */
+    mcp.begin(0x27);
+
     delay(2000);
 
     IMUTask imuTask(i2cLock);
@@ -72,11 +78,6 @@ void setup() {
     adc128D818->begin();*/
 
     nh.initNode();
-
-    /**
-     * MCP Init
-     */
-    mcp.begin(0x27);
 
     MotorControllerConfig controllerConfig{};
     controllerConfig.vnh5019PinDefinitions = PinAssignments::getMotor4Driver();

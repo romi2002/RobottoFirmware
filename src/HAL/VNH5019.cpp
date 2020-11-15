@@ -46,7 +46,6 @@ void VNH5019::set(double value) {
     Serial.println("VH50: Por entrar al lock");
     Serial.println((int)mcpLock);
 
-    mcpLock->WriterLock();
     Serial.println("Nunca entra");
     Serial.println(__LINE__);
     Serial.println((int)mcpLock);
@@ -54,6 +53,7 @@ void VNH5019::set(double value) {
     Serial.println((int) mcp);
     Serial.println(value);
 
+    digitalWrite(13, HIGH);
     if (value > 0.0) {
         mcp->digitalWrite(definitions.IN_A, HIGH);
         mcp->digitalWrite(definitions.IN_B, LOW);
@@ -66,8 +66,8 @@ void VNH5019::set(double value) {
         Serial.println("This line");
         mcp->digitalWrite(definitions.IN_B, LOW);
     }
+    digitalWrite(13, LOW);
 
     Serial.println("Despues del if");
-    mcpLock->WriterUnlock();
     Serial.println("VH50: Fuera de set");
 }

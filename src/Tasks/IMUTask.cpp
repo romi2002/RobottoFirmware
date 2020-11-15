@@ -53,7 +53,7 @@ IMUTask::IMUTask(ReadWriteLockPreferWriter *i2cLock, TickType_t tickDelay)
         delay(200);
     }
     //delay(1000);
-    Wire.setClock(4 * 1000);
+    Wire.setClock(1 * 100);
     digitalWrite(PinAssignments::IMU_RST_PIN, HIGH);
     delay(100);
 
@@ -198,13 +198,15 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
 
     while (true) {
         if (dataReady) {
-            noInterrupts();
+            digitalWrite(PinAssignments::DEBUG_PIN, HIGH);
             dataReady = 0;
             Serial.println("IMULOCK");
+            noInterrupts();
             i2cLock->WriterLock();
             ProcEventStatus(i2c_0, 0);
             FetchUSFSMAX_Data(UFSMAX_0, imu_0, 0);
             i2cLock->WriterUnlock();
+            interrupts();
             Serial.println("UNLOCK");
 
             imuQuat.x = qt[0][0];
@@ -214,7 +216,7 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
 
             imuYaw = heading[0];
             Serial.println(imuYaw);
-            interrupts();
+            digitalWrite(PinAssignments::DEBUG_PIN, LOW);
         }
 
         vTaskDelay(1);

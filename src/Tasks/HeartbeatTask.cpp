@@ -20,9 +20,9 @@ HeartbeatTask::HeartbeatTask(TickType_t tickDelay) : Thread("HeartbeatTask", con
 [[noreturn]] void HeartbeatTask::Run() {
     while (true) {
         vTaskDelay((tickDelay * configTICK_RATE_HZ) / 1000L);
-        digitalWrite(PinAssignments::HEARTBEAT_PIN, HIGH);
+        //digitalWrite(PinAssignments::HEARTBEAT_PIN, HIGH);
         vTaskDelay((tickDelay * configTICK_RATE_HZ) / 1000L);
-        digitalWrite(PinAssignments::HEARTBEAT_PIN, LOW);
+        //digitalWrite(PinAssignments::HEARTBEAT_PIN, LOW);
         //wdt.feed();
     }
 }

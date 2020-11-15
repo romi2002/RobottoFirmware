@@ -5,8 +5,8 @@
 #include "MecanumTask.h"
 #include "PinAssignments.h"
 
-extern geometry_msgs::Quaternion imuQuat;
-extern double imuYaw;
+//extern geometry_msgs::Quaternion imuQuat;
+//extern double imuYaw;
 
 MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *nh, double wheelDiameter,
                          TickType_t waitTime) : cpp_freertos::Thread("MecanumTask", 256, MECANUM_TASK_PRIORITY) {
@@ -64,10 +64,12 @@ MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *n
 }
 
 void MecanumTask::writeToMotors(const MecanumWheelVelocities &vel, MotorControlMode controlMode) {
+    m_config.i2cLock->WriterLock();
     controllers.frontLeft->set(vel.frontLeft, controlMode);
     controllers.frontRight->set(vel.frontRight, controlMode);
     controllers.backLeft->set(vel.backLeft, controlMode);
     controllers.backRight->set(vel.backRight, controlMode);
+    m_config.i2cLock->WriterUnlock();
 }
 
 MecanumWheelVelocities MecanumTask::getWheelPositions() const {
@@ -122,7 +124,7 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
 
         posePublisherMsg.position.x = currentPose.x + 1;
         posePublisherMsg.position.y = currentPose.y;
-        posePublisherMsg.position.z = imuYaw;
+        //posePublisherMsg.position.z = imuYaw;
 
         twistPublisherMsg.linear.x = velocities.dx;
         twistPublisherMsg.linear.y = velocities.dy;
