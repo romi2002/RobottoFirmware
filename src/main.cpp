@@ -1,7 +1,6 @@
 #include <LinkerFix.h>
 #include <Arduino.h>
 #include <FreeRTOS_TEENSY4.h>
-
 #define USE_TEENSY_HW_SERIAL
 #include "log.h"
 #include "PinAssignments.h"
@@ -33,12 +32,18 @@ ros::NodeHandle nh;
 Adafruit_MCP23017 mcp;
 cpp_freertos::ReadWriteLockPreferWriter *mcpLock;
 
+#include <TeensyDebug.h>
+
 void setup() {
     //SerialUSB1.begin(115200);
     SerialUSB.begin(115200);
-    Serial5.begin(921600);
+    debug.begin(SerialUSB);
+    Serial5.begin(2500000, SERIAL_8N1);
+
+    //Serial5.attachRts(32);
+    //Serial5.attachCts(43);
     SerialUSB.println("Hi there");
-    
+
 
     analogReadResolution(12);
     analogReadAveraging(4);

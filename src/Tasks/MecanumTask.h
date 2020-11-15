@@ -60,8 +60,11 @@ private:
 
     ExponentialOdometry *odometry;
 
-    nav_msgs::Odometry odomPublisherMsg;
-    ros::Publisher *odomPublisher;
+    geometry_msgs::Pose posePublisherMsg;
+    ros::Publisher *posePublisher;
+
+    geometry_msgs::Twist twistPublisherMsg;
+    ros::Publisher *twistPublisher;
 
     ros::NodeHandle *nh;
 };

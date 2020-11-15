@@ -35,8 +35,8 @@
 #ifndef ROS_NODE_HANDLE_H_
 #define ROS_NODE_HANDLE_H_
 
-#include <Arduino.h>
 #include <stdint.h>
+#include <Arduino.h>
 
 #include "std_msgs/Time.h"
 #include "rosserial_msgs/TopicInfo.h"
@@ -44,9 +44,6 @@
 #include "rosserial_msgs/RequestParam.h"
 
 #include "ros/msg.h"
-#include "config.h"
-#include "thread.hpp"
-#include "task.h"
 
 namespace ros
 {
@@ -162,7 +159,7 @@ public:
   /* Start serial, initialize buffers */
   void initNode()
   {
-    hardware_.init();
+    //hardware_.init();
     mode_ = 0;
     bytes_ = 0;
     index_ = 0;
@@ -172,7 +169,7 @@ public:
   /* Start a named port, which may be network server IP, initialize buffers */
   void initNode(char *portName)
   {
-    hardware_.init(portName);
+    //hardware_.init(portName);
     mode_ = 0;
     bytes_ = 0;
     index_ = 0;
@@ -538,10 +535,7 @@ public:
 
     if (l <= OUTPUT_SIZE)
     {
-      Serial5.flush();
       Serial5.write(message_out, l);
-      SerialUSB.print("Size: "); SerialUSB.print(l);
-      SerialUSB.print(" Chk: "); SerialUSB.println(message_out[4]);
       return l;
     }
     else

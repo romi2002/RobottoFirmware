@@ -48,8 +48,11 @@ MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *n
             "cmd_vel", &MecanumTask::twistSubsriberCb, this
             );
 
-    odomPublisher = new ros::Publisher("odom", &odomPublisherMsg);
-    nh->advertise(*odomPublisher);
+    twistPublisher = new ros::Publisher("twist", &twistPublisherMsg);
+    nh->advertise(*twistPublisher);
+
+    posePublisher = new ros::Publisher("pose", &posePublisherMsg);
+    nh->advertise(*posePublisher);
 
     nh->subscribe(*twistSetpointSubscriber);
 
@@ -111,20 +114,20 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
         odometry->update(positions);
 
         const auto currentPose = odometry->getPose();
-        odomPublisherMsg.child_frame_id = "base_link";
 
-        odomPublisherMsg.pose.pose.position.x = currentPose.x;
-        odomPublisherMsg.pose.pose.position.y = currentPose.y;
-        odomPublisherMsg.pose.pose.position.z = 0;
+        posePublisherMsg.position.x = currentPose.x;
+        posePublisherMsg.position.y = currentPose.y;
+        posePublisherMsg.position.z = 0;
 
-        odomPublisherMsg.twist.twist.linear.x = velocities.dx;
-        odomPublisherMsg.twist.twist.linear.y = velocities.dy;
-        odomPublisherMsg.twist.twist.angular.z = velocities.dtheta;
+        twistPublisherMsg.linear.x = velocities.dx;
+        twistPublisherMsg.linear.y = velocities.dy;
+        twistPublisherMsg.angular.z = velocities.dtheta;
 
         //TODO Publish orientation from IMU
-        odomPublisherMsg.pose.pose.orientation.x = 1.0;
+        posePublisherMsg.orientation.x = 1.0;
 
-        odomPublisher->publish(&odomPublisherMsg);
+        posePublisher->publish(&posePublisherMsg);
+        twistPublisher->publish(&twistPublisherMsg);
 
         writeToMotors(vel, MotorControlMode::PERCENTAGE);
         vTaskDelay(waitTime);

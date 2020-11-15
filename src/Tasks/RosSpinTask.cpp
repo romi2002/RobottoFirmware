@@ -11,6 +11,6 @@ RosSpinTask::RosSpinTask(ros::NodeHandle *nh, TickType_t waitTime) : Thread("Ros
 [[noreturn]] void RosSpinTask::Run() {
     while (true) {
         nh->spinOnce();
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        vTaskDelay(pdMS_TO_TICKS(10));
     }
 }
