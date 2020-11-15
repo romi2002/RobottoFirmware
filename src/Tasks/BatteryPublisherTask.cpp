@@ -38,13 +38,13 @@ BatteryPublisherTask::BatteryPublisherTask(ros::NodeHandle *nh, TickType_t waitT
         batteryStateMsg.power_supply_health = 0;
         batteryStateMsg.power_supply_technology = 3;
 
-        batteryStatePub.publish(&batteryStateMsg);
+        //batteryStatePub.publish(&batteryStateMsg);
 
         double energy = ((current * (dt / 1000.0)) / 60.0) / 60.0; //mAh
         energyUsed += energy;
 
         energyUsedMsg.data = energyUsed;
-        energyUsedPub.publish(&energyUsedMsg);
+        //energyUsedPub.publish(&energyUsedMsg);
 
         vTaskDelay(waitTime);
         dt = 0;

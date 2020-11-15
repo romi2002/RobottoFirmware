@@ -198,27 +198,23 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
 
     while (true) {
         if (dataReady) {
-            digitalWrite(PinAssignments::DEBUG_PIN, HIGH);
             dataReady = 0;
-            Serial.println("IMULOCK");
             noInterrupts();
             i2cLock->WriterLock();
             ProcEventStatus(i2c_0, 0);
             FetchUSFSMAX_Data(UFSMAX_0, imu_0, 0);
             i2cLock->WriterUnlock();
             interrupts();
-            Serial.println("UNLOCK");
 
-            imuQuat.x = qt[0][0];
-            imuQuat.y = qt[0][1];
-            imuQuat.z = qt[0][2];
-            imuQuat.w = qt[0][3];
+            imuQuat.x = qt[0][1];
+            imuQuat.y = qt[0][2];
+            imuQuat.z = qt[0][3];
+            imuQuat.w = qt[0][0];
 
             imuYaw = heading[0];
-            Serial.println(imuYaw);
-            digitalWrite(PinAssignments::DEBUG_PIN, LOW);
+            //Serial.println(imuYaw);
         }
 
-        vTaskDelay(1);
+        vTaskDelay(pdMS_TO_TICKS(10));
     }
 }

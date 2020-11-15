@@ -52,7 +52,7 @@
     //#define USE_2D_DHI_CORRECTOR               0x01                 // Define as "1" to use the 2D HI corrector instead of the 3D corrector
     #define USE_2D_DHI_CORRECTOR               0x00
 
-    #define SERIAL_DEBUG                                            // Uncomment to see the verbose screen update; comment out for spreadsheet or "MotionCal" GUI output
+    //#define SERIAL_DEBUG                                            // Uncomment to see the verbose screen update; comment out for spreadsheet or "MotionCal" GUI output
     //#define MOTION_CAL_GUI_ENABLED                                  // Uncomment to visualize the magnetometer response surface on the "MotionCal" GUI (https://www.pjrc.com/store/prop_shield.html)
     #define UPDATE_PERIOD                      100                  // Serial update period (ms)
     #define CAL_POINTS                         2048                 // Number or data points collected for gyro and accel/fine mag calibrations

@@ -5,8 +5,8 @@
 #include "MecanumTask.h"
 #include "PinAssignments.h"
 
-//extern geometry_msgs::Quaternion imuQuat;
-//extern double imuYaw;
+extern geometry_msgs::Quaternion imuQuat;
+extern double imuYaw;
 
 MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *nh, double wheelDiameter,
                          TickType_t waitTime) : cpp_freertos::Thread("MecanumTask", 256, MECANUM_TASK_PRIORITY) {
@@ -94,6 +94,8 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
 }
 
 [[noreturn]] void MecanumTask::Run() {
+    double initialYaw = imuYaw;
+
     while (true) {
         twistLock->ReaderLock();
         auto vel = kinematics->toWheelSpeeds(currentTarget);
@@ -115,27 +117,27 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
         auto positions = kinematics->toChassisSpeeds(currentWheelPositions);
         auto velocities = kinematics->toChassisSpeeds(currentWheelVelocities);
 
-        //positions.dtheta = imuYaw;
+        positions.dtheta = imuYaw;
         //Serial.println(imuYaw);
 
         odometry->update(positions);
 
         const auto currentPose = odometry->getPose();
 
-        posePublisherMsg.position.x = currentPose.x + 1;
+        posePublisherMsg.position.x = currentPose.x;
         posePublisherMsg.position.y = currentPose.y;
-        //posePublisherMsg.position.z = imuYaw;
+        posePublisherMsg.position.z = 0;
 
         twistPublisherMsg.linear.x = velocities.dx;
         twistPublisherMsg.linear.y = velocities.dy;
         twistPublisherMsg.angular.z = velocities.dtheta;
 
-        //posePublisherMsg.orientation = imuQuat;
+        posePublisherMsg.orientation = imuQuat;
 
         posePublisher->publish(&posePublisherMsg);
         twistPublisher->publish(&twistPublisherMsg);
 
-        //writeToMotors(vel, MotorControlMode::PERCENTAGE);
+        writeToMotors(vel, MotorControlMode::PERCENTAGE);
         vTaskDelay(waitTime);
     }
 }

@@ -42,7 +42,7 @@
 
 //#define F_CPU 1008000000
 
-#define configUSE_PREEMPTION                    1
+#define configUSE_PREEMPTION                    0
 #define configUSE_TICKLESS_IDLE                 0
 #define configCPU_CLOCK_HZ                      (F_CPU)
 #define configTICK_RATE_HZ                      ((TickType_t)1000)
