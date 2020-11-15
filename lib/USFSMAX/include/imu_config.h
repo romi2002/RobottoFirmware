@@ -39,7 +39,7 @@
 /*************************************************************************************************/
     #define MAX32660_SLV_ADDR                  (0x57)               // USFS MAX I2C slave address
     #define INT_PIN                            11                    // USFSMAX breakout board
-    #define LED_PIN                            13                   // Teensy LED
+    #define LED_PIN                            36                   // Teensy LED
     #define POWER_BY_GPIO_PINS                                      // Uncomment to power the USFSMAX using Teensy GPIO pins
     #define USFS_GND                           22                   // Teensy GPIO pin for USFSMAX GND
     #define USFS_VCC                           21                   // Teensy GPIO pin for USFSMAX 3V3
@@ -52,7 +52,7 @@
     //#define USE_2D_DHI_CORRECTOR               0x01                 // Define as "1" to use the 2D HI corrector instead of the 3D corrector
     #define USE_2D_DHI_CORRECTOR               0x00
 
-    #define SERIAL_DEBUG                                            // Uncomment to see the verbose screen update; comment out for spreadsheet or "MotionCal" GUI output
+    //#define SERIAL_DEBUG                                            // Uncomment to see the verbose screen update; comment out for spreadsheet or "MotionCal" GUI output
     //#define MOTION_CAL_GUI_ENABLED                                  // Uncomment to visualize the magnetometer response surface on the "MotionCal" GUI (https://www.pjrc.com/store/prop_shield.html)
     #define UPDATE_PERIOD                      100                  // Serial update period (ms)
     #define CAL_POINTS                         2048                 // Number or data points collected for gyro and accel/fine mag calibrations

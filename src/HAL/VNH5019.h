@@ -19,7 +19,7 @@ class Adafruit_MCP23017;
 class VNH5019 {
 public:
     VNH5019(const VNH5019_PinAssignments &pinDefinitions, Adafruit_MCP23017 *mcp,
-            cpp_freertos::ReadWriteLockPreferWriter *mcpLock);
+            cpp_freertos::ReadWriteLockPreferWriter *i2cLock);
 
     VNH5019();
 

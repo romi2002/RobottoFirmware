@@ -6,9 +6,9 @@
 
 Pose2D Pose2D::operator+(const Pose2D &other) const {
     return {
-        x + other.x,
-        y + other.y,
-        theta + other.theta
+            x + other.x,
+            y + other.y,
+            theta + other.theta
     };
 }
 

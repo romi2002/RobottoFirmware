@@ -33,7 +33,7 @@ struct MotorControllerConfig {
     EncoderPinAssignments encoderPinDefinitions;
 
     Adafruit_MCP23017 *mcp;
-    ReadWriteLockPreferWriter *mcpLock;
+    ReadWriteLockPreferWriter *i2cLock;
 
     double countsPerRev = 979.62;
 

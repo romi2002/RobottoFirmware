@@ -32,7 +32,7 @@
 #include "Alarms.h"
 #include "Types.h"
 #include "def.h"
-#include "config.h"
+#include "imu_config.h"
 #include "USFSMAX.h"
 
 extern uint8_t                          Acc_flag[2], Mag_flag[2];

@@ -35,7 +35,7 @@ USFSMAX::USFSMAX(I2Cdev* i2c, uint8_t sensornum)
   _sensornum = sensornum;
 }
 
-void USFSMAX::init_USFSMAX()
+ssize_t USFSMAX::init_USFSMAX()
 {
   uint8_t STAT;
   uint8_t ConfigByte;
@@ -98,7 +98,9 @@ void USFSMAX::init_USFSMAX()
       Serial.print("Sensor error!");
       Serial.println("");
     #endif
-    while(1) {;}
+    //while(1) {;}
+    digitalWrite(12, HIGH);
+    return -1;
   }
   if(ENABLE_DHI_CORRECTOR)
   {
@@ -196,6 +198,8 @@ void USFSMAX::init_USFSMAX()
     Serial.println(final_magcal[_sensornum].invW[2][2], 4);
     Serial.println(""); Serial.println("");
   #endif
+
+    return 0;
 }
 
 void USFSMAX::Upload_cfg(CoProcessorConfig_t Config)

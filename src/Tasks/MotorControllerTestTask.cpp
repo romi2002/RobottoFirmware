@@ -6,8 +6,10 @@
 #include "MotorControllerTestTask.h"
 #include <sstream>
 
-MotorControllerTestTask::MotorControllerTestTask(const std::string &name, ros::NodeHandle *nh, MotorController *controller,
-                                                 TickType_t waitTime) : Thread(name, 256, MOTOR_OUTPUT_TEST_TASK_PRIORITY) {
+MotorControllerTestTask::MotorControllerTestTask(const std::string &name, ros::NodeHandle *nh,
+                                                 MotorController *controller,
+                                                 TickType_t waitTime) : Thread(name, 256,
+                                                                               MOTOR_OUTPUT_TEST_TASK_PRIORITY) {
     this->nh = nh;
     this->controller = controller;
 
@@ -94,7 +96,7 @@ void MotorControllerTestTask::setpointSubscriberCb(const std_msgs::Float32 &msg)
 void MotorControllerTestTask::velPIDConfigSubCb(const control_msgs::PidState &msg) {
     PIDConfig newConfig = PIDControllerROS::getPIDConfig(msg);
     PIDConfig oldConfig = controller->getVelPIDConfig();
-    if(newConfig != oldConfig){
+    if (newConfig != oldConfig) {
         oldConfig.p = newConfig.p;
         oldConfig.i = newConfig.i;
         oldConfig.d = newConfig.d;
@@ -105,7 +107,7 @@ void MotorControllerTestTask::velPIDConfigSubCb(const control_msgs::PidState &ms
 void MotorControllerTestTask::posPIDConfigSubCb(const control_msgs::PidState &msg) {
     PIDConfig newConfig = PIDControllerROS::getPIDConfig(msg);
     PIDConfig oldConfig = controller->getPosPIDConfig();
-    if(newConfig != oldConfig){
+    if (newConfig != oldConfig) {
         oldConfig.p = newConfig.p;
         oldConfig.i = newConfig.i;
         oldConfig.d = newConfig.d;

@@ -26,8 +26,8 @@
  * WITH THE SOFTWARE.
  */
 
-#ifndef Globals_h
-#define Globals_h
+#ifndef IMU_GLOBALS_H
+#define IMU_GLOBALS_H
 
 #include <Arduino.h>
 #include "def.h"
@@ -115,4 +115,4 @@ float                                   integralFBx    = 0.0f;                  
 float                                   integralFBy    = 0.0f;
 float                                   integralFBz    = 0.0f;
 
-#endif // Globals_h
+#endif

@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"name": "TeensyROSController",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"deque": "cpp",
+			"core": "cpp"
+		}
+	}
+}

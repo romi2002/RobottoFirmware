@@ -15,15 +15,15 @@ public:
 
     Rotation2D(double x, double y);
 
-    double rad() const {return value; };
+    double rad() const { return value; };
 
-    double deg() const {return (value / M_PI) * 180.0; };
+    double deg() const { return (value / M_PI) * 180.0; };
 
-    double cos() const {return m_cos; };
+    double cos() const { return m_cos; };
 
-    double sin() const {return m_sin; };
+    double sin() const { return m_sin; };
 
-    double tan() const {return m_sin / m_cos; };
+    double tan() const { return m_sin / m_cos; };
 
     Rotation2D rotateBy(const Rotation2D &other) const;
 
@@ -33,13 +33,13 @@ public:
 
     Rotation2D operator+(const Rotation2D &other) const;
 
-    Rotation2D& operator +=(const Rotation2D& other);
+    Rotation2D &operator+=(const Rotation2D &other);
 
     Rotation2D operator-(const Rotation2D &other) const;
 
     Rotation2D operator-() const;
 
-    Rotation2D& operator -=(const Rotation2D& other);
+    Rotation2D &operator-=(const Rotation2D &other);
 
     Rotation2D operator*(double scalar) const;
 

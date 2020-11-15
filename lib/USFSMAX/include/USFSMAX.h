@@ -32,7 +32,7 @@
 #include "I2Cdev.h"
 #include "Alarms.h"
 #include "def.h"
-#include "config.h"
+#include "imu_config.h"
 #include "Types.h"
 
 #define SENS_ERR_STAT                 0x00
@@ -177,7 +177,7 @@ class USFSMAX
 {
   public:
                                       USFSMAX(I2Cdev*, uint8_t);
-     void                             init_USFSMAX();
+     ssize_t                             init_USFSMAX();
      void                             GyroAccelMagBaro_getADC();
      void                             GyroAccel_getADC();
      void                             MagBaro_getADC();

@@ -7,13 +7,13 @@
 #include "Adafruit_MCP23017.h"
 
 VNH5019::VNH5019(const VNH5019_PinAssignments &pinDefinitions, Adafruit_MCP23017 *mcp,
-        cpp_freertos::ReadWriteLockPreferWriter *mcpLock) {
+                 cpp_freertos::ReadWriteLockPreferWriter *i2cLock) {
     this->definitions = pinDefinitions;
 
-    assert(mcp != nullptr or mcpLock != nullptr);
+    assert(mcp != nullptr or i2cLock != nullptr);
 
     this->mcp = mcp;
-    this->mcpLock = mcpLock;
+    this->mcpLock = i2cLock;
 
     initializePins(pinDefinitions);
 }
@@ -37,7 +37,7 @@ void VNH5019::initializePins(const VNH5019_PinAssignments &definitions) {
 }
 
 void VNH5019::set(double value) {
-    if(std::fabs(value) < 0.05) value = 0;
+    if (std::fabs(value) < 0.05) value = 0;
     double tempValue = (value < -1.0) ? -1.0 : (1.0 < value) ? 1.0 : value; //Clamp value
 
     tempValue = tempValue * (double) VNH5019_PWM_MAXVAL;

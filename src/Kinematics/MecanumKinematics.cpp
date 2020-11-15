@@ -4,8 +4,9 @@
 
 #include "MecanumKinematics.h"
 
-MecanumWheelVelocities MecanumKinematics::toWheelSpeeds(const Twist2D &vel, const Translation2D &centerOfRotation) const {
-    if(centerOfRotation != prevCoR){
+MecanumWheelVelocities
+MecanumKinematics::toWheelSpeeds(const Twist2D &vel, const Translation2D &centerOfRotation) const {
+    if (centerOfRotation != prevCoR) {
         MecanumWheelValues<Translation2D> newValues;
         newValues.frontLeft = wheelPositions.frontLeft - centerOfRotation;
         newValues.frontRight = wheelPositions.frontRight - centerOfRotation;
@@ -39,16 +40,16 @@ Twist2D MecanumKinematics::toChassisSpeeds(const MecanumWheelVelocities &wheelVe
             forwardKinematics.solve(wheelSpeedsMatrix);
 
     return {
-        chassisSpeedsVector(0),
-        chassisSpeedsVector(1),
-        chassisSpeedsVector(2)
+            chassisSpeedsVector(0),
+            chassisSpeedsVector(1),
+            chassisSpeedsVector(2)
     };
 }
 
 void MecanumKinematics::setInverseKinematics(const MecanumWheelValues<Translation2D> &wheelPositions) const {
     inverseKinematics << 1, -1, (-(wheelPositions.frontLeft.X() + wheelPositions.frontLeft.Y())),
-            1,  1, (wheelPositions.frontRight.X() - wheelPositions.frontRight.Y()),
-            1,  1, (wheelPositions.backLeft.X() - wheelPositions.backLeft.Y()),
+            1, 1, (wheelPositions.frontRight.X() - wheelPositions.frontRight.Y()),
+            1, 1, (wheelPositions.backLeft.X() - wheelPositions.backLeft.Y()),
             1, -1, (-(wheelPositions.backRight.X() + wheelPositions.backRight.Y()));
     inverseKinematics /= std::sqrt(2);
 }

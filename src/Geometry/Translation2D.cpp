@@ -20,8 +20,8 @@ double Translation2D::norm() const {
 
 Translation2D Translation2D::rotateBy(const Rotation2D &other) const {
     return {
-        x * other.cos() - y * other.sin(),
-        x * other.sin() + y * other.cos()
+            x * other.cos() - y * other.sin(),
+            x * other.sin() + y * other.cos()
     };
 }
 
@@ -29,17 +29,17 @@ Translation2D Translation2D::operator+(const Translation2D &other) const {
     return {X() + other.X(), Y() + other.Y()};
 }
 
-Translation2D& Translation2D::operator+=(const Translation2D& other) {
+Translation2D &Translation2D::operator+=(const Translation2D &other) {
     x += other.X();
     y += other.Y();
     return *this;
 }
 
-Translation2D Translation2D::operator-(const Translation2D& other) const {
+Translation2D Translation2D::operator-(const Translation2D &other) const {
     return *this + -other;
 }
 
-Translation2D& Translation2D::operator-=(const Translation2D& other) {
+Translation2D &Translation2D::operator-=(const Translation2D &other) {
     *this += -other;
     return *this;
 }
@@ -50,7 +50,7 @@ Translation2D Translation2D::operator*(double scalar) const {
     return {scalar * x, scalar * y};
 }
 
-Translation2D& Translation2D::operator*=(double scalar) {
+Translation2D &Translation2D::operator*=(double scalar) {
     x *= scalar;
     y *= scalar;
     return *this;
@@ -60,14 +60,14 @@ Translation2D Translation2D::operator/(double scalar) const {
     return *this * (1.0 / scalar);
 }
 
-Translation2D& Translation2D::operator/=(double scalar) {
+Translation2D &Translation2D::operator/=(double scalar) {
     *this *= (1.0 / scalar);
     return *this;
 }
 
 bool Translation2D::operator==(const Translation2D &rhs) const {
     return std::abs(x - rhs.X()) < 1E-9 &&
-            std::abs(y - rhs.Y()) < 1E-9;
+           std::abs(y - rhs.Y()) < 1E-9;
 }
 
 bool Translation2D::operator!=(const Translation2D &rhs) const {

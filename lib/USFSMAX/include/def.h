@@ -29,7 +29,7 @@
 #ifndef def_h
 #define def_h
 
-#include "config.h"
+#include "imu_config.h"
 
 /*************************************************************************************************/
 /*************                                                                     ***************/
@@ -176,9 +176,9 @@
   #define MAG_DECLINIATION                     -10.1406f
 #endif
 #ifdef MONTERREY_NL_MEX
-    #define M_V                                   73.7f
-    #define M_H                                   24.1f
-    #define MAG_DECLINIATION                      -9.1617f
+    #define M_V                                   35.5066f
+    #define M_H                                   25.8054f
+    #define MAG_DECLINIATION                      4.8166f
 #endif
 
 /*************************************************************************************************/

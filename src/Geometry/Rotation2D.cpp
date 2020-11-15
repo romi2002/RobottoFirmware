@@ -22,9 +22,9 @@ Rotation2D::Rotation2D(double rad) {
 
 Rotation2D::Rotation2D(double x, double y) {
     const auto mag = std::hypot(x, y);
-    if(mag > 1e-6){
+    if (mag > 1e-6) {
         m_sin = y / mag;
-        m_cos = x /mag;
+        m_cos = x / mag;
     } else {
         m_sin = 0.0;
         m_cos = 1.0;
@@ -35,8 +35,8 @@ Rotation2D::Rotation2D(double x, double y) {
 
 Rotation2D Rotation2D::rotateBy(const Rotation2D &other) const {
     return {
-        cos() * other.cos() - sin() * other.sin(),
-        cos() * other.sin() + sin() * other.cos()
+            cos() * other.cos() - sin() * other.sin(),
+            cos() * other.sin() + sin() * other.cos()
     };
 }
 
@@ -44,7 +44,7 @@ Rotation2D Rotation2D::operator+(const Rotation2D &other) const {
     return rotateBy(other);
 }
 
-Rotation2D& Rotation2D::operator+=(const Rotation2D& other) {
+Rotation2D &Rotation2D::operator+=(const Rotation2D &other) {
     double cosTemp = cos() * other.cos() - sin() * other.sin();
     double sinTemp = sin() * other.sin() + sin() * other.cos();
     m_cos = cosTemp;
@@ -57,7 +57,7 @@ Rotation2D Rotation2D::operator-(const Rotation2D &other) const {
     return *this + -other;
 }
 
-Rotation2D & Rotation2D::operator-=(const Rotation2D &other) {
+Rotation2D &Rotation2D::operator-=(const Rotation2D &other) {
     *this += -other;
     return *this;
 }

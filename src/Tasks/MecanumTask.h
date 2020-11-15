@@ -20,7 +20,8 @@
 
 class MecanumTask : public cpp_freertos::Thread {
 public:
-    MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *nh, double wheelDiameter, TickType_t waitTime = DEFAULT_WAIT_TIME);
+    MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *nh, double wheelDiameter,
+                TickType_t waitTime = DEFAULT_WAIT_TIME);
 
     /**
      * Returns in rads traveled
@@ -33,6 +34,7 @@ public:
      * @return
      */
     MecanumWheelVelocities getWheelVelocities() const;
+
 protected:
     void Run() override;
 
@@ -48,13 +50,13 @@ private:
 
     MotorControllerConfig m_config;
 
-    MecanumWheelValues<MotorController*> controllers;
+    MecanumWheelValues<MotorController *> controllers;
 
     MecanumKinematics *kinematics;
 
     TickType_t waitTime;
 
-    ros::Subscriber<geometry_msgs::Twist, MecanumTask> *twistSetpointSubscriber;
+    ros::Subscriber <geometry_msgs::Twist, MecanumTask> *twistSetpointSubscriber;
     cpp_freertos::ReadWriteLock *twistLock;
     Twist2D currentTarget;
 

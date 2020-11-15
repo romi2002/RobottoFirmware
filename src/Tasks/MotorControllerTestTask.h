@@ -33,6 +33,7 @@ protected:
     void setpointSubscriberCb(const std_msgs::Float32 &msg);
 
     void velPIDConfigSubCb(const control_msgs::PidState &msg);
+
     void posPIDConfigSubCb(const control_msgs::PidState &msg);
 
 private:
@@ -44,10 +45,10 @@ private:
     float setpoint{0};
     ReadWriteLock *setpointLock;
 
-    ros::Subscriber<std_msgs::Float32, MotorControllerTestTask> *setpointSubscriber;
+    ros::Subscriber <std_msgs::Float32, MotorControllerTestTask> *setpointSubscriber;
 
-    ros::Subscriber<control_msgs::PidState, MotorControllerTestTask> *velPIDConfigSub;
-    ros::Subscriber<control_msgs::PidState, MotorControllerTestTask> *posPIDConfigSub;
+    ros::Subscriber <control_msgs::PidState, MotorControllerTestTask> *velPIDConfigSub;
+    ros::Subscriber <control_msgs::PidState, MotorControllerTestTask> *posPIDConfigSub;
 
     std_msgs::Float32 positionMsg;
     std_msgs::Float32 velocityMsg;

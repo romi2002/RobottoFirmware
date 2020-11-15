@@ -20,7 +20,7 @@ public:
 
 protected:
     TickType_t tickDelay;
-    WDT_T4<WDT1> wdt;
+    WDT_T4 <WDT1> wdt;
 
     [[noreturn]] void Run() override;
 };

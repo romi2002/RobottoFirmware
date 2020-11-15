@@ -10,13 +10,13 @@ class Twist2D {
 public:
     constexpr Twist2D() = default;
 
-    Twist2D(double dx, double dy, double dtheta){
+    Twist2D(double dx, double dy, double dtheta) {
         this->dx = dx;
         this->dy = dy;
         this->dtheta = dtheta;
     }
 
-    Twist2D(const Twist2D &rhs){
+    Twist2D(const Twist2D &rhs) {
         Twist2D(rhs.dx, rhs.dy, rhs.dtheta);
     }
 
@@ -32,7 +32,7 @@ public:
 
     Twist2D operator-() const;
 
-    Twist2D& operator-=(const Twist2D &other);
+    Twist2D &operator-=(const Twist2D &other);
 
     bool operator==(const Twist2D &rhs) const {
         return dx == rhs.dx &&

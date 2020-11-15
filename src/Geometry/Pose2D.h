@@ -10,7 +10,7 @@ class Pose2D {
 public:
     constexpr Pose2D() = default;
 
-    Pose2D(double x, double y, double theta){
+    Pose2D(double x, double y, double theta) {
         this->x = x;
         this->y = y;
         this->theta = theta;
@@ -18,7 +18,7 @@ public:
 
     Pose2D operator+(const Pose2D &other) const;
 
-    Pose2D operator +=(const Pose2D &other);
+    Pose2D operator+=(const Pose2D &other);
 
     double x{0}, y{0}, theta{0};
 };

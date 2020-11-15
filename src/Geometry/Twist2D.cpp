@@ -10,9 +10,9 @@ Twist2D Twist2D::operator-() const {
 
 Twist2D Twist2D::operator+(const Twist2D &other) const {
     return {
-        dx + other.dx,
-        dy + other.dy,
-        dtheta + other.dtheta
+            dx + other.dx,
+            dy + other.dy,
+            dtheta + other.dtheta
     };
 }
 
@@ -24,7 +24,7 @@ Twist2D Twist2D::operator+=(const Twist2D &other) {
     return *this;
 }
 
-Twist2D & Twist2D::operator-=(const Twist2D &other) {
+Twist2D &Twist2D::operator-=(const Twist2D &other) {
     *this += -other;
     return *this;
 }

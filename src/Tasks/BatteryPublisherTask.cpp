@@ -6,7 +6,7 @@ BatteryPublisherTask::BatteryPublisherTask(ros::NodeHandle *nh, TickType_t waitT
                                                                                                "currentSensorVoltage",
                                                                                                &currentSensorVoltageMsg),
                                                                                        energyUsedPub("energyUsed",
-                                                                                                        &energyUsedMsg),
+                                                                                                     &energyUsedMsg),
                                                                                        batteryStatePub(
                                                                                                "batteryState",
                                                                                                &batteryStateMsg) {

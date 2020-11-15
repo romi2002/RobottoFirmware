@@ -4,3 +4,4 @@
 .vscode/launch.json
 .vscode/ipch
 cmake-build-teensy40/*
+cmake-build-teensy41/*
