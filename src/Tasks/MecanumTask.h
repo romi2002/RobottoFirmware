@@ -43,6 +43,8 @@ protected:
 private:
     void writeToMotors(const MecanumWheelVelocities &vel, MotorControlMode controlMode);
 
+    long startTime{0};
+
 private:
     const double encoderCodes = 1200.0;
 

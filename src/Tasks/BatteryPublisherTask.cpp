@@ -19,6 +19,7 @@ BatteryPublisherTask::BatteryPublisherTask(ros::NodeHandle *nh, TickType_t waitT
     nh->advertise(currentSensorVoltagePub);
     nh->advertise(energyUsedPub);
     nh->advertise(batteryStatePub);
+    long startTime=0;
 
     while (true) {
         double currentSensorVoltage = ((double) analogRead(PinAssignments::CURRENT_SENSOR_PIN) / 4096) * 3.3;
@@ -48,5 +49,8 @@ BatteryPublisherTask::BatteryPublisherTask(ros::NodeHandle *nh, TickType_t waitT
 
         vTaskDelay(waitTime);
         dt = 0;
+
+        SerialUSB.print("Battery took: "); SerialUSB.println(millis()-startTime);
+        startTime = millis();
     }
 }

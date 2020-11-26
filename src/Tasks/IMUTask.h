@@ -38,6 +38,7 @@ private:
     USFSMAX *UFSMAX_0;
     IMU *imu_0;
     Sensor_cal *sensor_cal;
+    long startTime{0};
 
 private:
     void ProcEventStatus(I2Cdev *i2c_BUS, uint8_t sensorNUM);

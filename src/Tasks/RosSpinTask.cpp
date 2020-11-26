@@ -10,7 +10,12 @@ RosSpinTask::RosSpinTask(ros::NodeHandle *nh, TickType_t waitTime) : Thread("Ros
 
 [[noreturn]] void RosSpinTask::Run() {
     while (true) {
+        //SerialUSB.print("Took: "); SerialUSB.println(millis() - startTime);
         nh->spinOnce();
-        vTaskDelay(pdMS_TO_TICKS(10));
+        startTime = millis();
+        vTaskDelay(pdMS_TO_TICKS(5));
+
+        SerialUSB.print("Spin took: "); SerialUSB.println(millis()-startTime);
+        startTime = millis();
     }
 }

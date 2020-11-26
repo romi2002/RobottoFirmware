@@ -64,12 +64,10 @@ MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *n
 }
 
 void MecanumTask::writeToMotors(const MecanumWheelVelocities &vel, MotorControlMode controlMode) {
-    m_config.i2cLock->WriterLock();
     controllers.frontLeft->set(vel.frontLeft, controlMode);
     controllers.frontRight->set(vel.frontRight, controlMode);
     controllers.backLeft->set(vel.backLeft, controlMode);
     controllers.backRight->set(vel.backRight, controlMode);
-    m_config.i2cLock->WriterUnlock();
 }
 
 MecanumWheelVelocities MecanumTask::getWheelPositions() const {
@@ -138,6 +136,10 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
         twistPublisher->publish(&twistPublisherMsg);
 
         writeToMotors(vel, MotorControlMode::PERCENTAGE);
+
+        SerialUSB.print("MecanumTask took: "); SerialUSB.println(millis()-startTime);
+        startTime = millis();
+
         vTaskDelay(waitTime);
     }
 }

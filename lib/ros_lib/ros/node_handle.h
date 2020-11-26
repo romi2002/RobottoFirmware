@@ -95,7 +95,7 @@ const uint8_t MODE_MSG_CHECKSUM   = 8;    // checksum for msg and topic id
 
 const uint8_t SERIAL_MSG_TIMEOUT  = 20;   // 20 milliseconds to recieve all of message data
 
-const uint8_t MAX_MSG_QUEUE_LEN = 5;
+const uint8_t MAX_MSG_QUEUE_LEN = 15;
 
 using rosserial_msgs::TopicInfo;
 
@@ -123,9 +123,12 @@ protected:
   uint8_t message_outBuffer[OUTPUT_SIZE];
 
   std::queue<std::pair<uint8_t *, size_t>> msgQueue; //Byte buffer queue
+  size_t msgQueueSize{0};
 
   Publisher * publishers[MAX_PUBLISHERS];
   Subscriber_ * subscribers[MAX_SUBSCRIBERS];
+
+  elapsedMillis lastSyncTime;
 
   /*
    * Setup Functions
@@ -210,10 +213,15 @@ protected:
   uint32_t last_msg_timeout_time;
 
   void handleMSGQueue(){
+    if(!Serial8.availableForWrite()) return;
+
     const auto msg = msgQueue.front();
 
-    Serial5.write(msg.first, msg.second);
+    Serial8.write(msg.first, msg.second);
+    Serial8.flush();
     free(msg.first);
+
+      msgQueueSize -= msg.second;
 
     msgQueue.pop();
   }
@@ -242,13 +250,18 @@ public:
       }
     }
 
-    /* Send data while queue available */
+    SerialUSB.println(msgQueueSize);
+
+      /* Send data while queue available */
     while(!msgQueue.empty()){
       handleMSGQueue();
+      size_t totalSize = 0;
+      //if(!Serial8.availableForWrite()) break;
     }
 
+
     /* while available buffer, read data */
-    while (true)
+    while (Serial8.available())
     {
       // If a timeout has been specified, check how long spinOnce has been running.
       if (spin_timeout_ > 0)
@@ -263,7 +276,7 @@ public:
           return SPIN_TIMEOUT;
         }
       }
-      int data = Serial5.read();
+      int data = Serial8.read();
       if (data < 0)
         break;
       checksum_ += data;
@@ -369,10 +382,11 @@ public:
     }
 
     /* occasionally sync time */
-    if (configured_ && ((c_time - last_sync_time) > (SYNC_SECONDS * 500)))
+    if (configured_ && lastSyncTime >= 100)
     {
       requestSyncTime();
       last_sync_time = c_time;
+      SerialUSB.println("SYNCTime");
     }
 
     return SPIN_OK;
@@ -565,10 +579,17 @@ public:
       return -1;
     }
 
+    //SerialUSB.println("Before MEMCPY");
+
     memcpy(newLocation, message_outBuffer, l);
 
     //Add to queue
     msgQueue.emplace(std::make_pair(newLocation, l));
+    msgQueueSize += l;
+
+    //SerialUSB.println("Added to queue: "); SerialUSB.print(msgQueue.size());
+
+    return 0;
   }
 
   /********************************************************************

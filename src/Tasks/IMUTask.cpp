@@ -214,6 +214,8 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
             imuYaw = heading[0];
             //Serial.println(imuYaw);
         }
+        SerialUSB.print("IMUTask took: "); SerialUSB.println(millis()-startTime);
+        startTime = millis();
 
         vTaskDelay(pdMS_TO_TICKS(10));
     }

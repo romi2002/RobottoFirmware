@@ -17,6 +17,8 @@ protected:
 private:
     ros::NodeHandle *nh;
     TickType_t waitTime;
+
+    long startTime = 0;
 };
 
 #endif

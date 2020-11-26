@@ -41,10 +41,10 @@ void setup() {
     //SerialUSB1.begin(115200);
     SerialUSB.begin(115200);
     //debug.begin(SerialUSB1);
-    Serial5.begin(2500000, SERIAL_8N1);
+    Serial8.begin(2000000, SERIAL_8N1);
 
-    //Serial5.attachRts(32);
-    //Serial5.attachCts(43);
+    //Serial8.attachRts(32);
+    //Serial8.attachCts(43);
     SerialUSB.println("Hi there");
 
     analogReadResolution(12);
@@ -58,12 +58,13 @@ void setup() {
     i2cLock = new cpp_freertos::ReadWriteLockPreferWriter();
 
     Wire.begin();
+    mcp.begin(0x27);
+
     Wire.setClock(100);
 
     /**
     * MCP Init
     */
-    mcp.begin(0x27);
 
     delay(2000);
 

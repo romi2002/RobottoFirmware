@@ -27,12 +27,12 @@ void VNH5019::initializePins(const VNH5019_PinAssignments &definitions) {
     analogWriteFrequency(definitions.PWM, VNH5019_PWM_FREQUENCY);
 
     pinMode(definitions.PWM, OUTPUT);
-    mcpLock->WriterLock();
+    //mcpLock->WriterLock();
     mcp->pinMode(definitions.IN_A, OUTPUT);
     mcp->pinMode(definitions.IN_B, OUTPUT);
     mcp->pinMode(definitions.DIAG_A, INPUT);
     mcp->pinMode(definitions.DIAG_B, INPUT);
-    mcpLock->WriterUnlock();
+    //mcpLock->WriterUnlock();
 }
 
 void VNH5019::set(double value) {
@@ -44,6 +44,7 @@ void VNH5019::set(double value) {
 
     analogWrite(definitions.PWM, (int) std::abs(tempValue));
 
+    mcpLock->WriterLock();
     if (value > 0.0) {
         mcp->digitalWrite(definitions.IN_A, HIGH);
         mcp->digitalWrite(definitions.IN_B, LOW);
@@ -54,5 +55,5 @@ void VNH5019::set(double value) {
         mcp->digitalWrite(definitions.IN_A, LOW);
         mcp->digitalWrite(definitions.IN_B, LOW);
     }
-
+    mcpLock->WriterUnlock();
 }
