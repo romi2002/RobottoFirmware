@@ -12,13 +12,13 @@
  * Tasks
  */
 //#include "Tasks/RuntimeStatsPublisherTask.hpp"
-#include "Tasks/RosSpinTask.h"
-#include "Tasks/HeartbeatTask.h"
-#include "Tasks/BatteryPublisherTask.h"
-#include "Tasks/MotorControllerTestTask.h"
-#include "Tasks/MotorOutputTestTask.h"
-#include "Tasks/MecanumTask.h"
-#include "Tasks/IMUTask.h"
+#include "Tasks/RosSpinTask/RosSpinTask.h"
+#include "Tasks/HeartbeatTask/HeartbeatTask.h"
+#include "Tasks/BatteryPublisherTask/BatteryPublisherTask.h"
+#include "Tasks/MotorControllerTestTask/MotorControllerTestTask.h"
+#include "Tasks/MotorOutputTestTask/MotorOutputTestTask.h"
+#include "Tasks/MecanumTask/MecanumTask.h"
+#include "Tasks/IMUTask/IMUTask.h"
 #include "HAL/MotorController.h"
 
 #include "HAL/VNH5019.h"
