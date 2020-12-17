@@ -8,19 +8,19 @@
 #include <string>
 #include <cstdio>
 
-#define LOG_DEBUG
+//#define LOG_DEBUG
 
 template<typename T>
 void serialLog(const T &out) {
 #ifdef LOG_DEBUG
-    //SerialUSB1.print(out);
+    SerialUSB.print(out);
 #endif
 }
 
 template<typename T>
 void serialLogLn(const T &out) {
 #ifdef LOG_DEBUG
-    //SerialUSB1.println(out);
+    SerialUSB.println(out);
 #endif
 }
 

@@ -12,5 +12,6 @@ const UBaseType_t BATTERY_TASK_PRIORITY = 6;
 const UBaseType_t ROS_SPIN_TASK_PRIORITY = 2;
 const UBaseType_t MOTOR_OUTPUT_TEST_TASK_PRIORITY = 3;
 const UBaseType_t MOTOR_DRIVER_TASK_PRIORITY = 4;
+const UBaseType_t CONSOLE_TASK_PRIORITY = 5;
 const UBaseType_t MECANUM_TASK_PRIORITY = 8;
 const UBaseType_t IMU_TASK_PRIORITY = 7;
