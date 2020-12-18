@@ -65,6 +65,8 @@ IMUTask::IMUTask(ReadWriteLockPreferWriter *i2cLock, TickType_t tickDelay)
             std::sqrt(Mv_Cal * Mv_Cal + Mh_Cal * Mh_Cal);  // Geomagnetic field strength
     Del_Cal = std::atan(Mv_Cal / Mh_Cal);
 
+    profilerIt = profiler.initProfiler("IMUTask");
+
     Start();
 }
 
@@ -214,7 +216,8 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
             imuYaw = heading[0];
             //Serial.println(imuYaw);
         }
-        SerialUSB.print("IMUTask took: "); SerialUSB.println(millis()-startTime);
+
+        TaskProfiler::updateProfiler(profilerIt);
         startTime = millis();
 
         vTaskDelay(pdMS_TO_TICKS(10));

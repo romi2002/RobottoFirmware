@@ -14,7 +14,9 @@ ConsoleTask::ConsoleTask(TickType_t waitTime) : Thread("ConsoleTask", 512, CONSO
     console_init(&console);
 
     //Register console command
+    console_command_register(get_profiler);
 
+    profilerIt = profiler.initProfiler("ConsoleTask");
     Start();
 }
 
@@ -39,6 +41,7 @@ void ConsoleTask::serial_write_function(const char *str) {
 
         console_process(buffer, len);
 
+        TaskProfiler::updateProfiler(profilerIt);
         vTaskDelay(waitTime);
     }
 }

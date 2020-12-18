@@ -19,6 +19,7 @@
 #include "Tasks/MotorOutputTestTask/MotorOutputTestTask.h"
 #include "Tasks/MecanumTask/MecanumTask.h"
 #include "Tasks/IMUTask/IMUTask.h"
+#include "Tasks/ConsoleTask/ConsoleTask.h"
 #include "HAL/MotorController.h"
 
 #include "HAL/VNH5019.h"
@@ -40,6 +41,7 @@ cpp_freertos::ReadWriteLockPreferWriter *i2cLock;
 void setup() {
     //SerialUSB1.begin(115200);
     SerialUSB.begin(115200);
+    SerialUSB1.begin(115200);
     //debug.begin(SerialUSB1);
     Serial8.begin(2000000, SERIAL_8N1);
 
@@ -102,7 +104,7 @@ void setup() {
 
     MecanumTask mecanumTask(controllerConfig, &nh, 0.075);
 
-    Serial.println("Passed Tasks");
+    ConsoleTask consoleTask;
 
     //MotorController controller("TestController", controllerConfig, pdMS_TO_TICKS(10));
     //controller.set(0.0, MotorControlMode::PERCENTAGE);

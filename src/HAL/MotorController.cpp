@@ -34,6 +34,8 @@ MotorController::MotorController(const std::string &name, const MotorControllerC
 
     motor = new VNH5019(config.vnh5019PinDefinitions, config.mcp, config.i2cLock);
 
+    profilerIt = profiler.initProfiler(name.c_str());
+
     Start();
 }
 
@@ -122,6 +124,7 @@ double MotorController::getVelocity() const {
         modeChanged = false;
         setpointLock->ReaderUnlock();
 
+        TaskProfiler::updateProfiler(profilerIt);
         vTaskDelay(updateTime);
     }
 }

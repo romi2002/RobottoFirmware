@@ -13,6 +13,8 @@
 #include "read_write_lock.hpp"
 #include "thread.hpp"
 
+#include "Utils/TaskProfiler/TaskProfiler.h"
+
 using namespace cpp_freertos;
 
 class I2Cdev;
@@ -44,6 +46,9 @@ private:
     void ProcEventStatus(I2Cdev *i2c_BUS, uint8_t sensorNUM);
 
     void FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM);
+
+    TaskProfiler& profiler = TaskProfiler::getInstance();
+    TaskProfilerIt profilerIt;
 };
 
 inline void DRDY_handler_0() { dataReady = 1; }

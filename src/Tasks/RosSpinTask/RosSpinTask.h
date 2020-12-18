@@ -4,6 +4,7 @@
 #include <ros.h>
 #include "config.h"
 #include "thread.hpp"
+#include "Utils/TaskProfiler/TaskProfiler.h"
 
 using namespace cpp_freertos;
 
@@ -19,6 +20,9 @@ private:
     TickType_t waitTime;
 
     long startTime = 0;
+
+    TaskProfiler& profiler = TaskProfiler::getInstance();
+    TaskProfilerIt profilerIt;
 };
 
 #endif

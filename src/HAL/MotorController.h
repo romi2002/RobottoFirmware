@@ -11,6 +11,8 @@
 #include "read_write_lock.hpp"
 #include "PID/PIDControllerRos.h"
 
+#include "Utils/TaskProfiler/TaskProfiler.h"
+
 using namespace cpp_freertos;
 
 #include "VNH5019.h"
@@ -102,6 +104,9 @@ private:
      * Motor driver
      */
     VNH5019 *motor;
+
+    TaskProfiler& profiler = TaskProfiler::getInstance();
+    TaskProfilerIt profilerIt;
 };
 
 

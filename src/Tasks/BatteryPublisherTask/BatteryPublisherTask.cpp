@@ -12,6 +12,9 @@ BatteryPublisherTask::BatteryPublisherTask(ros::NodeHandle *nh, TickType_t waitT
                                                                                                &batteryStateMsg) {
     this->nh = nh;
     this->waitTime = waitTime;
+
+    profilerIt = profiler.initProfiler("BatteryPublisherTask");
+
     Start();
 }
 
@@ -50,7 +53,8 @@ BatteryPublisherTask::BatteryPublisherTask(ros::NodeHandle *nh, TickType_t waitT
         vTaskDelay(waitTime);
         dt = 0;
 
-        SerialUSB.print("Battery took: "); SerialUSB.println(millis()-startTime);
+        //SerialUSB.print("Battery took: "); SerialUSB.println(millis()-startTime);
+        TaskProfiler::updateProfiler(profilerIt);
         startTime = millis();
     }
 }

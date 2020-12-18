@@ -60,6 +60,8 @@ MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *n
 
     nh->subscribe(*twistSetpointSubscriber);
 
+    profilerIt = profiler.initProfiler("MecanumTask");
+
     Start();
 }
 
@@ -137,7 +139,8 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
 
         writeToMotors(vel, MotorControlMode::PERCENTAGE);
 
-        SerialUSB.print("MecanumTask took: "); SerialUSB.println(millis()-startTime);
+        //SerialUSB.print("MecanumTask took: "); SerialUSB.println(millis()-startTime);
+        TaskProfiler::updateProfiler(profilerIt);
         startTime = millis();
 
         vTaskDelay(waitTime);

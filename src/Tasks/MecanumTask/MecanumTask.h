@@ -18,6 +18,8 @@
 
 #include <ros.h>
 
+#include "Utils/TaskProfiler/TaskProfiler.h"
+
 class MecanumTask : public cpp_freertos::Thread {
 public:
     MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *nh, double wheelDiameter,
@@ -71,6 +73,9 @@ private:
     ros::Publisher *twistPublisher;
 
     ros::NodeHandle *nh;
+
+    TaskProfiler& profiler = TaskProfiler::getInstance();
+    TaskProfilerIt profilerIt;
 };
 
 

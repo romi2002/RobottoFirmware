@@ -14,6 +14,8 @@ HeartbeatTask::HeartbeatTask(TickType_t tickDelay) : Thread("HeartbeatTask", con
 
     wdt.begin(config);
 
+    profilerIt = profiler.initProfiler("HeartbeatTask");
+
     Start();
 }
 
@@ -24,5 +26,6 @@ HeartbeatTask::HeartbeatTask(TickType_t tickDelay) : Thread("HeartbeatTask", con
         vTaskDelay((tickDelay * configTICK_RATE_HZ) / 1000L);
         digitalWrite(PinAssignments::HEARTBEAT_PIN, LOW);
         wdt.feed();
+        TaskProfiler::updateProfiler(profilerIt);
     }
 }

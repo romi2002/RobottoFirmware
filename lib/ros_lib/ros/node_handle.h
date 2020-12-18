@@ -250,7 +250,7 @@ public:
       }
     }
 
-    SerialUSB.println(msgQueueSize);
+    //SerialUSB.println(msgQueueSize);
 
       /* Send data while queue available */
     while(!msgQueue.empty()){
@@ -386,7 +386,7 @@ public:
     {
       requestSyncTime();
       last_sync_time = c_time;
-      SerialUSB.println("SYNCTime");
+      //SerialUSB.println("SYNCTime");
     }
 
     return SPIN_OK;
@@ -568,14 +568,14 @@ public:
 
     if(msgQueue.size() > MAX_MSG_QUEUE_LEN){
       //TODO Handle this correctly
-      SerialUSB.println("Dropping msg!");
+      //SerialUSB.println("Dropping msg!");
       return -1;
     }
 
     uint8_t *newLocation = (uint8_t*) malloc(l);
 
     if(newLocation == nullptr){
-      SerialUSB.println("Failed to malloc");
+      //SerialUSB.println("Failed to malloc");
       return -1;
     }
 

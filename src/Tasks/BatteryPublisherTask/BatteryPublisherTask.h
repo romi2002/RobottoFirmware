@@ -8,6 +8,7 @@
 #include <std_msgs/Float32.h>
 #include <sensor_msgs/BatteryState.h>
 #include "thread.hpp"
+#include "Utils/TaskProfiler/TaskProfiler.h"
 
 using namespace cpp_freertos;
 
@@ -32,6 +33,9 @@ private:
 
     double energyUsed;
     elapsedMillis dt;
+
+    TaskProfiler& profiler = TaskProfiler::getInstance();
+    TaskProfilerIt profilerIt;
 };
 
 #endif

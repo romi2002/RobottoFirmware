@@ -5,6 +5,7 @@ RosSpinTask::RosSpinTask(ros::NodeHandle *nh, TickType_t waitTime) : Thread("Ros
     this->nh = nh;
     this->waitTime = waitTime;
 
+    profilerIt = profiler.initProfiler("RosSpinTask");
     Start();
 }
 
@@ -15,7 +16,7 @@ RosSpinTask::RosSpinTask(ros::NodeHandle *nh, TickType_t waitTime) : Thread("Ros
         startTime = millis();
         vTaskDelay(pdMS_TO_TICKS(5));
 
-        SerialUSB.print("Spin took: "); SerialUSB.println(millis()-startTime);
+        TaskProfiler::updateProfiler(profilerIt);
         startTime = millis();
     }
 }
