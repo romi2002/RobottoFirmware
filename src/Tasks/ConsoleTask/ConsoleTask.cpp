@@ -16,6 +16,7 @@ ConsoleTask::ConsoleTask(TickType_t waitTime) : Thread("ConsoleTask", 512, CONSO
     //Register console command
     console_command_register(get_profiler);
     console_command_register(clear_eeprom);
+    console_command_register(get_usetime);
 
     profilerIt = profiler.initProfiler("ConsoleTask");
     Start();

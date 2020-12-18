@@ -17,6 +17,8 @@ extern "C"{
 #include "Utils/TaskProfiler/TaskProfiler.h"
 #include <EEPROM.h>
 
+#include "Tasks/UseTimeTask/UseTimeTask.h"
+
 using namespace cpp_freertos;
 
 class ConsoleTask : public Thread {
@@ -63,5 +65,11 @@ static void clear_eeprom_command_handler(const clear_eeprom_args_t* args){
     }
 }
 
+CONSOLE_COMMAND_DEF(get_usetime, "Prints use time (in minutes)");
+
+static void get_usetime_command_handler(const get_usetime_args_t * args){
+    ConsoleTask::serial->print(UseTimeTask::getElapsedTime() * 5.0);
+    ConsoleTask::serial->println(" mins");
+}
 
 #endif //TEENSYROSCONTROLLER_CONSOLETASK_H

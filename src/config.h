@@ -15,3 +15,9 @@ const UBaseType_t MOTOR_DRIVER_TASK_PRIORITY = 4;
 const UBaseType_t CONSOLE_TASK_PRIORITY = 5;
 const UBaseType_t MECANUM_TASK_PRIORITY = 8;
 const UBaseType_t IMU_TASK_PRIORITY = 7;
+
+/**
+ * EEPROM locations
+ */
+
+const int USE_TIME_LOCATION = 0x0;

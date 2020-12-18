@@ -19,6 +19,7 @@
 #include "Tasks/MotorOutputTestTask/MotorOutputTestTask.h"
 #include "Tasks/MecanumTask/MecanumTask.h"
 #include "Tasks/IMUTask/IMUTask.h"
+#include "Tasks/UseTimeTask/UseTimeTask.h"
 #include "Tasks/ConsoleTask/ConsoleTask.h"
 #include "HAL/MotorController.h"
 
@@ -105,6 +106,7 @@ void setup() {
     MecanumTask mecanumTask(controllerConfig, &nh, 0.075);
 
     ConsoleTask consoleTask;
+    UseTimeTask useTimeTask;
 
     //MotorController controller("TestController", controllerConfig, pdMS_TO_TICKS(10));
     //controller.set(0.0, MotorControlMode::PERCENTAGE);
