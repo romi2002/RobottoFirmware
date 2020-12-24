@@ -50,7 +50,7 @@
 
     // Dynamic Hard Iron Corrector allgorithm (Uncomment one only)
     //#define USE_2D_DHI_CORRECTOR               0x01                 // Define as "1" to use the 2D HI corrector instead of the 3D corrector
-    #define USE_2D_DHI_CORRECTOR               0x00
+    #define USE_2D_DHI_CORRECTOR               0x01
 
     //#define SERIAL_DEBUG                                            // Uncomment to see the verbose screen update; comment out for spreadsheet or "MotionCal" GUI output
     //#define MOTION_CAL_GUI_ENABLED                                  // Uncomment to visualize the magnetometer response surface on the "MotionCal" GUI (https://www.pjrc.com/store/prop_shield.html)
@@ -71,8 +71,8 @@
 
 /********************                Alternate Fusion Filter                **********************/
     /* Uncomment one only */
-    //#define MADGWICK_9DOF
-    #define MAHONY_9DOF
+    #define MADGWICK_9DOF
+    //#define MAHONY_9DOF
 
 
 /********************                  MAX32660 IMU Board                   **********************/
@@ -90,9 +90,9 @@
 /**************************            Sensor Data Rates              ****************************/
     /* LSM6DSM Acc Output data rate. Uncomment only one option */
     //#define ACC_ODR                            0x0A                 // 6660Hz
-    //#define ACC_ODR                            0x09                 // 3330Hz
+    #define ACC_ODR                            0x09                 // 3330Hz
     //#define ACC_ODR                            0x08                 // 1660Hz
-    #define ACC_ODR                            0x07                 // 834Hz
+    //#define ACC_ODR                            0x07                 // 834Hz
     //#define ACC_ODR                            0x06                 // 416Hz
     //#define ACC_ODR                            0x05                 // 208Hz
     //#define ACC_ODR                            0x04                 // 104Hz
@@ -102,9 +102,9 @@
 
     /* LSM6DSM Gyro Output data rate. Uncomment only one option */
     //#define GYRO_ODR                           0x0A                 // 6660Hz
-    //#define GYRO_ODR                           0x09                 // 3330Hz
+    #define GYRO_ODR                           0x09                 // 3330Hz
     //#define GYRO_ODR                           0x08                 // 1660Hz
-    #define GYRO_ODR                           0x07                 // 834Hz
+    //#define GYRO_ODR                           0x07                 // 834Hz
     //#define GYRO_ODR                           0x06                 // 416Hz
     //#define GYRO_ODR                           0x05                 // 208Hz
     //#define GYRO_ODR                           0x04                 // 104Hz

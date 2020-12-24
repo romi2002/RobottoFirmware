@@ -29,6 +29,18 @@ public:
     explicit IMUTask(ReadWriteLockPreferWriter *i2cLock,
                      TickType_t tickDelay = DEFAULT_WAIT_TIME);
 
+    static void setPrintRPY(bool status){
+        printRPY = status;
+    }
+
+    static void setPrintDHIStatus(){
+        printDHIStatus = !printDHIStatus;
+    }
+
+    static void resetDHICorrector(){
+        doResetDHI = true;
+    }
+
 protected:
     TickType_t tickDelay;
     ReadWriteLockPreferWriter *i2cLock;
@@ -41,6 +53,11 @@ private:
     IMU *imu_0;
     Sensor_cal *sensor_cal;
     long startTime{0};
+
+    static bool printRPY;
+    static bool printDHIStatus;
+    static bool doResetDHI;
+    int RPYPrintCount{0};
 
 private:
     void ProcEventStatus(I2Cdev *i2c_BUS, uint8_t sensorNUM);

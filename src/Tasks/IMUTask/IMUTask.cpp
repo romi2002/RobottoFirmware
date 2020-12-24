@@ -22,6 +22,10 @@ double imuYaw;
 
 #include <TeensyDebug.h>
 
+bool IMUTask::printRPY = false;
+bool IMUTask::printDHIStatus = false;
+bool IMUTask::doResetDHI = false;
+
 IMUTask::IMUTask(ReadWriteLockPreferWriter *i2cLock, TickType_t tickDelay)
         : Thread("IMUTask", configMINIMAL_STACK_SIZE, IMU_TASK_PRIORITY) {
     this->tickDelay = tickDelay;
@@ -201,6 +205,22 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
     while (true) {
         if (dataReady) {
             dataReady = 0;
+
+            if(printDHIStatus){
+                cal_status[0] = i2c_0->readByte(MAX32660_SLV_ADDR, CALIBRATION_STATUS);
+                UFSMAX_0->getDHI_Rsq();
+                SerialUSB2.print("Dynamic Hard Iron Correction Valid = ");
+                SerialUSB2.println(cal_status[0] & 0x80);                                                                        // DHI correction status
+                SerialUSB2.print("Dynamic Hard Iron Fit R-square = ");
+                SerialUSB2.println(Rsq, 4);
+                //printDHIStatus = false;
+            }
+
+            if(doResetDHI){
+                UFSMAX_0->Reset_DHI();
+                doResetDHI = false;
+            }
+
             noInterrupts();
             i2cLock->WriterLock();
             ProcEventStatus(i2c_0, 0);
@@ -214,6 +234,20 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
             imuQuat.w = qt[0][0];
 
             imuYaw = heading[0];
+
+            if(printRPY){
+                if(RPYPrintCount++ > 5) {
+                    //Print at a lower rate
+                    SerialUSB2.print("Roll: ");
+                    SerialUSB2.print(angle[0][0]);
+                    SerialUSB2.print(", Pitch: ");
+                    SerialUSB2.print(angle[0][1]);
+                    SerialUSB2.print(", Yaw: ");
+                    SerialUSB2.println(heading[0]);
+                    RPYPrintCount = 0;
+                }
+            }
+
             //Serial.println(imuYaw);
         }
 
