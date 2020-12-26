@@ -7,7 +7,7 @@
 #include <WProgram.h>
 #endif
 
-#include <usb_serial.h> // Teensy 3.0 and 3.1
+#include <usb_host_serial.h> // Teensy 3.0 and 3.1
 #define SERIAL_CLASS usb_serial_class
 
 class ArduinoHardware

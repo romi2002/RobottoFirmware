@@ -209,10 +209,10 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
             if(printDHIStatus){
                 cal_status[0] = i2c_0->readByte(MAX32660_SLV_ADDR, CALIBRATION_STATUS);
                 UFSMAX_0->getDHI_Rsq();
-                SerialUSB2.print("Dynamic Hard Iron Correction Valid = ");
-                SerialUSB2.println(cal_status[0] & 0x80);                                                                        // DHI correction status
-                SerialUSB2.print("Dynamic Hard Iron Fit R-square = ");
-                SerialUSB2.println(Rsq, 4);
+//                SerialUSB2.print("Dynamic Hard Iron Correction Valid = ");
+//                SerialUSB2.println(cal_status[0] & 0x80);                                                                        // DHI correction status
+//                SerialUSB2.print("Dynamic Hard Iron Fit R-square = ");
+//                SerialUSB2.println(Rsq, 4);
                 //printDHIStatus = false;
             }
 
@@ -238,12 +238,12 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
             if(printRPY){
                 if(RPYPrintCount++ > 5) {
                     //Print at a lower rate
-                    SerialUSB2.print("Roll: ");
-                    SerialUSB2.print(angle[0][0]);
-                    SerialUSB2.print(", Pitch: ");
-                    SerialUSB2.print(angle[0][1]);
-                    SerialUSB2.print(", Yaw: ");
-                    SerialUSB2.println(heading[0]);
+//                    SerialUSB2.print("Roll: ");
+//                    SerialUSB2.print(angle[0][0]);
+//                    SerialUSB2.print(", Pitch: ");
+//                    SerialUSB2.print(angle[0][1]);
+//                    SerialUSB2.print(", Yaw: ");
+//                    SerialUSB2.println(heading[0]);
                     RPYPrintCount = 0;
                 }
             }

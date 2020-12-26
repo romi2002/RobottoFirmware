@@ -37,7 +37,9 @@
 
 #include <stdint.h>
 #include <Arduino.h>
+#include "usb_host_serial.h"
 #include <queue>
+#include "ArduinoHardware.h"
 
 #include "std_msgs/Time.h"
 #include "rosserial_msgs/TopicInfo.h"
@@ -134,7 +136,7 @@ protected:
    * Setup Functions
    */
 public:
-  NodeHandle_() : configured_(false)
+    NodeHandle_() : configured_(false)
   {
 
     for (unsigned int i = 0; i < MAX_PUBLISHERS; i++)
@@ -213,12 +215,14 @@ protected:
   uint32_t last_msg_timeout_time;
 
   void handleMSGQueue(){
-    if(!Serial8.availableForWrite()) return;
+      auto &userial(usb_host_serial::getInstance().userial);
+
+      if(userial.availableForWrite()) return;
 
     const auto msg = msgQueue.front();
 
-    Serial8.write(msg.first, msg.second);
-    Serial8.flush();
+      userial.write(msg.first, msg.second);
+    //Serial8.flush();
     free(msg.first);
 
       msgQueueSize -= msg.second;
@@ -234,6 +238,7 @@ public:
 
   virtual int spinOnce()
   {
+      auto &userial(usb_host_serial::getInstance().userial);
     /* restart if timed out */
     uint32_t c_time = hardware_.time();
     if ((c_time - last_sync_receive_time) > (SYNC_SECONDS * 2200))
@@ -261,7 +266,7 @@ public:
 
 
     /* while available buffer, read data */
-    while (Serial8.available())
+    while (userial.available())
     {
       // If a timeout has been specified, check how long spinOnce has been running.
       if (spin_timeout_ > 0)
@@ -276,7 +281,7 @@ public:
           return SPIN_TIMEOUT;
         }
       }
-      int data = Serial8.read();
+      int data = userial.read();
       if (data < 0)
         break;
       checksum_ += data;

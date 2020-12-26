@@ -26,7 +26,7 @@ class ConsoleTask : public Thread {
 public:
     explicit ConsoleTask(TickType_t waitTime = DEFAULT_WAIT_TIME);
 
-    static constexpr Stream *serial = &SerialUSB1;
+    static constexpr Stream *serial = &SerialUSB;
 
 protected:
     void Run() override;
