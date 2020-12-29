@@ -37,6 +37,7 @@
 
 #include <stdint.h>
 #include <Arduino.h>
+#include <PacketSerial.h>
 #include <queue>
 
 #include "std_msgs/Time.h"
@@ -45,6 +46,8 @@
 #include "rosserial_msgs/RequestParam.h"
 
 #include "ros/msg.h"
+
+#include "LoopbackStream.h"
 
 namespace ros
 {
@@ -55,6 +58,17 @@ public:
   virtual int publish(int id, const Msg* msg) = 0;
   virtual int spinOnce() = 0;
   virtual bool connected() = 0;
+
+    static LoopbackStream readStream;
+
+    static void onPacketRecieved(const uint8_t* buffer, size_t size){
+        SerialUSB.println("pkgRec");
+        SerialUSB.print("Size: "); SerialUSB.println(size);
+        for(int i = 0; i < size; ++i){
+            SerialUSB.println("Wrote");
+            readStream.write(buffer[i]);
+        }
+    }
 };
 }
 
@@ -110,6 +124,8 @@ class NodeHandle_ : public NodeHandleBase_
 protected:
   Hardware hardware_;
 
+  PacketSerial packetSerial;
+
   /* time used for syncing */
   uint32_t rt_time;
 
@@ -157,6 +173,12 @@ public:
     req_param_resp.ints = NULL;
 
     spin_timeout_ = 0;
+
+    packetSerial.setStream(&Serial8);
+    packetSerial.setPacketHandler([](const uint8_t* buffer, size_t size) {
+      ros::NodeHandleBase_::onPacketRecieved(buffer, size);
+      SerialUSB.println("GOT PKG");
+    });
   }
 
   Hardware* getHardware()
@@ -213,12 +235,15 @@ protected:
   uint32_t last_msg_timeout_time;
 
   void handleMSGQueue(){
-    if(!Serial8.availableForWrite()) return;
+    //if(!Serial8.availableForWrite()) return;
 
     const auto msg = msgQueue.front();
 
-    Serial8.write(msg.first, msg.second);
-    Serial8.flush();
+    packetSerial.send(msg.first, msg.second);
+    SerialUSB.print("Size: "); SerialUSB.println(msg.second);
+
+//    Serial8.write(msg.first, msg.second);
+//    Serial8.flush();
     free(msg.first);
 
       msgQueueSize -= msg.second;
@@ -234,6 +259,8 @@ public:
 
   virtual int spinOnce()
   {
+      packetSerial.update();
+
     /* restart if timed out */
     uint32_t c_time = hardware_.time();
     if ((c_time - last_sync_receive_time) > (SYNC_SECONDS * 2200))
@@ -261,7 +288,8 @@ public:
 
 
     /* while available buffer, read data */
-    while (Serial8.available())
+    //SerialUSB.println(ros::NodeHandleBase_::readStream.available());
+    while (ros::NodeHandleBase_::readStream.available())
     {
       // If a timeout has been specified, check how long spinOnce has been running.
       if (spin_timeout_ > 0)
@@ -276,9 +304,13 @@ public:
           return SPIN_TIMEOUT;
         }
       }
-      int data = Serial8.read();
+      int data = ros::NodeHandleBase_::readStream.read();
+      SerialUSB.println("datacheck");
+      SerialUSB.println(data, HEX);
       if (data < 0)
         break;
+
+      SerialUSB.println("GOT DATA");
       checksum_ += data;
       if (mode_ == MODE_MESSAGE)          /* message data being recieved */
       {

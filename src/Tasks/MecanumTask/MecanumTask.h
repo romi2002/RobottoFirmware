@@ -11,6 +11,8 @@
 
 #include "Odometry/ExponentialOdometry.h"
 
+#include "sensor_msgs/JointState.h"
+
 #include <thread.hpp>
 #include "config.h"
 
@@ -45,8 +47,6 @@ protected:
 private:
     void writeToMotors(const MecanumWheelVelocities &vel, MotorControlMode controlMode);
 
-    long startTime{0};
-
 private:
     const double encoderCodes = 1200.0;
 
@@ -71,6 +71,9 @@ private:
 
     geometry_msgs::Twist twistPublisherMsg;
     ros::Publisher *twistPublisher;
+
+    ros::Publisher * wheelStatePublisher;
+    sensor_msgs::JointState wheelStateMsg;
 
     ros::NodeHandle *nh;
 

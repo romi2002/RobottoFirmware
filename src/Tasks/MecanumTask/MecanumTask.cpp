@@ -38,7 +38,7 @@ MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *n
 
     controllers.backRight = new MotorController("BackRight", m_config);
 
-    MecanumWheelValues <Translation2D> wheelPositions;
+    MecanumWheelValues<Translation2D> wheelPositions;
     wheelPositions.frontLeft = Translation2D(0.08, 0.08);
     wheelPositions.frontRight = Translation2D(0.08, -0.08);
     wheelPositions.backLeft = Translation2D(-0.08, 0.08);
@@ -59,6 +59,9 @@ MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *n
     nh->advertise(*posePublisher);
 
     nh->subscribe(*twistSetpointSubscriber);
+
+    wheelStatePublisher = new ros::Publisher("wheelState", &wheelStateMsg);
+    nh->advertise(*wheelStatePublisher);
 
     profilerIt = profiler.initProfiler("MecanumTask");
 
@@ -139,9 +142,36 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
 
         writeToMotors(vel, MotorControlMode::PERCENTAGE);
 
-        //SerialUSB.print("MecanumTask took: "); SerialUSB.println(millis()-startTime);
+        float wheelPositions[] = {
+                currentWheelPositions.frontLeft,
+                currentWheelPositions.frontRight,
+                currentWheelPositions.backLeft,
+                currentWheelPositions.backRight};
+
+        float wheelVelocities[] = {
+                currentWheelVelocities.frontLeft,
+                currentWheelVelocities.frontRight,
+                currentWheelVelocities.backLeft,
+                currentWheelVelocities.backRight};
+
+        float wheelEffort[] = {
+                vel.frontLeft,
+                vel.frontRight,
+                vel.backLeft,
+                vel.backRight};
+
+        //wheelStateMsg.position = wheelPositions;
+        wheelStateMsg.position_length = 0;
+
+        wheelStateMsg.velocity = wheelVelocities;
+        wheelStateMsg.velocity_length = 4;
+
+        wheelStateMsg.effort = wheelEffort;
+        wheelStateMsg.effort_length = 4;
+
+        wheelStatePublisher->publish(&wheelStateMsg);
+
         TaskProfiler::updateProfiler(profilerIt);
-        startTime = millis();
 
         vTaskDelay(waitTime);
     }
