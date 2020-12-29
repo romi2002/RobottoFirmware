@@ -37,7 +37,8 @@
 
 #include <stdint.h>
 #include <Arduino.h>
-#include <PacketSerial.h>
+#include <cobs/Stream.h>
+#include <cobs/Print.h>
 #include <queue>
 
 #include "std_msgs/Time.h"
@@ -47,7 +48,7 @@
 
 #include "ros/msg.h"
 
-#include "LoopbackStream.h"
+using namespace packetio;
 
 namespace ros
 {
@@ -58,17 +59,6 @@ public:
   virtual int publish(int id, const Msg* msg) = 0;
   virtual int spinOnce() = 0;
   virtual bool connected() = 0;
-
-    static LoopbackStream readStream;
-
-    static void onPacketRecieved(const uint8_t* buffer, size_t size){
-        SerialUSB.println("pkgRec");
-        SerialUSB.print("Size: "); SerialUSB.println(size);
-        for(int i = 0; i < size; ++i){
-            SerialUSB.println("Wrote");
-            readStream.write(buffer[i]);
-        }
-    }
 };
 }
 
@@ -124,7 +114,8 @@ class NodeHandle_ : public NodeHandleBase_
 protected:
   Hardware hardware_;
 
-  PacketSerial packetSerial;
+  COBSPrint cobs_out{SerialUSB};
+  COBSStream cobs_in{SerialUSB};
 
   /* time used for syncing */
   uint32_t rt_time;
