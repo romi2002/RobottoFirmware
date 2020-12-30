@@ -18,13 +18,13 @@ MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *n
 
     twistLock = new cpp_freertos::ReadWriteLockPreferWriter();
 
-    m_config.encoderPinDefinitions = PinAssignments::getMotor1Encoder();
-    m_config.vnh5019PinDefinitions = PinAssignments::getMotor1Driver();
+    m_config.encoderPinDefinitions = PinAssignments::getMotor2Encoder();
+    m_config.vnh5019PinDefinitions = PinAssignments::getMotor2Driver();
 
     controllers.frontLeft = new MotorController("FrontLeft", m_config);
 
-    m_config.encoderPinDefinitions = PinAssignments::getMotor2Encoder();
-    m_config.vnh5019PinDefinitions = PinAssignments::getMotor2Driver();
+    m_config.encoderPinDefinitions = PinAssignments::getMotor1Encoder();
+    m_config.vnh5019PinDefinitions = PinAssignments::getMotor1Driver();
 
     controllers.frontRight = new MotorController("FrontRight", m_config);
 
@@ -146,7 +146,7 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
         currentWheelVelocities = getWheelVelocities();
 
         float wheelPositions[] = {
-                static_cast<float>(controllers.frontLeft->getPosition()),
+                static_cast<float>(currentWheelPositions.frontLeft),
                 static_cast<float>(currentWheelPositions.frontRight),
                 static_cast<float>(currentWheelPositions.backLeft),
                 static_cast<float>(currentWheelPositions.backRight)};

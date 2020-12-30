@@ -47,7 +47,7 @@ void Sensor_cal::sendOneToProceed()
 {
   uint8_t input = 0;
   
-  Serial.println("Send '1' to continue...");
+  //Serial.println("Send '1' to continue...");
   while(1)
   {
     input = Serial.read();

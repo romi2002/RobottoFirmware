@@ -54,16 +54,16 @@ VNH5019_PinAssignments PinAssignments::getMotor4Driver() {
 
 EncoderPinAssignments PinAssignments::getMotor1Encoder() {
     EncoderPinAssignments def{};
-    def.channel = 0;
-    def.phaseA = 0;
-    def.phaseB = 1;
+    def.channel = 1;
+    def.phaseA = 31;
+    def.phaseB = 33;
 
     return def;
 }
 
 EncoderPinAssignments PinAssignments::getMotor2Encoder() {
     EncoderPinAssignments def{};
-    def.channel = 1;
+    def.channel = 2;
     def.phaseA = 2;
     def.phaseB = 3;
 
@@ -72,16 +72,16 @@ EncoderPinAssignments PinAssignments::getMotor2Encoder() {
 
 EncoderPinAssignments PinAssignments::getMotor3Encoder() {
     EncoderPinAssignments def{};
-    def.channel = 2;
-    def.phaseA = 4;
-    def.phaseB = 5;
+    def.channel = 3;
+    def.phaseA = 5;
+    def.phaseB = 4;
 
     return def;
 }
 
 EncoderPinAssignments PinAssignments::getMotor4Encoder() {
     EncoderPinAssignments def{};
-    def.channel = 3;
+    def.channel = 4;
     def.phaseA = 7;
     def.phaseB = 30;
 

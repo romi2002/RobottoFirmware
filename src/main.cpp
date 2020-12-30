@@ -3,7 +3,7 @@
 #include <Wire.h>
 #include <FreeRTOS_TEENSY4.h>
 
-#define USE_TEENSY_HW_SERIAL
+//#define USE_TEENSY_HW_SERIAL
 
 #include "log.h"
 #include "PinAssignments.h"
@@ -37,7 +37,7 @@ ros::NodeHandle nh;
 
 Adafruit_MCP23017 mcp;
 cpp_freertos::ReadWriteLockPreferWriter *i2cLock;
-#include "TeensyDebug.h"
+//#include "TeensyDebug.h"
 
 void setup() {
     //SerialUSB1.begin(115200);
@@ -46,7 +46,10 @@ void setup() {
     SerialUSB2.begin(115200);
     //debug.begin(SerialUSB1);
     Serial5.begin(576000);
-    Serial8.begin(1000000, SERIAL_8N1);
+    Serial8.begin(1000000, SERIAL_8E1);
+
+    pinMode(0, INPUT);
+    pinMode(1, INPUT);
 
     //Serial8.attachRts(32);
     //Serial8.attachCts(43);

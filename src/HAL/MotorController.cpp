@@ -19,7 +19,7 @@ MotorController::MotorController(const std::string &name, const MotorControllerC
     positionPIDLock = new ReadWriteLockPreferReader();
 
     encoder = new QuadEncoder(config.encoderPinDefinitions.channel, config.encoderPinDefinitions.phaseA,
-                              config.encoderPinDefinitions.phaseB);
+                              config.encoderPinDefinitions.phaseB,0);
 
     encoder->setInitConfig();
     encoder->EncConfig.filterCount = 5;
