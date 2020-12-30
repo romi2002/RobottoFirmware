@@ -97,7 +97,7 @@ private:
      * Encoder
      */
     QuadEncoder *encoder;
-    double averageVelocity{0}, averagePosition{0};
+    double averageVelocity{0}, position{0};
     ReadWriteLock *averageVelocityLock, *averagePositionLock;
 
     /**

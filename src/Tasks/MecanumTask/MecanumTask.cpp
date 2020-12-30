@@ -142,11 +142,14 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
 
         writeToMotors(vel, MotorControlMode::PERCENTAGE);
 
+        currentWheelPositions = getWheelPositions();
+        currentWheelVelocities = getWheelVelocities();
+
         float wheelPositions[] = {
-                currentWheelPositions.frontLeft,
-                currentWheelPositions.frontRight,
-                currentWheelPositions.backLeft,
-                currentWheelPositions.backRight};
+                static_cast<float>(controllers.frontLeft->getPosition()),
+                static_cast<float>(currentWheelPositions.frontRight),
+                static_cast<float>(currentWheelPositions.backLeft),
+                static_cast<float>(currentWheelPositions.backRight)};
 
         float wheelVelocities[] = {
                 currentWheelVelocities.frontLeft,
@@ -160,8 +163,8 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
                 vel.backLeft,
                 vel.backRight};
 
-        //wheelStateMsg.position = wheelPositions;
-        wheelStateMsg.position_length = 0;
+        wheelStateMsg.position = wheelPositions;
+        wheelStateMsg.position_length = 4;
 
         wheelStateMsg.velocity = wheelVelocities;
         wheelStateMsg.velocity_length = 4;

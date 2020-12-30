@@ -43,8 +43,10 @@ void setup() {
     //SerialUSB1.begin(115200);
     SerialUSB.begin(115200);
     SerialUSB1.begin(115200);
+    SerialUSB2.begin(115200);
     //debug.begin(SerialUSB1);
-    Serial8.begin(2000000, SERIAL_8N1);
+    Serial5.begin(576000);
+    Serial8.begin(1000000, SERIAL_8N1);
 
     //Serial8.attachRts(32);
     //Serial8.attachCts(43);
@@ -101,7 +103,7 @@ void setup() {
     HeartbeatTask heartbeatTask;
     //ADCTestTask adcTestTask(adc128D818);
     BatteryPublisherTask batteryPublisherTask(&nh);
-    RosSpinTask rosSpinTask(&nh);
+    RosSpinTask rosSpinTask(&nh, pdMS_TO_TICKS(10));
 
     MecanumTask mecanumTask(controllerConfig, &nh, 0.075);
 

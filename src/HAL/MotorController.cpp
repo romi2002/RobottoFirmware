@@ -30,7 +30,7 @@ MotorController::MotorController(const std::string &name, const MotorControllerC
     averagePositionLock = new ReadWriteLockPreferWriter();
 
     averageVelocity = 0;
-    averagePosition = 0;
+    position = 0;
 
     motor = new VNH5019(config.vnh5019PinDefinitions, config.mcp, config.i2cLock);
 
@@ -51,10 +51,10 @@ void MotorController::set(double setpoint, MotorControlMode mode) {
 
 double MotorController::getPosition() const {
     averagePositionLock->ReaderLock();
-    double position = averagePosition;
+    double curr_position = this->position;
     averagePositionLock->ReaderUnlock();
 
-    return position;
+    return curr_position;
 }
 
 double MotorController::getVelocity() const {
@@ -79,8 +79,7 @@ double MotorController::getVelocity() const {
         encoderVelocity = encoderVelocity / 979.62 * 60.0;
 
         averagePositionLock->WriterLock();
-        if (isnanf(averagePosition)) averagePosition = 0;
-        averagePosition = averagePosition + config.positionFilterAlpha * (encoderPosition - averagePosition);
+        position = encoder->read();
         averagePositionLock->WriterUnlock();
 
         averageVelocityLock->WriterLock();
@@ -114,7 +113,7 @@ double MotorController::getVelocity() const {
                 positionController->setSetpoint(setpoint);
 
                 averagePositionLock->ReaderLock();
-                motor->set(positionController->calculate(averagePosition));
+                motor->set(positionController->calculate(position));
                 averagePositionLock->ReaderUnlock();
                 positionPIDLock->WriterUnlock();
                 break;

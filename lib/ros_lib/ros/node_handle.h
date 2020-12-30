@@ -177,7 +177,7 @@ public:
     packetSerial.setStream(&Serial8);
     packetSerial.setPacketHandler([](const uint8_t* buffer, size_t size) {
       ros::NodeHandleBase_::onPacketRecieved(buffer, size);
-      SerialUSB.println("GOT PKG");
+      SerialUSB.print("GOT PKG "); SerialUSB.println(size);
     });
   }
 
@@ -243,7 +243,7 @@ protected:
     SerialUSB.print("Size: "); SerialUSB.println(msg.second);
 
 //    Serial8.write(msg.first, msg.second);
-//    Serial8.flush();
+    //Serial5.flush();
     free(msg.first);
 
       msgQueueSize -= msg.second;
