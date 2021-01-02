@@ -110,7 +110,7 @@ const uint8_t MODE_MSG_CHECKSUM   = 8;    // checksum for msg and topic id
 
 const uint8_t SERIAL_MSG_TIMEOUT  = 20;   // 20 milliseconds to recieve all of message data
 
-const uint8_t MAX_MSG_QUEUE_LEN = 15;
+const uint8_t MAX_MSG_QUEUE_LEN = 35;
 
 using rosserial_msgs::TopicInfo;
 
@@ -259,7 +259,7 @@ protected:
     //Serial5.flush();
     free(msg.first);
 
-      msgQueueSize -= msg.second;
+   msgQueueSize -= msg.second;
 
     msgQueue.pop();
   }
