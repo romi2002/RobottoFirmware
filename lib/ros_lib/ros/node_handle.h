@@ -48,7 +48,7 @@
 #include "ros/msg.h"
 
 #include "LoopbackStream.h"
-#include "lzwlib.h"
+#include "crc16.h"
 
 namespace ros
 {
@@ -140,6 +140,7 @@ protected:
   uint8_t message_outBuffer[OUTPUT_SIZE];
 
   std::queue<std::pair<uint8_t *, size_t>> msgQueue; //Byte buffer queue
+  uint8_t msgQueueBuffer[8096];
   size_t msgQueueSize{0};
 
   Publisher * publishers[MAX_PUBLISHERS];
@@ -239,8 +240,19 @@ protected:
     //if(!Serial8.availableForWrite()) return;
 
     const auto msg = msgQueue.front();
+    auto size = msg.second;
+    //Size, Msg, CRC16 of Size + MSG
+    msgQueueBuffer[0] = size & 0x00ff; //Lower bytes
+    msgQueueBuffer[1] = (size >> 8); //Upper bytes
+    size += 2;
+    memcpy(msgQueueBuffer + 2, msg.first, msg.second);
 
-    packetSerial.send(msg.first, msg.second);
+    auto crc = crc16_ccitt(msgQueueBuffer, size);
+    msgQueueBuffer[size] = crc & 0x00ff;
+    msgQueueBuffer[size + 1] = (crc >> 8);
+    size += 2;
+
+    packetSerial.send(msgQueueBuffer, size);
     SerialUSB.print("Size: "); SerialUSB.println(msg.second);
 
 //    Serial8.write(msg.first, msg.second);

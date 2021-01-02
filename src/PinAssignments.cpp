@@ -32,8 +32,8 @@ VNH5019_PinAssignments PinAssignments::getMotor3Driver() {
     VNH5019_PinAssignments def{};
 
     def.PWM = 9;
-    def.IN_A = 12;
-    def.IN_B = 13;
+    def.IN_A = 13;
+    def.IN_B = 12;
     def.DIAG_A = 4;
     def.DIAG_B = 5;
 
@@ -44,8 +44,8 @@ VNH5019_PinAssignments PinAssignments::getMotor4Driver() {
     VNH5019_PinAssignments def{};
 
     def.PWM = 10;
-    def.IN_A = 15;
-    def.IN_B = 14;
+    def.IN_A = 14;
+    def.IN_B = 15;
     def.DIAG_A = 6;
     def.DIAG_B = 7;
 

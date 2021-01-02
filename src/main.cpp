@@ -46,7 +46,7 @@ void setup() {
     SerialUSB2.begin(115200);
     //debug.begin(SerialUSB1);
     Serial5.begin(576000);
-    Serial8.begin(1000000, SERIAL_8E1);
+    Serial8.begin(230400, SERIAL_8N1);
 
     pinMode(0, INPUT);
     pinMode(1, INPUT);

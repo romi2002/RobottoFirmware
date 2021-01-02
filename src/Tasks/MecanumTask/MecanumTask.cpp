@@ -18,23 +18,23 @@ MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *n
 
     twistLock = new cpp_freertos::ReadWriteLockPreferWriter();
 
-    m_config.encoderPinDefinitions = PinAssignments::getMotor2Encoder();
-    m_config.vnh5019PinDefinitions = PinAssignments::getMotor2Driver();
-
-    controllers.frontLeft = new MotorController("FrontLeft", m_config);
-
     m_config.encoderPinDefinitions = PinAssignments::getMotor1Encoder();
     m_config.vnh5019PinDefinitions = PinAssignments::getMotor1Driver();
 
+    controllers.frontLeft = new MotorController("FrontLeft", m_config);
+
+    m_config.encoderPinDefinitions = PinAssignments::getMotor2Encoder();
+    m_config.vnh5019PinDefinitions = PinAssignments::getMotor2Driver();
+
     controllers.frontRight = new MotorController("FrontRight", m_config);
-
-    m_config.encoderPinDefinitions = PinAssignments::getMotor4Encoder();
-    m_config.vnh5019PinDefinitions = PinAssignments::getMotor4Driver();
-
-    controllers.backLeft = new MotorController("BackLeft", m_config);
 
     m_config.encoderPinDefinitions = PinAssignments::getMotor3Encoder();
     m_config.vnh5019PinDefinitions = PinAssignments::getMotor3Driver();
+
+    controllers.backLeft = new MotorController("BackLeft", m_config);
+
+    m_config.encoderPinDefinitions = PinAssignments::getMotor4Encoder();
+    m_config.vnh5019PinDefinitions = PinAssignments::getMotor4Driver();
 
     controllers.backRight = new MotorController("BackRight", m_config);
 
