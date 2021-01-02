@@ -48,7 +48,6 @@
 #include "ros/msg.h"
 
 #include "LoopbackStream.h"
-#include "lzwlib.h"
 
 namespace ros
 {
