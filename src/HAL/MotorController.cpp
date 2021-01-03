@@ -74,18 +74,15 @@ double MotorController::getVelocity() const {
 
         auto encoderPositionDelta = static_cast<float>(encoderPosition - lastPosition);
         auto deltaTimeSeconds = static_cast<float>(deltaTime) / 1e+6f;
-        deltaTimeSeconds = max(deltaTimeSeconds, 0.0f);
+        deltaTimeSeconds = max(deltaTimeSeconds, 0.0000001f);
         double encoderVelocity = encoderPositionDelta / deltaTimeSeconds;
-        encoderVelocity = encoderVelocity / 979.62 * 60.0;
 
         averagePositionLock->WriterLock();
-        position = encoder->read();
+        position = encoderPosition;
         averagePositionLock->WriterUnlock();
 
         averageVelocityLock->WriterLock();
-        if (isnanf(averageVelocity)) averageVelocity = 0;
-        averageVelocity += config.velocityFilterAlpha *
-                           (encoderVelocity - averageVelocity); //Exponential rolling average
+        averageVelocity = encoderVelocity;
         averageVelocityLock->WriterUnlock();
 
         lastPosition = encoder->read();

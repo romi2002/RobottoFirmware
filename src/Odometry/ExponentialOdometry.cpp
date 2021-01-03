@@ -22,38 +22,17 @@ void ExponentialOdometry::updateRotMatrix(double angle) {
             0, 0, 1;
 }
 
-void ExponentialOdometry::update(const Twist2D &position, double startAngle) {
+void ExponentialOdometry::update(const Twist2D &position, double yaw) {
     Twist2D deltaPos = position - lastPositionUpdate;
 
-    if (lastStartAngle != startAngle) {
-        updateRotMatrix(startAngle);
-        lastStartAngle = startAngle;
-    }
-
-    const double deltaSin = std::sin(deltaPos.dtheta);
-    const double deltaCos = std::cos(deltaPos.dtheta);
-
-    Eigen::Matrix<double, 3, 1> deltaMatrix;
-    deltaMatrix << deltaPos.dx, deltaPos.dy, deltaPos.dtheta;
-
-    Eigen::Matrix<double, 3, 1> finalMatrix;
-    if (deltaPos.dtheta != 0) {
-        Eigen::Matrix<double, 3, 3> velMatrix;
-        velMatrix << deltaSin / deltaPos.dtheta, (deltaCos - 1.0) / deltaPos.dtheta, 0,
-                (1.0 - deltaCos) / deltaPos.dtheta, deltaSin / deltaPos.dtheta, 0,
-                0, 0, 1;
-        finalMatrix = rotMatrix * velMatrix * deltaMatrix;
-    } else {
-        finalMatrix = rotMatrix * deltaMatrix;
-    }
-
-    Pose2D posUpdate(
-            finalMatrix(0, 0),
-            finalMatrix(1, 0),
-            finalMatrix(2, 0)
-    );
-
-    currentPose += posUpdate;
-
+    update_velocity(deltaPos, 1, yaw);
     lastPositionUpdate = position;
+}
+
+void ExponentialOdometry::update_velocity(const Twist2D &velocity, double dt, double yaw) {
+    Twist2D rotVel{-velocity.dx, -velocity.dy, (lastYaw - yaw)};
+
+    currentPose = currentPose.transformBy(Pose2D::exp(rotVel * dt));
+    currentPose.theta = yaw;
+    lastYaw = yaw;
 }

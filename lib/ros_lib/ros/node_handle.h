@@ -62,10 +62,10 @@ public:
     static LoopbackStream readStream;
 
     static void onPacketRecieved(const uint8_t* buffer, size_t size){
-        SerialUSB.println("pkgRec");
-        SerialUSB.print("Size: "); SerialUSB.println(size);
+        //SerialUSB.println("pkgRec");
+        //SerialUSB.print("Size: "); //SerialUSB.println(size);
         for(int i = 0; i < size; ++i){
-            SerialUSB.println("Wrote");
+            //SerialUSB.println("Wrote");
             readStream.write(buffer[i]);
         }
     }
@@ -177,7 +177,7 @@ public:
     packetSerial.setStream(&Serial8);
     packetSerial.setPacketHandler([](const uint8_t* buffer, size_t size) {
       ros::NodeHandleBase_::onPacketRecieved(buffer, size);
-      SerialUSB.print("GOT PKG "); SerialUSB.println(size);
+      //SerialUSB.print("GOT PKG "); //SerialUSB.println(size);
     });
   }
 
@@ -240,7 +240,7 @@ protected:
     const auto msg = msgQueue.front();
 
     packetSerial.send(msg.first, msg.second);
-    SerialUSB.print("Size: "); SerialUSB.println(msg.second);
+    //SerialUSB.print("Size: "); //SerialUSB.println(msg.second);
 
 //    Serial8.write(msg.first, msg.second);
     //Serial5.flush();
@@ -277,7 +277,7 @@ public:
       }
     }
 
-    //SerialUSB.println(msgQueueSize);
+    ////SerialUSB.println(msgQueueSize);
 
       /* Send data while queue available */
     while(!msgQueue.empty()){
@@ -288,7 +288,7 @@ public:
 
 
     /* while available buffer, read data */
-    //SerialUSB.println(ros::NodeHandleBase_::readStream.available());
+    ////SerialUSB.println(ros::NodeHandleBase_::readStream.available());
     while (ros::NodeHandleBase_::readStream.available())
     {
       // If a timeout has been specified, check how long spinOnce has been running.
@@ -305,12 +305,12 @@ public:
         }
       }
       int data = ros::NodeHandleBase_::readStream.read();
-      SerialUSB.println("datacheck");
-      SerialUSB.println(data, HEX);
+      //SerialUSB.println("datacheck");
+      //SerialUSB.println(data, HEX);
       if (data < 0)
         break;
 
-      SerialUSB.println("GOT DATA");
+      //SerialUSB.println("GOT DATA");
       checksum_ += data;
       if (mode_ == MODE_MESSAGE)          /* message data being recieved */
       {
@@ -418,7 +418,7 @@ public:
     {
       requestSyncTime();
       last_sync_time = c_time;
-      //SerialUSB.println("SYNCTime");
+      ////SerialUSB.println("SYNCTime");
     }
 
     return SPIN_OK;
@@ -600,18 +600,18 @@ public:
 
     if(msgQueue.size() > MAX_MSG_QUEUE_LEN){
       //TODO Handle this correctly
-      //SerialUSB.println("Dropping msg!");
+      ////SerialUSB.println("Dropping msg!");
       return -1;
     }
 
     uint8_t *newLocation = (uint8_t*) malloc(l);
 
     if(newLocation == nullptr){
-      //SerialUSB.println("Failed to malloc");
+      ////SerialUSB.println("Failed to malloc");
       return -1;
     }
 
-    //SerialUSB.println("Before MEMCPY");
+    ////SerialUSB.println("Before MEMCPY");
 
     memcpy(newLocation, message_outBuffer, l);
 
@@ -619,7 +619,7 @@ public:
     msgQueue.emplace(std::make_pair(newLocation, l));
     msgQueueSize += l;
 
-    //SerialUSB.println("Added to queue: "); SerialUSB.print(msgQueue.size());
+    ////SerialUSB.println("Added to queue: "); //SerialUSB.print(msgQueue.size());
 
     return 0;
   }

@@ -65,6 +65,7 @@ private:
     Twist2D currentTarget;
 
     ExponentialOdometry *odometry;
+    elapsedMicros lastUpdate;
 
     geometry_msgs::Pose posePublisherMsg;
     ros::Publisher *posePublisher;

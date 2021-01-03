@@ -34,6 +34,10 @@ public:
 
     Twist2D &operator-=(const Twist2D &other);
 
+    Twist2D operator*(double rhs) const;
+
+    Twist2D operator/(double rhs) const;
+
     bool operator==(const Twist2D &rhs) const {
         return dx == rhs.dx &&
                dy == rhs.dy &&

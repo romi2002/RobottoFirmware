@@ -65,6 +65,7 @@ MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *n
 
     profilerIt = profiler.initProfiler("MecanumTask");
 
+    lastUpdate = 0;
     Start();
 }
 
@@ -121,9 +122,9 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
         auto velocities = kinematics->toChassisSpeeds(currentWheelVelocities);
 
         positions.dtheta = imuYaw;
-        //Serial.println(imuYaw);
+        SerialUSB.println(imuYaw);
 
-        odometry->update(positions);
+        odometry->update_velocity(velocities, (double) lastUpdate / (double) 1e+6f, -imuYaw);
 
         const auto currentPose = odometry->getPose();
 
@@ -176,6 +177,7 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
 
         TaskProfiler::updateProfiler(profilerIt);
 
+        lastUpdate = 0;
         vTaskDelay(waitTime);
     }
 }

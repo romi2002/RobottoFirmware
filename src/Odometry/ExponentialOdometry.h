@@ -13,7 +13,8 @@ class ExponentialOdometry {
 public:
     ExponentialOdometry();
 
-    void update(const Twist2D &position, double startAngle = 0);
+    void update(const Twist2D &position, double yaw);
+    void update_velocity(const Twist2D &velocity, double dt, double yaw);
 
     Pose2D getPose() const;
 
@@ -22,7 +23,7 @@ private:
 
     void updateRotMatrix(double angle);
 
-    double lastStartAngle{0};
+    double lastYaw{0};
 
     Twist2D lastPositionUpdate{0, 0, 0};
 

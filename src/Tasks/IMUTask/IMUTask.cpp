@@ -233,7 +233,7 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
             imuQuat.z = qt[0][3];
             imuQuat.w = qt[0][0];
 
-            imuYaw = heading[0];
+            imuYaw = (heading[0] - 180.0) / 180.0 * M_PI;
 
             if(printRPY){
                 if(RPYPrintCount++ > 5) {
