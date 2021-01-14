@@ -7,6 +7,7 @@
 
 extern geometry_msgs::Quaternion imuQuat;
 extern double imuYaw;
+extern double imuAccel[3], imuAngVel[3];
 
 MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *nh, double wheelDiameter,
                          TickType_t waitTime) : cpp_freertos::Thread("MecanumTask", 256, MECANUM_TASK_PRIORITY) {
@@ -62,6 +63,12 @@ MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *n
 
     wheelStatePublisher = new ros::Publisher("wheelState", &wheelStateMsg);
     nh->advertise(*wheelStatePublisher);
+
+    angularVelPublisher = new ros::Publisher("imu_raw/angular_velocity", &angularVelMsg);
+    nh->advertise(*angularVelPublisher);
+
+    linearAccelPublisher = new ros::Publisher("imu_raw/linear_acceleration", &linearAccelMsg);
+    nh->advertise(*linearAccelPublisher);
 
     profilerIt = profiler.initProfiler("MecanumTask");
 
@@ -140,6 +147,11 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
 
         posePublisher->publish(&posePublisherMsg);
         twistPublisher->publish(&twistPublisherMsg);
+
+        linearAccelMsg.x =
+
+        linearAccelPublisher->publish(&linearAccelMsg);
+        angularVelPublisher->publish(&angularVelMsg);
 
         writeToMotors(vel, MotorControlMode::PERCENTAGE);
 

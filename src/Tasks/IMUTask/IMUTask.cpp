@@ -19,6 +19,7 @@
 
 geometry_msgs::Quaternion imuQuat;
 double imuYaw;
+double imuAccel[3], imuAngVel[3];
 
 #include <TeensyDebug.h>
 
@@ -234,6 +235,14 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
             imuQuat.w = qt[0][0];
 
             imuYaw = (heading[0] - 180.0) / 180.0 * M_PI;
+
+            imuAccel[0] = 1000.0f*accData[0][0]; //X,Y,Z
+            imuAccel[1] = 1000.0f*accData[0][1];
+            imuAccel[2] = 1000.0f*accData[0][2];
+
+            imuAngVel[0] = gyroData[0][0] * (M_PI / 180.0); //X,Y,Z
+            imuAngVel[1] = gyroData[0][1] * (M_PI / 180.0);
+            imuAngVel[2] = gyroData[0][2] * (M_PI / 180.0);
 
             if(printRPY){
                 if(RPYPrintCount++ > 5) {

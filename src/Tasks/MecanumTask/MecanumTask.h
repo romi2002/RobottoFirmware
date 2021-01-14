@@ -76,6 +76,12 @@ private:
     ros::Publisher * wheelStatePublisher;
     sensor_msgs::JointState wheelStateMsg;
 
+    ros::Publisher * angularVelPublisher;
+    geometry_msgs::Vector3 angularVelMsg;
+
+    ros::Publisher * linearAccelPublisher;
+    geometry_msgs::Vector3 linearAccelMsg;
+
     ros::NodeHandle *nh;
 
     TaskProfiler& profiler = TaskProfiler::getInstance();
