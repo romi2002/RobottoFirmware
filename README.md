@@ -1,5 +1,10 @@
 ## RobottoFirmware
 Firmware developed for the `Teensy 4.1` on a [RobottoPCB](https://github.com/romi2002/RobottoPCB). Handles communication with a single board computer (Jetson Nano or Raspberry Pi) using a modified version of `rosserial`. Implements motor control including PID loops and odometry.
+
+<p align="center">
+  <img src="media/robotto_render.jpg" width="750">
+</p>
+
 ### Features
 * Runs on FreeRTOS
 * Embedded serial console, can be used to get diagnostics and current system status from the Teensy.
