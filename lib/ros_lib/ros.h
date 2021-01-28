@@ -40,7 +40,7 @@
 #if defined(ESP8266) or defined(ESP32) or defined(ROSSERIAL_ARDUINO_TCP)
   #include "ArduinoTcpHardware.h"
 #else
-  #include "ArduinoHardware.h"
+  #include "NATIVE_hardware.h"
 #endif
 
 namespace ros
@@ -59,7 +59,7 @@ namespace ros
 
 #else
 
-  typedef NodeHandle_<ArduinoHardware> NodeHandle; // default 25, 25, 512, 512
+  typedef NodeHandle_<NATIVE_hardware, 25, 25, 512, 512> NodeHandle; // default 25, 25, 512, 512
 
 #endif
 }

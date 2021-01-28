@@ -1,9 +1,11 @@
-#include <LinkerFix.h>
+#define ROSSERIAL_ARDUINO_TCP
+
+#include <NativeEthernet.h>
 #include <Arduino.h>
 #include <Wire.h>
 #include <FreeRTOS_TEENSY4.h>
 
-//#define USE_TEENSY_HW_SERIAL
+#include <ros.h>
 
 #include "log.h"
 #include "PinAssignments.h"
@@ -33,20 +35,33 @@
 #include "Adafruit_MCP23017.h"
 #include "ADC128D818.h"
 
+byte mac[] = {0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0xAD};
+
 ros::NodeHandle nh;
 
 Adafruit_MCP23017 mcp;
 cpp_freertos::ReadWriteLockPreferWriter *i2cLock;
-//#include "TeensyDebug.h"
+#include "TeensyDebug.h"
+
+IPAddress server_ip(192,168,1,53);
+const uint16_t  server_port = 11411;
 
 void setup() {
     //SerialUSB1.begin(115200);
     SerialUSB.begin(115200);
     SerialUSB1.begin(115200);
     SerialUSB2.begin(115200);
-    //debug.begin(SerialUSB1);
+    debug.begin(SerialUSB);
+    halt();
     Serial5.begin(576000);
     Serial8.begin(1000000, SERIAL_8E1);
+
+    while(!Ethernet.begin(mac)){
+        SerialUSB1.println("No ethernet connection!");
+        delay(1000);
+    }
+
+    SerialUSB1.print("Connected with ip: "); SerialUSB1.println(Ethernet.localIP());
 
     pinMode(0, INPUT);
     pinMode(1, INPUT);
@@ -87,6 +102,7 @@ void setup() {
     adc128D818->setDisabledMask(0b00000010);
     adc128D818->begin();*/
 
+    nh.getHardware()->setConnection(server_ip, server_port);
     nh.initNode();
 
     MotorControllerConfig controllerConfig{};

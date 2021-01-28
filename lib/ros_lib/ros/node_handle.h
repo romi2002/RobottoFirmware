@@ -36,9 +36,6 @@
 #define ROS_NODE_HANDLE_H_
 
 #include <stdint.h>
-#include <Arduino.h>
-#include <PacketSerial.h>
-#include <queue>
 
 #include "std_msgs/Time.h"
 #include "rosserial_msgs/TopicInfo.h"
@@ -46,8 +43,6 @@
 #include "rosserial_msgs/RequestParam.h"
 
 #include "ros/msg.h"
-
-#include "LoopbackStream.h"
 
 namespace ros
 {
@@ -58,17 +53,6 @@ public:
   virtual int publish(int id, const Msg* msg) = 0;
   virtual int spinOnce() = 0;
   virtual bool connected() = 0;
-
-    static LoopbackStream readStream;
-
-    static void onPacketRecieved(const uint8_t* buffer, size_t size){
-        //SerialUSB.println("pkgRec");
-        //SerialUSB.print("Size: "); //SerialUSB.println(size);
-        for(int i = 0; i < size; ++i){
-            //SerialUSB.println("Wrote");
-            readStream.write(buffer[i]);
-        }
-    }
 };
 }
 
@@ -109,8 +93,6 @@ const uint8_t MODE_MSG_CHECKSUM   = 8;    // checksum for msg and topic id
 
 const uint8_t SERIAL_MSG_TIMEOUT  = 20;   // 20 milliseconds to recieve all of message data
 
-const uint8_t MAX_MSG_QUEUE_LEN = 15;
-
 using rosserial_msgs::TopicInfo;
 
 /* Node Handle */
@@ -122,65 +104,27 @@ template<class Hardware,
 class NodeHandle_ : public NodeHandleBase_
 {
 protected:
-  Hardware hardware_;
-
-  PacketSerial packetSerial;
+  Hardware hardware_{};
 
   /* time used for syncing */
-  uint32_t rt_time;
+  uint32_t rt_time{0};
 
   /* used for computing current time */
-  uint32_t sec_offset, nsec_offset;
+  uint32_t sec_offset{0}, nsec_offset{0};
 
   /* Spinonce maximum work timeout */
-  uint32_t spin_timeout_;
+  uint32_t spin_timeout_{0};
 
-  uint8_t message_in[INPUT_SIZE];
-  uint8_t message_outBuffer[OUTPUT_SIZE];
+  uint8_t message_in[INPUT_SIZE] = {0};
+  uint8_t message_out[OUTPUT_SIZE] = {0};
 
-  std::queue<std::pair<uint8_t *, size_t>> msgQueue; //Byte buffer queue
-  size_t msgQueueSize{0};
-
-  Publisher * publishers[MAX_PUBLISHERS];
-  Subscriber_ * subscribers[MAX_SUBSCRIBERS];
-
-  elapsedMillis lastSyncTime;
+  Publisher * publishers[MAX_PUBLISHERS] = {nullptr};
+  Subscriber_ * subscribers[MAX_SUBSCRIBERS] {nullptr};
 
   /*
    * Setup Functions
    */
 public:
-  NodeHandle_() : configured_(false)
-  {
-
-    for (unsigned int i = 0; i < MAX_PUBLISHERS; i++)
-      publishers[i] = 0;
-
-    for (unsigned int i = 0; i < MAX_SUBSCRIBERS; i++)
-      subscribers[i] = 0;
-
-    for (unsigned int i = 0; i < INPUT_SIZE; i++)
-      message_in[i] = 0;
-
-    for (unsigned int i = 0; i < OUTPUT_SIZE; i++)
-      message_outBuffer[i] = 0;
-
-    req_param_resp.ints_length = 0;
-    req_param_resp.ints = NULL;
-    req_param_resp.floats_length = 0;
-    req_param_resp.floats = NULL;
-    req_param_resp.ints_length = 0;
-    req_param_resp.ints = NULL;
-
-    spin_timeout_ = 0;
-
-    packetSerial.setStream(&Serial8);
-    packetSerial.setPacketHandler([](const uint8_t* buffer, size_t size) {
-      ros::NodeHandleBase_::onPacketRecieved(buffer, size);
-      //SerialUSB.print("GOT PKG "); //SerialUSB.println(size);
-    });
-  }
-
   Hardware* getHardware()
   {
     return &hardware_;
@@ -189,7 +133,7 @@ public:
   /* Start serial, initialize buffers */
   void initNode()
   {
-    //hardware_.init();
+    hardware_.init();
     mode_ = 0;
     bytes_ = 0;
     index_ = 0;
@@ -199,7 +143,7 @@ public:
   /* Start a named port, which may be network server IP, initialize buffers */
   void initNode(char *portName)
   {
-    //hardware_.init(portName);
+    hardware_.init(portName);
     mode_ = 0;
     bytes_ = 0;
     index_ = 0;
@@ -220,36 +164,19 @@ public:
   }
 
 protected:
-  //State machine variables for spinOnce
-  int mode_;
-  int bytes_;
-  int topic_;
-  int index_;
-  int checksum_;
+  // State machine variables for spinOnce
+  int mode_{0};
+  int bytes_{0};
+  int topic_{0};
+  int index_{0};
+  int checksum_{0};
 
-  bool configured_;
+  bool configured_{false};
 
   /* used for syncing the time */
-  uint32_t last_sync_time;
-  uint32_t last_sync_receive_time;
-  uint32_t last_msg_timeout_time;
-
-  void handleMSGQueue(){
-    //if(!Serial8.availableForWrite()) return;
-
-    const auto msg = msgQueue.front();
-
-    packetSerial.send(msg.first, msg.second);
-    //SerialUSB.print("Size: "); //SerialUSB.println(msg.second);
-
-//    Serial8.write(msg.first, msg.second);
-    //Serial5.flush();
-    free(msg.first);
-
-      msgQueueSize -= msg.second;
-
-    msgQueue.pop();
-  }
+  uint32_t last_sync_time{0};
+  uint32_t last_sync_receive_time{0};
+  uint32_t last_msg_timeout_time{0};
 
 public:
   /* This function goes in your loop() function, it handles
@@ -257,10 +184,8 @@ public:
    */
 
 
-  virtual int spinOnce()
+  virtual int spinOnce() override
   {
-      packetSerial.update();
-
     /* restart if timed out */
     uint32_t c_time = hardware_.time();
     if ((c_time - last_sync_receive_time) > (SYNC_SECONDS * 2200))
@@ -277,19 +202,8 @@ public:
       }
     }
 
-    ////SerialUSB.println(msgQueueSize);
-
-      /* Send data while queue available */
-    while(!msgQueue.empty()){
-      handleMSGQueue();
-      size_t totalSize = 0;
-      //if(!Serial8.availableForWrite()) break;
-    }
-
-
     /* while available buffer, read data */
-    ////SerialUSB.println(ros::NodeHandleBase_::readStream.available());
-    while (ros::NodeHandleBase_::readStream.available())
+    while (true)
     {
       // If a timeout has been specified, check how long spinOnce has been running.
       if (spin_timeout_ > 0)
@@ -304,13 +218,9 @@ public:
           return SPIN_TIMEOUT;
         }
       }
-      int data = ros::NodeHandleBase_::readStream.read();
-      //SerialUSB.println("datacheck");
-      //SerialUSB.println(data, HEX);
+      int data = hardware_.read();
       if (data < 0)
         break;
-
-      //SerialUSB.println("GOT DATA");
       checksum_ += data;
       if (mode_ == MODE_MESSAGE)          /* message data being recieved */
       {
@@ -398,7 +308,7 @@ public:
           else if (topic_ == TopicInfo::ID_PARAMETER_REQUEST)
           {
             req_param_resp.deserialize(message_in);
-            param_recieved = true;
+            param_received = true;
           }
           else if (topic_ == TopicInfo::ID_TX_STOP)
           {
@@ -414,11 +324,10 @@ public:
     }
 
     /* occasionally sync time */
-    if (configured_ && lastSyncTime >= 100)
+    if (configured_ && ((c_time - last_sync_time) > (SYNC_SECONDS * 500)))
     {
       requestSyncTime();
       last_sync_time = c_time;
-      ////SerialUSB.println("SYNCTime");
     }
 
     return SPIN_OK;
@@ -426,7 +335,7 @@ public:
 
 
   /* Are we connected to the PC? */
-  virtual bool connected()
+  virtual bool connected() override
   {
     return configured_;
   };
@@ -465,7 +374,7 @@ public:
     return current_time;
   }
 
-  void setNow(Time & new_now)
+  void setNow(const Time & new_now)
   {
     uint32_t ms = hardware_.time();
     sec_offset = new_now.sec - ms / 1000 - 1;
@@ -494,14 +403,13 @@ public:
   }
 
   /* Register a new subscriber */
-  template<typename SubscriberT>
-  bool subscribe(SubscriberT& s)
+  bool subscribe(Subscriber_& s)
   {
     for (int i = 0; i < MAX_SUBSCRIBERS; i++)
     {
       if (subscribers[i] == 0) // empty slot
       {
-        subscribers[i] = static_cast<Subscriber_*>(&s);
+        subscribers[i] = &s;
         s.id_ = i + 100;
         return true;
       }
@@ -514,16 +422,8 @@ public:
   bool advertiseService(ServiceServer<MReq, MRes, ObjT>& srv)
   {
     bool v = advertise(srv.pub);
-    for (int i = 0; i < MAX_SUBSCRIBERS; i++)
-    {
-      if (subscribers[i] == 0) // empty slot
-      {
-        subscribers[i] = static_cast<Subscriber_*>(&srv);
-        srv.id_ = i + 100;
-        return v;
-      }
-    }
-    return false;
+    bool w = subscribe(srv);
+    return v && w;
   }
 
   /* Register a new Service Client */
@@ -531,16 +431,8 @@ public:
   bool serviceClient(ServiceClient<MReq, MRes>& srv)
   {
     bool v = advertise(srv.pub);
-    for (int i = 0; i < MAX_SUBSCRIBERS; i++)
-    {
-      if (subscribers[i] == 0) // empty slot
-      {
-        subscribers[i] = static_cast<Subscriber_*>(&srv);
-        srv.id_ = i + 100;
-        return v;
-      }
-    }
-    return false;
+    bool w = subscribe(srv);
+    return v && w;
   }
 
   void negotiateTopics()
@@ -574,61 +466,47 @@ public:
     configured_ = true;
   }
 
-  virtual int publish(int id, const Msg * msg)
+  virtual int publish(int id, const Msg * msg) override
   {
     if (id >= 100 && !configured_)
       return 0;
 
     /* serialize message */
-    int l = msg->serialize(message_outBuffer + 7);
+    int l = msg->serialize(message_out + 7);
 
     /* setup the header */
-    message_outBuffer[0] = 0xff;
-    message_outBuffer[1] = PROTOCOL_VER;
-    message_outBuffer[2] = (uint8_t)((uint16_t)l & 255);
-    message_outBuffer[3] = (uint8_t)((uint16_t)l >> 8);
-    message_outBuffer[4] = 255 - ((message_outBuffer[2] + message_outBuffer[3]) % 256);
-    message_outBuffer[5] = (uint8_t)((int16_t)id & 255);
-    message_outBuffer[6] = (uint8_t)((int16_t)id >> 8);
+    message_out[0] = 0xff;
+    message_out[1] = PROTOCOL_VER;
+    message_out[2] = (uint8_t)((uint16_t)l & 255);
+    message_out[3] = (uint8_t)((uint16_t)l >> 8);
+    message_out[4] = 255 - ((message_out[2] + message_out[3]) % 256);
+    message_out[5] = (uint8_t)((int16_t)id & 255);
+    message_out[6] = (uint8_t)((int16_t)id >> 8);
 
     /* calculate checksum */
     int chk = 0;
     for (int i = 5; i < l + 7; i++)
-      chk += message_outBuffer[i];
+      chk += message_out[i];
     l += 7;
-    message_outBuffer[l++] = 255 - (chk % 256);
+    message_out[l++] = 255 - (chk % 256);
 
-    if(msgQueue.size() > MAX_MSG_QUEUE_LEN){
-      //TODO Handle this correctly
-      ////SerialUSB.println("Dropping msg!");
+    if (l <= OUTPUT_SIZE)
+    {
+      hardware_.write(message_out, l);
+      return l;
+    }
+    else
+    {
+      logerror("Message from device dropped: message larger than buffer.");
       return -1;
     }
-
-    uint8_t *newLocation = (uint8_t*) malloc(l);
-
-    if(newLocation == nullptr){
-      ////SerialUSB.println("Failed to malloc");
-      return -1;
-    }
-
-    ////SerialUSB.println("Before MEMCPY");
-
-    memcpy(newLocation, message_outBuffer, l);
-
-    //Add to queue
-    msgQueue.emplace(std::make_pair(newLocation, l));
-    msgQueueSize += l;
-
-    ////SerialUSB.println("Added to queue: "); //SerialUSB.print(msgQueue.size());
-
-    return 0;
   }
 
   /********************************************************************
    * Logging
    */
 
-private:
+protected:
   void log(char byte, const char * msg)
   {
     rosserial_msgs::Log l;
@@ -663,18 +541,18 @@ public:
    * Parameters
    */
 
-private:
-  bool param_recieved;
-  rosserial_msgs::RequestParamResponse req_param_resp;
+protected:
+  bool param_received{false};
+  rosserial_msgs::RequestParamResponse req_param_resp{};
 
   bool requestParam(const char * name, int time_out =  1000)
   {
-    param_recieved = false;
+    param_received = false;
     rosserial_msgs::RequestParamRequest req;
     req.name  = (char*)name;
     publish(TopicInfo::ID_PARAMETER_REQUEST, &req);
     uint32_t end_time = hardware_.time() + time_out;
-    while (!param_recieved)
+    while (!param_received)
     {
       spinOnce();
       if (hardware_.time() > end_time)

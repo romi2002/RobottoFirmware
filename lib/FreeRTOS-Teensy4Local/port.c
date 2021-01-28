@@ -318,7 +318,6 @@ void vPortSVCHandler( void )
 				);
 }
 /*-----------------------------------------------------------*/
-
 static void prvPortStartFirstTask( void )
 {
 	/* Start the first task.  This also clears the bit that indicates the FPU is

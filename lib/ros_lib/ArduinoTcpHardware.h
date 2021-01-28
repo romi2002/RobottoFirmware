@@ -42,7 +42,7 @@
   #include <WiFi.h> // Using Espressif's WiFi.h
 #else
   #include <SPI.h>
-  #include <Ethernet.h>
+  #include <NativeEthernet.h>
 #endif
 
 class ArduinoHardware {

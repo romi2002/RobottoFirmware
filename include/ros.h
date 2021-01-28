@@ -2,7 +2,7 @@
 #define _ROS_H_
 
 #include "ros/node_handle.h"
-#include "ArduinoHardware.h"
+#include "ArduinoTcpHardware.h"
 
     namespace ros
 {
