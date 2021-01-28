@@ -43,16 +43,13 @@ Adafruit_MCP23017 mcp;
 cpp_freertos::ReadWriteLockPreferWriter *i2cLock;
 #include "TeensyDebug.h"
 
-IPAddress server_ip(192,168,1,53);
-const uint16_t  server_port = 11411;
-
 void setup() {
     //SerialUSB1.begin(115200);
     SerialUSB.begin(115200);
     SerialUSB1.begin(115200);
     SerialUSB2.begin(115200);
     debug.begin(SerialUSB);
-    halt();
+    //halt();
     Serial5.begin(576000);
     Serial8.begin(1000000, SERIAL_8E1);
 
@@ -102,7 +99,6 @@ void setup() {
     adc128D818->setDisabledMask(0b00000010);
     adc128D818->begin();*/
 
-    nh.getHardware()->setConnection(server_ip, server_port);
     nh.initNode();
 
     MotorControllerConfig controllerConfig{};
@@ -121,13 +117,13 @@ void setup() {
 
     HeartbeatTask heartbeatTask;
     //ADCTestTask adcTestTask(adc128D818);
-    BatteryPublisherTask batteryPublisherTask(&nh);
+    //BatteryPublisherTask batteryPublisherTask(&nh);
     RosSpinTask rosSpinTask(&nh, pdMS_TO_TICKS(10));
 
-    MecanumTask mecanumTask(controllerConfig, &nh, 0.075);
+    //MecanumTask mecanumTask(controllerConfig, &nh, 0.075);
 
-    ConsoleTask consoleTask;
-    UseTimeTask useTimeTask;
+    //ConsoleTask consoleTask;
+    //UseTimeTask useTimeTask;
 
     //MotorController controller("TestController", controllerConfig, pdMS_TO_TICKS(10));
     //controller.set(0.0, MotorControlMode::PERCENTAGE);

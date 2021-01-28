@@ -37,6 +37,7 @@
 
 #include <stdint.h>
 
+#include <Arduino.h>
 #include "std_msgs/Time.h"
 #include "rosserial_msgs/TopicInfo.h"
 #include "rosserial_msgs/Log.h"

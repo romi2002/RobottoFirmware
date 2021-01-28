@@ -112,7 +112,7 @@
 #define INCLUDE_xTaskAbortDelay                 0
 #define INCLUDE_xTaskGetHandle                  1
 #define INCLUDE_xTaskResumeFromISR              1
-#define INCLUDE_vTaskEndScheduler               0
+#define INCLUDE_vTaskEndScheduler               1
 
 #ifdef __NVIC_PRIO_BITS
 /* __BVIC_PRIO_BITS will be specified when CMSIS is being used. */
