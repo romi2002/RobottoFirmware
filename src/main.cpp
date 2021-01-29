@@ -113,7 +113,7 @@ void setup() {
     //BatteryPublisherTask batteryPublisherTask(&nh);
     //RosSpinTask rosSpinTask(&nh, pdMS_TO_TICKS(10));
 
-    //MecanumTask mecanumTask(controllerConfig, &nh, 0.075);
+    MecanumTask mecanumTask(controllerConfig, &nh, 0.075);
 
     //ConsoleTask consoleTask;
     //UseTimeTask useTimeTask;

@@ -5,7 +5,7 @@
 #include "MecanumTask.h"
 #include "PinAssignments.h"
 
-extern geometry_msgs::Quaternion imuQuat;
+extern Quaternion imuQuat;
 extern double imuYaw;
 extern double imuAccel[3], imuAngVel[3];
 
@@ -49,27 +49,6 @@ MecanumTask::MecanumTask(const MotorControllerConfig &config, ros::NodeHandle *n
 
     odometry = new ExponentialOdometry();
 
-    this->twistSetpointSubscriber = new ros::Subscriber<geometry_msgs::Twist, MecanumTask>(
-            "cmd_vel", &MecanumTask::twistSubsriberCb, this
-    );
-
-    twistPublisher = new ros::Publisher("twist", &twistPublisherMsg);
-    nh->advertise(*twistPublisher);
-
-    posePublisher = new ros::Publisher("pose", &posePublisherMsg);
-    nh->advertise(*posePublisher);
-
-    nh->subscribe(*twistSetpointSubscriber);
-
-    wheelStatePublisher = new ros::Publisher("wheelState", &wheelStateMsg);
-    nh->advertise(*wheelStatePublisher);
-
-    angularVelPublisher = new ros::Publisher("imu_raw/angular_velocity", &angularVelMsg);
-    nh->advertise(*angularVelPublisher);
-
-    linearAccelPublisher = new ros::Publisher("imu_raw/linear_acceleration", &linearAccelMsg);
-    nh->advertise(*linearAccelPublisher);
-
     profilerIt = profiler.initProfiler("MecanumTask");
 
     lastUpdate = 0;
@@ -109,7 +88,7 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
 
     while (true) {
         twistLock->ReaderLock();
-        auto vel = kinematics->toWheelSpeeds(currentTarget);
+        auto motor_vels = kinematics->toWheelSpeeds(inData.setpoint);
         twistLock->ReaderUnlock();
 
         auto currentWheelPositions = getWheelPositions();
@@ -135,67 +114,26 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
 
         const auto currentPose = odometry->getPose();
 
-        posePublisherMsg.position.x = currentPose.x;
-        posePublisherMsg.position.y = currentPose.y;
-        posePublisherMsg.position.z = 0;
+        outData.pose = currentPose;
+        outData.twist = velocities;
+        outData.imuQuat = imuQuat;
 
-        twistPublisherMsg.linear.x = velocities.dx;
-        twistPublisherMsg.linear.y = velocities.dy;
-        twistPublisherMsg.angular.z = velocities.dtheta;
+        //TODO
+        //outData.linearAccel =
+        //outData.angularVel =
 
-        posePublisherMsg.orientation = imuQuat;
-
-        posePublisher->publish(&posePublisherMsg);
-        twistPublisher->publish(&twistPublisherMsg);
-
-        linearAccelMsg.x =
-
-        linearAccelPublisher->publish(&linearAccelMsg);
-        angularVelPublisher->publish(&angularVelMsg);
-
-        writeToMotors(vel, MotorControlMode::PERCENTAGE);
+        writeToMotors(motor_vels, MotorControlMode::PERCENTAGE);
 
         currentWheelPositions = getWheelPositions();
         currentWheelVelocities = getWheelVelocities();
 
-        float wheelPositions[] = {
-                static_cast<float>(currentWheelPositions.frontLeft),
-                static_cast<float>(currentWheelPositions.frontRight),
-                static_cast<float>(currentWheelPositions.backLeft),
-                static_cast<float>(currentWheelPositions.backRight)};
-
-        float wheelVelocities[] = {
-                currentWheelVelocities.frontLeft,
-                currentWheelVelocities.frontRight,
-                currentWheelVelocities.backLeft,
-                currentWheelVelocities.backRight};
-
-        float wheelEffort[] = {
-                vel.frontLeft,
-                vel.frontRight,
-                vel.backLeft,
-                vel.backRight};
-
-        wheelStateMsg.position = wheelPositions;
-        wheelStateMsg.position_length = 4;
-
-        wheelStateMsg.velocity = wheelVelocities;
-        wheelStateMsg.velocity_length = 4;
-
-        wheelStateMsg.effort = wheelEffort;
-        wheelStateMsg.effort_length = 4;
-
-        wheelStatePublisher->publish(&wheelStateMsg);
+        outData.wheelPositions = currentWheelPositions;
+        outData.wheelVelocities = currentWheelVelocities;
+        outData.wheelEffort = motor_vels;
 
         TaskProfiler::updateProfiler(profilerIt);
 
         lastUpdate = 0;
         vTaskDelay(waitTime);
     }
-}
-
-void MecanumTask::twistSubsriberCb(const geometry_msgs::Twist &msg) {
-    twistLock->WriterLock();
-    currentTarget = Twist2D(msg.linear.x, msg.linear.y, msg.angular.z);
-    twistLock->WriterUnlock();
 }

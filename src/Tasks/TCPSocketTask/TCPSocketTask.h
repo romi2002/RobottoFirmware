@@ -14,6 +14,47 @@
 #include <ArduinoJson.h>
 #include "TCPPayload.h"
 
+static void serializeData(const Pose2D &pose, JsonObject &obj){
+    obj["x"] = pose.x;
+    obj["y"] = pose.y;
+    obj["theta"] = pose.theta;
+}
+
+static void serializeData(const Rotation2D &rot, JsonObject &obj){
+    obj["rad"] = rot.rad();
+}
+
+static void serializeData(const Translation2D &translation, JsonObject &obj){
+    obj["x"] = translation.X();
+    obj["y"] = translation.Y();
+}
+
+static void serializeData(const Twist2D &twist, JsonObject &obj){
+    obj["dx"] = twist.dx;
+    obj["dy"] = twist.dy;
+    obj["dtheta"] = twist.dtheta;
+}
+
+static void serializeData(const MecanumWheelVelocities &velocities, JsonObject &obj){
+    obj["frontLeft"] = velocities.frontLeft;
+    obj["frontRight"] = velocities.frontRight;
+    obj["backLeft"] = velocities.backLeft;
+    obj["backRight"] = velocities.backRight;
+}
+
+static void serializeData(const Quaternion &quat, JsonObject &obj){
+    obj["x"] = quat.x;
+    obj["y"] = quat.y;
+    obj["z"] = quat.z;
+    obj["w"] = quat.w;
+}
+
+static void deserializeData(Twist2D & twist, const JsonVariantConst &obj){
+    twist.dx = obj["dx"];
+    twist.dy = obj["dy"];
+    twist.dtheta = obj["dtheta"];
+}
+
 using namespace cpp_freertos;
 
 class TCPWriter{
@@ -37,7 +78,7 @@ private:
 
 class TCPSocketTask : public Thread  {
 public:
-    TCPSocketTask(TickType_t tickDelay = 10);
+    TCPSocketTask(TickType_t tickDelay = 5);
 
     ~TCPSocketTask() override{
         ;
@@ -48,10 +89,29 @@ public:
 
     static void serializePayload(JsonDocument &doc, const OutData &data){
         doc["hb"] = data.hb;
+
+        auto pose_obj = doc.createNestedObject("pose");
+        serializeData(data.pose, pose_obj);
+
+        auto twist_obj = doc.createNestedObject("twist");
+        serializeData(data.twist, twist_obj);
+
+        auto wheelVelocities_obj = doc.createNestedObject("wheelVelocities");
+        serializeData(data.wheelVelocities, wheelVelocities_obj);
+
+        auto wheelPositions_obj = doc.createNestedObject("wheelPositions");
+        serializeData(data.wheelVelocities, wheelPositions_obj);
+
+        auto wheelEffort_obj = doc.createNestedObject("wheelEffort");
+        serializeData(data.wheelEffort, wheelEffort_obj);
+
+        auto quat_obj = doc.createNestedObject("imu_quat");
+        serializeData(data.imuQuat, quat_obj);
     }
 
     static void deserializePayload(InData &data, const JsonDocument &doc){
         data.i = doc["i"];
+        deserializeData(data.setpoint, doc["setpoint"]);
     }
 private:
     [[noreturn]] void Run() override;

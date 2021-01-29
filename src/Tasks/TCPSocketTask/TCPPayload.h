@@ -5,13 +5,30 @@
 #ifndef TEENSYROSCONTROLLER_TCPPAYLOAD_H
 #define TEENSYROSCONTROLLER_TCPPAYLOAD_H
 
+#include "Geometry/Pose2D.h"
+#include "Geometry/Twist2D.h"
+#include "Geometry/Quaternion.h"
+#include "Kinematics/MecanumKinematics.h"
+
 struct OutData {
     unsigned int hb{0};
+
+    Pose2D pose{};
+    Twist2D twist{};
+
+    MecanumWheelVelocities wheelPositions{};
+    MecanumWheelVelocities wheelVelocities{};
+    MecanumWheelVelocities wheelEffort{};
+
+    Quaternion imuQuat;
+
+    Twist2D angularVel{};
+    Twist2D linearAccel{};
 };
 
 struct InData {
-    unsigned int i{0};
-
+    int i{0};
+    Twist2D setpoint{};
 };
 
 #endif //TEENSYROSCONTROLLER_TCPPAYLOAD_H

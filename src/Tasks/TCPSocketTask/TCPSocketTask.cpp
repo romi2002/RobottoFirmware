@@ -35,7 +35,9 @@ void TCPSocketTask::Run() {
     uint8_t readBuffer[4096 * 2];
     uint8_t cobsDenc[4096 * 2];
 
-    int readSize = 0;
+    size_t readSize = 0;
+    size_t readIndex = 0;
+    bool newBytes = false;
 
     for (;;) {
         if (client and client.connected()) {
@@ -63,24 +65,34 @@ void TCPSocketTask::Run() {
              */
             while (client.peek() != -1) {
                 readBuffer[readSize++] = client.read();
+                newBytes = true;
             }
 
-            for (int i = 0; i < readSize; ++i) {
-                if (readBuffer[i] == 0x00) {
-                    //Found end of packet
-                    auto res = cobs_decode(cobsDenc, sizeof(cobsDenc), readBuffer, i);
-                    if (res.status == COBS_DECODE_OK) {
-                        auto ret = deserializeJson(jsonIn, cobsDenc, res.out_len);
-                        memmove(readBuffer, readBuffer + i, sizeof(readBuffer) - i);
-                        readSize = 0;
+            if(newBytes){
+                size_t n = readSize + readIndex;
 
-                        if(ret.code() == ArduinoJson6172_91::DeserializationError::Ok){
-                            deserializePayload(dataIn, jsonIn);
-                            SerialUSB1.println(dataIn.i);
-                        } else {
-                            SerialUSB1.println("json error");
+                for (int i = 0; i < readSize; ++i) {
+                    if (readBuffer[i] == 0x00) {
+                        //Found end of packet
+                        auto res = cobs_decode(cobsDenc, sizeof(cobsDenc), readBuffer, i);
+                        if (res.status == COBS_DECODE_OK) {
+                            auto ret = deserializeJson(jsonIn, cobsDenc, res.out_len);
+                            memmove(readBuffer, readBuffer + i, sizeof(readBuffer) - i);
+                            readSize = 0;
+
+                            if(ret.code() == ArduinoJson6172_91::DeserializationError::Ok){
+                                deserializePayload(dataIn, jsonIn);
+                                SerialUSB1.println(dataIn.i);
+                            } else {
+                                SerialUSB1.println("json error");
+                            }
+                            break;
                         }
-                        break;
+
+                        memmove(readBuffer, readBuffer + i + 1, (n + readIndex) - 1 - i);
+                        readIndex = n - i - 1;
+                        n = n - i - 1;
+                        i = 0;
                     }
                 }
             }

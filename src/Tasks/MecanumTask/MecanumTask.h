@@ -21,6 +21,7 @@
 #include <ros.h>
 
 #include "Utils/TaskProfiler/TaskProfiler.h"
+#include "Tasks/TCPSocketTask/TCPSocketTask.h"
 
 class MecanumTask : public cpp_freertos::Thread {
 public:
@@ -60,32 +61,20 @@ private:
 
     TickType_t waitTime;
 
-    ros::Subscriber <geometry_msgs::Twist, MecanumTask> *twistSetpointSubscriber;
     cpp_freertos::ReadWriteLock *twistLock;
     Twist2D currentTarget;
 
     ExponentialOdometry *odometry;
     elapsedMicros lastUpdate;
 
-    geometry_msgs::Pose posePublisherMsg;
-    ros::Publisher *posePublisher;
-
-    geometry_msgs::Twist twistPublisherMsg;
-    ros::Publisher *twistPublisher;
-
-    ros::Publisher * wheelStatePublisher;
-    sensor_msgs::JointState wheelStateMsg;
-
-    ros::Publisher * angularVelPublisher;
-    geometry_msgs::Vector3 angularVelMsg;
-
-    ros::Publisher * linearAccelPublisher;
-    geometry_msgs::Vector3 linearAccelMsg;
-
     ros::NodeHandle *nh;
 
     TaskProfiler& profiler = TaskProfiler::getInstance();
     TaskProfilerIt profilerIt;
+
+    OutData &outData{TCPSocketTask::dataOut};
+
+    InData &inData{TCPSocketTask::dataIn};
 };
 
 

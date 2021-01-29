@@ -15,9 +15,9 @@
 #include "imu_config.h"
 #include "def.h"
 
-#include "geometry_msgs/Quaternion.h"
+#include "Geometry/Quaternion.h"
 
-geometry_msgs::Quaternion imuQuat;
+Quaternion imuQuat;
 double imuYaw;
 double imuAccel[3], imuAngVel[3];
 
@@ -32,7 +32,7 @@ IMUTask::IMUTask(ReadWriteLockPreferWriter *i2cLock, TickType_t tickDelay)
     this->tickDelay = tickDelay;
 
     this->i2cLock = i2cLock;
-    imuQuat = geometry_msgs::Quaternion();
+    imuQuat = Quaternion();
     imuYaw = 0;
 
     i2c_0 = new I2Cdev(&Wire);
