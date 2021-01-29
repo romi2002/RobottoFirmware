@@ -10,7 +10,7 @@
 #include "log.h"
 #include "PinAssignments.h"
 
-#include "Tasks/WebSocketTask/WebSocketTask.h"
+#include "Tasks/TCPSocketTask/TCPSocketTask.h"
 
 /**
  * Tasks
@@ -108,7 +108,7 @@ void setup() {
     controllerConfig.i2cLock = i2cLock;
 
     HeartbeatTask heartbeatTask;
-    WebSocketTask webSocketTask;
+    TCPSocketTask webSocketTask;
     //ADCTestTask adcTestTask(adc128D818);
     //BatteryPublisherTask batteryPublisherTask(&nh);
     //RosSpinTask rosSpinTask(&nh, pdMS_TO_TICKS(10));
