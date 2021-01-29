@@ -10,6 +10,8 @@
 #include "log.h"
 #include "PinAssignments.h"
 
+#include "Tasks/WebSocketTask/WebSocketTask.h"
+
 /**
  * Tasks
  */
@@ -53,19 +55,11 @@ void setup() {
     Serial5.begin(576000);
     Serial8.begin(1000000, SERIAL_8E1);
 
-    while(!Ethernet.begin(mac)){
-        SerialUSB1.println("No ethernet connection!");
-        delay(1000);
-    }
-
-    SerialUSB1.print("Connected with ip: "); SerialUSB1.println(Ethernet.localIP());
-
     pinMode(0, INPUT);
     pinMode(1, INPUT);
 
     //Serial8.attachRts(32);
     //Serial8.attachCts(43);
-    SerialUSB.println("Hi there");
 
     analogReadResolution(12);
     analogReadAveraging(4);
@@ -99,8 +93,6 @@ void setup() {
     adc128D818->setDisabledMask(0b00000010);
     adc128D818->begin();*/
 
-    nh.initNode();
-
     MotorControllerConfig controllerConfig{};
     controllerConfig.vnh5019PinDefinitions = PinAssignments::getMotor4Driver();
     controllerConfig.encoderPinDefinitions = PinAssignments::getMotor4Encoder();
@@ -116,9 +108,10 @@ void setup() {
     controllerConfig.i2cLock = i2cLock;
 
     HeartbeatTask heartbeatTask;
+    WebSocketTask webSocketTask;
     //ADCTestTask adcTestTask(adc128D818);
     //BatteryPublisherTask batteryPublisherTask(&nh);
-    RosSpinTask rosSpinTask(&nh, pdMS_TO_TICKS(10));
+    //RosSpinTask rosSpinTask(&nh, pdMS_TO_TICKS(10));
 
     //MecanumTask mecanumTask(controllerConfig, &nh, 0.075);
 
