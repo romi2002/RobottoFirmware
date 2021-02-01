@@ -9,7 +9,7 @@
 OutData TCPSocketTask::dataOut;
 InData TCPSocketTask::dataIn;
 
-TCPSocketTask::TCPSocketTask(TickType_t tickDelay) : Thread("HeartbeatTask", 8000,
+TCPSocketTask::TCPSocketTask(TickType_t tickDelay) : Thread("TCPSocketTask", 8000,
                                                             2), server(port) {
     teensyMAC(mac);
 
@@ -52,7 +52,7 @@ void TCPSocketTask::Run() {
             int size = measureJson(jsonOut);
             buffer[0] = size & 0xff;
             buffer[1] = (size >> 8) & 0xff;
-            size = 2 + serializeJson(jsonOut, buffer + 2, sizeof(buffer) - 2);
+            size = 2 + serializeMsgPack(jsonOut, buffer + 2, sizeof(buffer) - 2);
             auto res = cobs_encode(cobsBuffer, sizeof(cobsBuffer), buffer, size);
 
             if (res.status == COBS_ENCODE_OK) {
@@ -76,7 +76,7 @@ void TCPSocketTask::Run() {
                         //Found end of packet
                         auto res = cobs_decode(cobsDenc, sizeof(cobsDenc), readBuffer, i);
                         if (res.status == COBS_DECODE_OK) {
-                            auto ret = deserializeJson(jsonIn, cobsDenc, res.out_len);
+                            auto ret = deserializeMsgPack(jsonIn, cobsDenc, res.out_len);
                             memmove(readBuffer, readBuffer + i, sizeof(readBuffer) - i);
                             readSize = 0;
 

@@ -78,7 +78,7 @@ private:
 
 class TCPSocketTask : public Thread  {
 public:
-    TCPSocketTask(TickType_t tickDelay = 5);
+    TCPSocketTask(TickType_t tickDelay = 1);
 
     ~TCPSocketTask() override{
         ;
@@ -96,13 +96,13 @@ public:
         auto twist_obj = doc.createNestedObject("twist");
         serializeData(data.twist, twist_obj);
 
-        auto wheelVelocities_obj = doc.createNestedObject("wheelVelocities");
+        auto wheelVelocities_obj = doc.createNestedObject("wheel_vel");
         serializeData(data.wheelVelocities, wheelVelocities_obj);
 
-        auto wheelPositions_obj = doc.createNestedObject("wheelPositions");
-        serializeData(data.wheelVelocities, wheelPositions_obj);
+        auto wheelPositions_obj = doc.createNestedObject("wheel_pos");
+        serializeData(data.wheelPositions, wheelPositions_obj);
 
-        auto wheelEffort_obj = doc.createNestedObject("wheelEffort");
+        auto wheelEffort_obj = doc.createNestedObject("wheel_effort");
         serializeData(data.wheelEffort, wheelEffort_obj);
 
         auto quat_obj = doc.createNestedObject("imu_quat");
