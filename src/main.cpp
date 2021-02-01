@@ -12,6 +12,7 @@
 
 #include "Tasks/TCPSocketTask/TCPSocketTask.h"
 
+#ifndef UNIT_TEST
 /**
  * Tasks
  */
@@ -50,8 +51,6 @@ void setup() {
     SerialUSB.begin(115200);
     SerialUSB1.begin(115200);
     SerialUSB2.begin(115200);
-    debug.begin(SerialUSB);
-    //halt();
     Serial5.begin(576000);
     Serial8.begin(1000000, SERIAL_8E1);
 
@@ -128,3 +127,4 @@ void setup() {
 void loop() {
     ;
 }
+#endif
