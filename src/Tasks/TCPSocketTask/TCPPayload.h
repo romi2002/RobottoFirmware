@@ -14,6 +14,8 @@ struct OutData {
     unsigned int hb{0};
 
     Pose2D pose{};
+
+    Twist2D rawKinematics{};
     Twist2D twist{};
 
     MecanumWheelVelocities wheelPositions{};
@@ -24,6 +26,8 @@ struct OutData {
 
     Twist2D angularVel{};
     Twist2D linearAccel{};
+
+    double batteryVoltage{0};
 };
 
 struct InData {

@@ -109,13 +109,13 @@ void setup() {
     HeartbeatTask heartbeatTask;
     TCPSocketTask webSocketTask;
     //ADCTestTask adcTestTask(adc128D818);
-    //BatteryPublisherTask batteryPublisherTask(&nh);
+    BatteryPublisherTask batteryPublisherTask(&nh);
     //RosSpinTask rosSpinTask(&nh, pdMS_TO_TICKS(10));
 
     MecanumTask mecanumTask(controllerConfig, &nh, 0.075);
 
-    //ConsoleTask consoleTask;
-    //UseTimeTask useTimeTask;
+    ConsoleTask consoleTask;
+    UseTimeTask useTimeTask;
 
     //MotorController controller("TestController", controllerConfig, pdMS_TO_TICKS(10));
     //controller.set(0.0, MotorControlMode::PERCENTAGE);

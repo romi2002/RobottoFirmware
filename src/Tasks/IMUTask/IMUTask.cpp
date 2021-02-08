@@ -236,9 +236,9 @@ void IMUTask::FetchUSFSMAX_Data(USFSMAX *usfsmax, IMU *IMu, uint8_t sensorNUM) {
 
             imuYaw = (heading[0] - 180.0) / 180.0 * M_PI;
 
-            imuAccel[0] = 1000.0f*accData[0][0]; //X,Y,Z
-            imuAccel[1] = 1000.0f*accData[0][1];
-            imuAccel[2] = 1000.0f*accData[0][2];
+            imuAccel[0] = accData[0][0]; //X,Y,Z
+            imuAccel[1] = accData[0][1];
+            imuAccel[2] = accData[0][2];
 
             imuAngVel[0] = gyroData[0][0] * (M_PI / 180.0); //X,Y,Z
             imuAngVel[1] = gyroData[0][1] * (M_PI / 180.0);

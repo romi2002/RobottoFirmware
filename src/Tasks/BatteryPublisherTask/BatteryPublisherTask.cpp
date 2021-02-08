@@ -28,33 +28,18 @@ BatteryPublisherTask::BatteryPublisherTask(ros::NodeHandle *nh, TickType_t waitT
         double currentSensorVoltage = ((double) analogRead(PinAssignments::CURRENT_SENSOR_PIN) / 4096) * 3.3;
         double current = (currentSensorVoltage - 1.65) / 0.055;
 
-        currentSensorVoltageMsg.data = analogRead(PinAssignments::CURRENT_SENSOR_PIN);
-        currentSensorVoltagePub.publish(&currentSensorVoltageMsg);
-
         double batteryVoltage = (((double) analogRead(PinAssignments::BATTERY_VOLTAGE_PIN) / 4096) * 3.3);
         batteryVoltage *= ((1000.0 + 300.0) / 300.0);
+        outData.batteryVoltage = batteryVoltage;
         //batteryVoltage *= 0.95;
 
-        batteryStateMsg.voltage = batteryVoltage;
-        batteryStateMsg.current = currentSensorVoltage;
-        batteryStateMsg.present = true;
-        batteryStateMsg.power_supply_status = 2; //Discharging
-        batteryStateMsg.power_supply_health = 0;
-        batteryStateMsg.power_supply_technology = 3;
-
-        //batteryStatePub.publish(&batteryStateMsg);
 
         double energy = ((current * (dt / 1000.0)) / 60.0) / 60.0; //mAh
         energyUsed += energy;
 
-        energyUsedMsg.data = energyUsed;
-        //energyUsedPub.publish(&energyUsedMsg);
-
         vTaskDelay(waitTime);
         dt = 0;
 
-        //SerialUSB.print("Battery took: "); SerialUSB.println(millis()-startTime);
         TaskProfiler::updateProfiler(profilerIt);
-        startTime = millis();
     }
 }

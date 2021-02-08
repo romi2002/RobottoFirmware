@@ -89,8 +89,8 @@
 
 /**************************            Sensor Data Rates              ****************************/
     /* LSM6DSM Acc Output data rate. Uncomment only one option */
-    //#define ACC_ODR                            0x0A                 // 6660Hz
-    #define ACC_ODR                            0x09                 // 3330Hz
+    #define ACC_ODR                            0x0A                 // 6660Hz
+    //#define ACC_ODR                            0x09                 // 3330Hz
     //#define ACC_ODR                            0x08                 // 1660Hz
     //#define ACC_ODR                            0x07                 // 834Hz
     //#define ACC_ODR                            0x06                 // 416Hz
@@ -101,8 +101,8 @@
     //#define ACC_ODR                            0x01                 // 12.5Hz
 
     /* LSM6DSM Gyro Output data rate. Uncomment only one option */
-    //#define GYRO_ODR                           0x0A                 // 6660Hz
-    #define GYRO_ODR                           0x09                 // 3330Hz
+    #define GYRO_ODR                           0x0A                 // 6660Hz
+    //#define GYRO_ODR                           0x09                 // 3330Hz
     //#define GYRO_ODR                           0x08                 // 1660Hz
     //#define GYRO_ODR                           0x07                 // 834Hz
     //#define GYRO_ODR                           0x06                 // 416Hz
@@ -113,8 +113,8 @@
     //#define GYRO_ODR                           0x01                 // 12.5Hz
 
     /* LIS2MDL Mag Output data rate. Uncomment only one option */
-    #define MAG_ODR                            0x03                 // 100Hz
-    //#define MAG_ODR                            0x02                 // 50Hz
+    //#define MAG_ODR                            0x03                 // 100Hz
+    #define MAG_ODR                            0x02                 // 50Hz
     //#define MAG_ODR                            0x01                 // 20Hz
     //#define MAG_ODR                            0x00                 // 10Hz
 
@@ -196,8 +196,8 @@
     #define LSM6DSM_ACC_DHPF_CFG               0x00                 // Future option
 
     /* LIS2MDL Mag low pass filter setting. Uncomment only one option */
-    //#define LIS2MDL_MAG_LPF                    0x00                 // ODR/2
-    #define LIS2MDL_MAG_LPF                    0x01                 // ODR/4
+    #define LIS2MDL_MAG_LPF                    0x00                 // ODR/2
+    //#define LIS2MDL_MAG_LPF                    0x01                 // ODR/4
 
     /* LIS2MDL Mag high pass filter setting. Uncomment only one option */
     #define LIS2MDL_MAG_HPF                    0x00                 // Future option

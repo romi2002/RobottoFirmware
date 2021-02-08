@@ -107,6 +107,17 @@ public:
 
         auto quat_obj = doc.createNestedObject("imu_quat");
         serializeData(data.imuQuat, quat_obj);
+
+        auto imu_accel_obj = doc.createNestedObject("imu_accel");
+        serializeData(data.linearAccel, imu_accel_obj);
+
+        auto imu_ang_obj = doc.createNestedObject("imu_angular");
+        serializeData(data.angularVel, imu_ang_obj);
+
+        auto raw_kinematics = doc.createNestedObject("raw_kinematics");
+        serializeData(data.rawKinematics, raw_kinematics);
+
+        doc["battery_voltage"] = data.batteryVoltage;
     }
 
     static void deserializePayload(InData &data, const JsonDocument &doc){

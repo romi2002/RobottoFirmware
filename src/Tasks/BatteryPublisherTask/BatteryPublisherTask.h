@@ -9,6 +9,7 @@
 #include <sensor_msgs/BatteryState.h>
 #include "thread.hpp"
 #include "Utils/TaskProfiler/TaskProfiler.h"
+#include "Tasks/TCPSocketTask/TCPSocketTask.h"
 
 using namespace cpp_freertos;
 
@@ -36,6 +37,8 @@ private:
 
     TaskProfiler& profiler = TaskProfiler::getInstance();
     TaskProfilerIt profilerIt;
+
+    OutData &outData{TCPSocketTask::dataOut};
 };
 
 #endif

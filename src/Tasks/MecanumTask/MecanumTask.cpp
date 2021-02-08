@@ -105,10 +105,11 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
         currentWheelVelocities.backRight *= (wheelDiameter / 2.0);
 
         auto positions = kinematics->toChassisSpeeds(currentWheelPositions);
+
         auto velocities = kinematics->toChassisSpeeds(currentWheelVelocities);
 
         positions.dtheta = imuYaw;
-        SerialUSB.println(imuYaw);
+        outData.rawKinematics = positions;
 
         odometry->update_velocity(velocities, (double) lastUpdate / (double) 1e+6f, -imuYaw);
 
@@ -119,8 +120,13 @@ MecanumWheelVelocities MecanumTask::getWheelVelocities() const {
         outData.imuQuat = imuQuat;
 
         //TODO
-        //outData.linearAccel =
-        //outData.angularVel =
+        outData.linearAccel.dx = imuAccel[0];
+        outData.linearAccel.dy = imuAccel[1];
+        outData.linearAccel.dtheta = imuAccel[2];
+
+        outData.angularVel.dx = imuAngVel[0];
+        outData.angularVel.dy = imuAngVel[1];
+        outData.angularVel.dtheta = imuAngVel[2];
 
         writeToMotors(motor_vels, MotorControlMode::PERCENTAGE);
 
